@@ -1,0 +1,34 @@
+export const directionMap: Record<string, string[]> = {
+  l: ['-inline-start'],
+  r: ['-inline-end'],
+  t: ['-block-start'],
+  b: ['-block-end'],
+  x: ['-inline'],
+  y: ['-block'],
+  '': ['']
+};
+
+/**
+ * Get these font size values using a TypeScale ratio of 1.200.
+ * @url https://www.fluid-type-scale.com/
+ */
+export const fontSizeValues: Record<string, string> = {
+  '200': 'clamp(0.8rem, 0.34vi + 0.71rem, 0.99rem)',
+  '300': 'clamp(1rem, 0.34vi + 0.91rem, 1.19rem)',
+  '400': 'clamp(1.25rem, 0.32vi + 1.17rem, 1.43rem)',
+  '500': 'clamp(1.56rem, 0.27vi + 1.5rem, 1.71rem)',
+  '600': 'clamp(1.95rem, 0.18vi + 1.91rem, 2.05rem)',
+  '700': 'clamp(2.44rem, 0.04vi + 2.43rem, 2.46rem)',
+  '800': 'clamp(3.05rem, -0.18vi + 3.1rem, 2.95rem)'
+};
+
+export const colors: Record<string, string> = {
+  brand: '#035170',
+  'brand-light': '#028bd2',
+  'brand-dark': '#606060',
+  accent: '#fbb40a',
+  'accent-dark': '#f47920',
+  'text-main': '#606060',
+  'text-secondary': '#ffffff',
+  background: '#fbfbfb'
+};
