@@ -1,16 +1,29 @@
+/**
+ * Mapa de direcciones que traduce abreviaturas de dirección a sus equivalentes en CSS.
+ * 
+ * Abreviaturas:
+ * - 'l': left (inline-start)
+ * - 'r': right (inline-end)
+ * - 't': top (block-start)
+ * - 'b': bottom (block-end)
+ * - 'x': horizontal (inline)
+ * - 'y': vertical (block)
+ * - '': sin dirección específica
+ */
 export const directionMap: Record<string, string[]> = {
-  l: ['-inline-start'],
-  r: ['-inline-end'],
-  t: ['-block-start'],
-  b: ['-block-end'],
-  x: ['-inline'],
-  y: ['-block'],
-  '': ['']
+  l: ['-inline-start'],  
+  r: ['-inline-end'],    
+  t: ['-block-start'],   
+  b: ['-block-end'],     
+  x: ['-inline'],        
+  y: ['-block'],         
+  '': ['']               
 };
 
 /**
- * Get these font size values using a TypeScale ratio of 1.200.
- * @url https://www.fluid-type-scale.com/
+ * Objeto que define valores de tamaño de fuente utilizando una proporción de escala de tipo de 1.200.
+ * Los valores se obtuvieron de https://www.fluid-type-scale.com/
+ * La función `clamp` se utiliza para mantener los tamaños de fuente fluidos entre diferentes pantallas.
  */
 export const fontSizeValues: Record<string, string> = {
   '200': 'clamp(0.8rem, 0.34vi + 0.71rem, 0.99rem)',
@@ -22,6 +35,10 @@ export const fontSizeValues: Record<string, string> = {
   '800': 'clamp(3.05rem, -0.18vi + 3.1rem, 2.95rem)'
 };
 
+/**
+ * Objeto que define una paleta de colores para la aplicación.
+ * Cada clave representa un nombre descriptivo del color y su valor es el código hexadecimal correspondiente.
+ */
 export const colors: Record<string, string> = {
   brand: '#035170',
   'brand-light': '#028bd2',

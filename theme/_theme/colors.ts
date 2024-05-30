@@ -1,12 +1,12 @@
 import { colors } from '../utils/mapping';
 
 export const colorsBase = {
-  '--brand': colors['brand'],
-  '--brand-light': colors['brand-light'],
-  '--brand-dark': colors['brand-dark'],
-  '--accent': colors['accent'],
-  '--accent-dark': colors['accent-dark'],
-  '--text-main': colors['text-main'],
-  '--text-secondary': colors['text-secondary'],
-  '--background': colors['background']
+  '--clr-brand': colors['brand'],
+  '--clr-brand-light': colors['brand-light'],
+  '--clr-brand-dark': colors['brand-dark'],
+  '--clr-accent': colors['accent'],
+  '--clr-accent-dark': colors['accent-dark'],
+  '--clr-text-main': colors['text-main'],
+  '--clr-text-secondary': colors['text-secondary'],
+  '--clr-background': colors['background']
 };
