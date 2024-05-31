@@ -10,8 +10,8 @@
     align-items: center;
     column-gap: 1em;
     z-index: 1;
-    background-image: url(assets/images/banner-header.webp), radial-gradient(circle at 33%, hsl(0deg 0% 100% / 16%) 13%, #005784 48%);
-    background-color: #005784;
+    background-image: url(assets/images/banner-header.webp), radial-gradient(circle at 33%, hsl(0deg 0% 100% / 16%) 13%, var(--clr-brand) 48%);
+    background-color: var(--clr-brand);
     color: var(--clr-text-header);
     background-position: left;
     background-size: contain;

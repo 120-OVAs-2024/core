@@ -40,7 +40,7 @@ export const fontSizeValues: Record<string, string> = {
  * Cada clave representa un nombre descriptivo del color y su valor es el código hexadecimal correspondiente.
  */
 export const colors: Record<string, string> = {
-  brand: '#035170',
+  brand: '#005784',
   'brand-light': '#028bd2',
   'brand-dark': '#606060',
   accent: '#fbb40a',
