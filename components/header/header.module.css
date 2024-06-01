@@ -38,8 +38,9 @@
 }
 
 .menu-a11y__button {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: clamp(.5rem, 5%, 1.2rem);
     font-family: 'Lato';

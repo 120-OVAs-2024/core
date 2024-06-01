@@ -17,7 +17,7 @@ export const ICON_TYPE: Record<PaginationItemType, string> = {
 };
 
 // Constantes para las etiquetas de navegación en múltiples idiomas
-export const NAVIGATION_LABEL = {
+export const i18n = {
   es: {
     previous: 'atrás',
     next: 'siguiente'

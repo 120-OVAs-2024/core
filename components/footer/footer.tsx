@@ -6,7 +6,7 @@ import { focusMainElement } from '@/shared/utils/focusMain';
 
 import { Icon } from '../icon';
 
-import { ICON_TYPE, NAVIGATION_LABEL, PAGINATION_ITEM_TYPE, QUARTER } from './consts';
+import { i18n, ICON_TYPE, PAGINATION_ITEM_TYPE, QUARTER } from './consts';
 import type { PaginationItemType, Props, PropsPaginationItem } from './types';
 
 import css from './footer.module.css';
@@ -67,7 +67,7 @@ const PaginationItem: React.FC<PropsPaginationItem> = ({ item, lang }) => {
       data-page={page}
       disabled={disabled}>
       <Icon addClass={css['footer__nav-button-icon']} name={ICON_TYPE[type as PaginationItemType]} />
-      <span>{type === PAGINATION_ITEM_TYPE.NEXT ? NAVIGATION_LABEL[lang].next : NAVIGATION_LABEL[lang].previous}</span>
+      <span>{type === PAGINATION_ITEM_TYPE.NEXT ? i18n[lang].next : i18n[lang].previous}</span>
     </button>
   ) : (
     <span className={css['footer__nav-ellipsis']}>...</span>
