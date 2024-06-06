@@ -47,5 +47,7 @@ export const colors: Record<string, string> = {
   'accent-dark': '#f47920',
   'text-main': '#606060',
   'text-secondary': '#ffffff',
-  background: '#fbfbfb'
+  background: '#fbfbfb',
+  'activity-success': '#52b74e',
+  'activity-wrong': '#b74e4e',
 };

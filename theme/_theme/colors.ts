@@ -8,5 +8,7 @@ export const colorsBase = {
   '--clr-accent-dark': colors['accent-dark'],
   '--clr-text-main': colors['text-main'],
   '--clr-text-secondary': colors['text-secondary'],
-  '--clr-background': colors['background']
+  '--clr-background': colors['background'],
+  '--clr-activity-success': colors['activity-success'],
+  '--clr-activity-wrong': colors['activity-wrong'],
 };
