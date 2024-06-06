@@ -7,7 +7,7 @@ import { focusMainElement } from '@/shared/utils/focusMain';
 import { Icon } from '../icon';
 
 import { i18n, ICON_TYPE, PAGINATION_ITEM_TYPE, QUARTER } from './consts';
-import type { PaginationItemType, Props, PropsPaginationItem } from './types';
+import type { PaginationItemProps, PaginationItemType, Props } from './types';
 
 import css from './footer.module.css';
 
@@ -26,7 +26,7 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
   const boundaryCount = Math.floor(routes.length / QUARTER);
 
   return (
-    <footer className={`${css['footer']} u-p-1`}>
+    <footer className={`${css['footer']}`}>
       <Pagination
         boundaryCount={boundaryCount}
         count={routes.length}
@@ -38,7 +38,7 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
   );
 };
 
-const PaginationItem: React.FC<PropsPaginationItem> = ({ item, lang }) => {
+const PaginationItem: React.FC<PaginationItemProps> = ({ item, lang }) => {
   const { onClick, type, page, disabled } = item;
 
   /**
@@ -56,7 +56,7 @@ const PaginationItem: React.FC<PropsPaginationItem> = ({ item, lang }) => {
       to={`/page-${page}`}
       className={css['footer__nav-link']}
       onClick={focusMainElement}
-      {...(item['aria-current'] && { 'aria-current': 'page' })}>
+      aria-current={item['aria-current']}>
       <span className="u-sr-only">Slide</span> {page}
     </Link>
   ) : type === PAGINATION_ITEM_TYPE.NEXT || type === PAGINATION_ITEM_TYPE.PREVIOUS ? (

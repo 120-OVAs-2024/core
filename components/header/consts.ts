@@ -15,3 +15,6 @@ export const i18n = {
     help: 'help'
   }
 };
+
+// Expresión regular para extraer el número de la página de la URL
+export const PATH_REGEX = /\/page-(\d+)/;

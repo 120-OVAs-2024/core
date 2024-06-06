@@ -1,11 +1,13 @@
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 
 import { useOvaContext } from '@/context/ova-context';
+import { EVENTS } from '@/shared/consts/events';
 
 import { Icon } from '../icon';
 
-import { i18n } from './consts';
+import { i18n, PATH_REGEX } from './consts';
 
 import css from './header.module.css';
 
@@ -28,20 +30,52 @@ export const Header = () => {
 };
 
 const TitleSlide = () => {
+  const [title, setTitle] = useState<{ title: string; number: string }>({ title: 'Default', number: '0' });
   const uid = useId();
 
+  useEffect(() => {
+    /**
+     * Manejador para actualizar el título cuando se despacha el evento `OVATITLEUPDATE`.
+     *
+     * @param event - El evento personalizado que contiene el nuevo título en `detail`.
+     */
+    const handleUpdateTitle = ({ detail }: CustomEvent<{ title: string }>) => {
+      // Obtenemos el número de la página actual desde la URL.
+      const currentPageNumber = (window.location.href.match(PATH_REGEX) || ['0'])[1];
+
+      setTitle((prev) => {
+        if (prev.number === currentPageNumber) {
+          // Solo actualizar el título si el número de la página no ha cambiado
+          return { ...prev, title: detail.title };
+        }
+
+        // Actualizar tanto el título como el número de la página
+        return {
+          title: detail.title,
+          number: currentPageNumber
+        };
+      });
+    };
+
+    document.addEventListener(EVENTS.OVATITLEUPDATE, handleUpdateTitle as EventListener);
+
+    return () => {
+      document.removeEventListener(EVENTS.OVATITLEUPDATE, handleUpdateTitle as EventListener);
+    };
+  }, []);
+
   return (
-    <div className={css['title-slide']}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={css['title-slide']}>
       <p className={css['title-slide__number']} aria-hidden="true">
-        1.
+        {title.number}.
       </p>
       <h1 aria-describedby={uid} aria-hidden="true">
-        Objetivo de aprendizaje
+        {title.title}
       </h1>
       <h1 id={uid} className="u-sr-only">
-        Página 1, Objetivo de aprendizaje
+        Página {title.number}, {title.title}
       </h1>
-    </div>
+    </motion.div>
   );
 };
 

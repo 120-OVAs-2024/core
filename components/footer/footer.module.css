@@ -46,6 +46,7 @@
 }
 
 :is(.footer__nav-link, .footer__nav-ellipsis) {
+    top: -0.5rem;
     display: grid;
     place-items: center;
     height: 2rem;
@@ -58,7 +59,6 @@
     border-image-slice: 1 fill;
     filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, .6));
     position: relative;
-    top: -1rem;
     font-size: var(--fs-200);
 }
 
