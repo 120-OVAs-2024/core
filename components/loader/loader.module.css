@@ -1,0 +1,23 @@
+.loader {
+    --size: 4rem;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--size));
+    width: var(--size);
+    height: var(--size);
+    border: .3125rem solid;
+    border-color: var(--clr-accent-dark) transparent;
+    border-radius: 50%;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
