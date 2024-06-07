@@ -1,13 +1,14 @@
-import { useEffect, useId, useState } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
+import { useHashLocation } from 'wouter/use-hash-location';
 
 import { useOvaContext } from '@/context/ova-context';
 import { EVENTS } from '@/shared/consts/events';
 
 import { Icon } from '../icon';
 
-import { i18n, PATH_REGEX } from './consts';
+import { HOME_PATH, i18n, PATH_REGEX } from './consts';
 
 import css from './header.module.css';
 
@@ -30,8 +31,45 @@ export const Header = () => {
 };
 
 const TitleSlide = () => {
-  const [title, setTitle] = useState<{ title: string; number: string }>({ title: 'Default', number: '0' });
+  const [title, setTitle] = useState<{ title: string; number: string }>({ title: '', number: '' });
   const uid = useId();
+
+  const [location] = useHashLocation();
+  const { routes, titles } = useOvaContext();
+
+  // Función para actualizar el título de la página
+  const updateTitle = useCallback(
+    (newTitle: string) => {
+      // Obtener el número de la página actual desde la URL
+      const currentPageNumber = (location.match(PATH_REGEX) || ['0'])[1];
+
+      setTitle((prev) => {
+        if (prev.number === currentPageNumber) {
+          // Solo actualizar el título si el número de la página no ha cambiado
+          return { ...prev, title: newTitle };
+        }
+
+        // Actualizar tanto el título como el número de la página
+        return {
+          title: newTitle,
+          number: currentPageNumber
+        };
+      });
+    },
+    [location]
+  );
+
+  useEffect(() => {
+    if (routes.length === 0 || titles.length === 0) return;
+
+    // Encontrar el índice del título actual basado en la ubicación
+    const titleIndex = routes.findIndex((route) => route === location);
+
+    if (titleIndex >= 0) {
+      const currentTitle = titles[titleIndex];
+      updateTitle(currentTitle);
+    }
+  }, [location, routes, titles, updateTitle]);
 
   useEffect(() => {
     /**
@@ -40,21 +78,8 @@ const TitleSlide = () => {
      * @param event - El evento personalizado que contiene el nuevo título en `detail`.
      */
     const handleUpdateTitle = ({ detail }: CustomEvent<{ title: string }>) => {
-      // Obtenemos el número de la página actual desde la URL.
-      const currentPageNumber = (window.location.href.match(PATH_REGEX) || ['0'])[1];
-
-      setTitle((prev) => {
-        if (prev.number === currentPageNumber) {
-          // Solo actualizar el título si el número de la página no ha cambiado
-          return { ...prev, title: detail.title };
-        }
-
-        // Actualizar tanto el título como el número de la página
-        return {
-          title: detail.title,
-          number: currentPageNumber
-        };
-      });
+      const currentTitle = detail.title;
+      updateTitle(currentTitle);
     };
 
     document.addEventListener(EVENTS.OVATITLEUPDATE, handleUpdateTitle as EventListener);
@@ -62,21 +87,19 @@ const TitleSlide = () => {
     return () => {
       document.removeEventListener(EVENTS.OVATITLEUPDATE, handleUpdateTitle as EventListener);
     };
-  }, []);
+  }, [updateTitle]);
 
-  return (
+  return location !== HOME_PATH ? (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={css['title-slide']}>
       <p className={css['title-slide__number']} aria-hidden="true">
         {title.number}.
       </p>
-      <h1 aria-describedby={uid} aria-hidden="true">
-        {title.title}
-      </h1>
+      <h1 aria-describedby={uid} aria-hidden="true" dangerouslySetInnerHTML={{ __html: title.title }} />
       <h1 id={uid} className="u-sr-only">
         Página {title.number}, {title.title}
       </h1>
     </motion.div>
-  );
+  ) : null;
 };
 
 const MenuA11y = () => {

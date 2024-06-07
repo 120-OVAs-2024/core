@@ -7,9 +7,9 @@ import { eventUpdateTitle } from '../utils/eventUpdateTitle';
  *
  * @param title - El nuevo título que se va a establecer.
  */
-export const useTitle = (title: string) => {
+export const useTitle = (title?: string) => {
   useEffect(() => {
     // Actualiza el título cuando cambia el valor de `title`
-    eventUpdateTitle(title);
+    title && eventUpdateTitle(title);
   }, [title]);
 };
