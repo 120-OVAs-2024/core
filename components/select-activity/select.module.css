@@ -7,11 +7,13 @@
 .select--wrong {
     --select-btn-clr: var(--clr-activity-wrong);
     --select-border-clr: var(--clr-activity-wrong);
+    composes: u-validation-wrong from global;
 }
 
 .select--success {
     --select-btn-clr: var(--clr-activity-success);
     --select-border-clr: var(--clr-activity-success);
+    composes: u-validation-success from global;
 }
 
 .select:global(.c-select) {

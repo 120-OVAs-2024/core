@@ -19,6 +19,7 @@
     --outline-color: #fbfbfb;
     --outline-offset: -.25rem;
 
+    position: relative;
     padding: .2rem 1.125rem;
     width: 100%;
     min-height: var(--drag-height);
@@ -35,12 +36,38 @@
     cursor: not-allowed;
 }
 
+.drag[data-validation]::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.6rem;
+    display: grid;
+    place-content: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    background-color: var(--clr-background);
+    box-shadow: 2px 2px 3px 0px #60606057;
+    font-style: normal;
+    z-index: 2;
+}
+
 .drag[data-validation="true"] {
     --drag-bg-clr: var(--clr-activity-success);
 }
 
+.drag[data-validation="true"]::after {
+    content: '✔';
+    color: var(--clr-activity-success);
+}
+
 .drag[data-validation="false"] {
     --drag-bg-clr: var(--clr-activity-wrong);
+}
+
+.drag[data-validation="false"]::after {
+    content: '✖';
+    color: var(--clr-activity-wrong);
 }
 
 button.drag--dragging {
