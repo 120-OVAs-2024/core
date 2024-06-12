@@ -1,0 +1,51 @@
+import { DndClasses, DndTypes } from './types/types';
+
+import css from './dnd.module.css';
+
+export const INITIAL_STATE = Object.freeze({
+  validation: false,
+  button: true,
+  result: false
+});
+
+export const DND_CLASSES: Record<DndTypes, DndClasses> = {
+  draggable: { style: css['drag'], dragging: css['drag--dragging'] },
+  droppable: { style: css['drop'], over: css['drop--over'] },
+  'general-draggable': { style: css['general-drag'] }
+};
+
+// Constantes para las etiquetas de navegación en múltiples idiomas
+export const i18n = {
+  es: {
+    screenReaderInstruction:
+      'Si usas un lector de pantalla, desactiva el mouse virtual. Para recoger un elemento arrastrable, presiona la barra espaciadora o la tecla Enter. Mientras arrastras, usa las teclas de flecha para mover el elemento en cualquier dirección deseada. Presiona nuevamente la barra espaciadora o la tecla Enter para soltar el elemento en su nueva posición, o presiona Escape para cancelar.'
+  },
+  en: {
+    screenReaderInstruction:
+      'If you use a screen reader, disable the virtual mouse. To pick up a draggable item, press the spacebar or the Enter key. While dragging, use the arrow keys to move the item in any desired direction. Press the spacebar or the Enter key again to drop the item in its new position, or press Escape to cancel.'
+  }
+};
+
+
+export const defaultAnnouncements = {
+  onDragStart({ active }) {
+      return `Se ha agarrado la opción ${active.data.current?.label}.`
+  },
+  onDragOver({ active, over }) {
+      if (over) {
+          return `la opción ${active.data.current?.label} se movió sobre la ${over.data.current?.label} opción desplegable.`
+      }
+
+      return `la opción ${active.data.current?.label} ya no está sobre una opción desplegable.`
+  },
+  onDragEnd({ active, over }) {
+      if (over) {
+          return `la opción ${active.data.current?.label} se soltó sobre la ${over.data.current?.label} opción desplegable.`
+      }
+
+      return `la opción ${active.data.current?.label} se eliminó.`
+  },
+  onDragCancel({ active }) {
+      return `Se cancelo el arrastre. la opción ${active.data.current?.label} se eliminó.`
+  }
+}
