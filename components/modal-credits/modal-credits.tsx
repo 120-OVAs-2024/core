@@ -1,4 +1,5 @@
 import type { ModalProps } from 'books-ui';
+import { Audio } from 'books-ui';
 
 import { useOvaContext } from '@/context/ova-context';
 
@@ -15,7 +16,7 @@ interface Props extends ModalProps {
   audio?: string;
 }
 
-export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, ...props }) => {
+export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, audio, ...props }) => {
   const { lang } = useOvaContext();
 
   return (
@@ -31,6 +32,7 @@ export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, ...p
         <p>2024</p>
         <p>UNAD</p>
         <p className="u-font-bold u-font-italic">“{i18n[lang].license}”</p>
+        {audio ? <Audio src={audio} /> : null}
       </div>
     </Modal>
   );
