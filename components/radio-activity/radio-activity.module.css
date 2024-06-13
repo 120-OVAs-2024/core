@@ -1,0 +1,34 @@
+div.radio {
+    --input-radio-clr: var(--clr-background);
+    --input-radio-border-clr: #11203c;
+    --input-radio-bg: #11203c;
+    --input-size: 1.6rem;
+    --input-size-svg: 1.2em;
+    --input-radio-gap: 1rem;
+
+    padding: .5rem 1rem;
+    justify-content: space-between;
+    font-style: italic;
+    background-color: var(--clr-background);
+    border-radius: .5rem;
+    box-shadow: 2px 2px 3px 0px #60606057;
+}
+
+.radio[data-state="right"] {
+    --input-radio-bg: var(--clr-activity-success);
+}
+
+.radio[data-state="wrong"] {
+    --input-radio-bg: var(--clr-activity-wrong);
+}
+
+.radio :global(.c-input-radio__box) {
+    min-inline-size: var(--input-size);
+    min-block-size: var(--input-size);
+    border: 1.8px solid var(--input-radio-border-clr);
+}
+
+.radio :global(.c-input-radio__icon) svg {
+    width: var(--input-size-svg);
+    height: var(--input-size-svg);
+}
