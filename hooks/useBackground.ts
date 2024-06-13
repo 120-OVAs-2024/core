@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useBackground = (): [string | null, (image: string) => void] => {
   const [background, setBackground] = useState<string | null>(null);
 
-  const handleChangeBackground = (image: string) => {
-    if (!image) return;
+  useEffect(() => {
+    if (!background) return;
+    const parentElement = document.body as HTMLElement;
+    parentElement?.style.setProperty('--bg-image', `url(${background})`);
 
-    setBackground(() => {
-      const parentElement = document.body as HTMLElement;
-      parentElement?.style.setProperty('--bg-image', `url(${image})`);
-      return image;
-    });
-  };
+    return () => {
+      parentElement?.style.removeProperty('--bg-image');
+    };
+  }, [background]);
 
-  return [background, handleChangeBackground];
+  return [background, setBackground];
 };

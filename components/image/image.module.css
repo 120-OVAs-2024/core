@@ -1,0 +1,10 @@
+
+
+.image__figcaption {
+    font-style: italic;
+    text-align: center;
+}
+
+.image__figcaption > * {
+    display: inline;
+}

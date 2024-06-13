@@ -1,0 +1,115 @@
+/* Header */
+.header {
+    --clr-text-header: var(--clr-text-secondary);
+
+    width: 100vw;
+    min-height: min(10vh, 8rem);
+    display: grid;
+    grid-template-columns: 15ch 2fr 1fr 10ch;
+    place-content: center;
+    align-items: center;
+    column-gap: 1em;
+    z-index: 1;
+    background-image: url(assets/images/banner-header.webp), radial-gradient(circle at 33%, hsl(0deg 0% 100% / 16%) 13%, var(--clr-brand) 48%);
+    background-color: var(--clr-brand);
+    color: var(--clr-text-header);
+    background-position: left;
+    background-size: contain;
+    background-repeat: repeat;
+    background-origin: padding-box;
+    box-shadow: inset 0px 0px 20px 0px #004569;
+}
+
+/* Logo */
+.logo {
+    width: auto;
+    height: max(3rem, 4vw);
+    justify-self: center;
+}
+
+
+/* Menu a11y */
+.menu-a11y ul {
+    --flow-space: .3rem;
+    list-style: none;
+    padding-inline-start: 0;
+    padding-inline-start: 0;
+    margin-block: 0;
+}
+
+.menu-a11y__button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: clamp(.5rem, 5%, 1.2rem);
+    font-family: 'Lato';
+    color: var(--clr-text-header);
+    border: 1px solid transparent;
+    background-color: transparent;
+    font-size: var(--fs-300);
+}
+
+/* Title slide */
+.title-slide>* {
+    display: inline-block;
+}
+
+.title-slide__number {
+    position: relative;
+    margin-inline-end: 1rem;
+    font-family: 'Nunito';
+    font-size: var(--fs-800);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--clr-text-header);
+    -webkit-text-fill-color: transparent;
+}
+
+.title-slide__number::after {
+    content: '';
+    top: 50%;
+    right: -.5rem;
+    height: 55%;
+    position: absolute;
+    border-right: 1px solid rgb(255 255 255 / 70%);
+    transform: translateY(-50%);
+}
+
+.title-slide h1 {
+    font-family: 'Heebo';
+    font-size: var(--fs-600);
+}
+
+/* Menu */
+.menu__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-inline-start: 0;
+}
+
+.menu__button {
+    color: var(--clr-text-header);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    padding-block: 0.4rem;
+    font-size: var(--fs-300);
+    text-decoration-color: transparent;
+    border: 1px solid transparent;
+    background-color: transparent;
+    text-transform: capitalize;
+    font-family: 'Roboto';
+}
+
+.menu__button svg {
+    --icon-size: 2.1rem;
+}
+
+.menu__button span {
+    align-self: flex-end;
+}

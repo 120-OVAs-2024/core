@@ -1,99 +1,76 @@
-/* Normal */
+/* Heebo - Page title */
 @font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-Regular.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-Regular.ttf') format('ttf');
+  font-family: 'Heebo';
+  src: url('assets/fonts/Heebo-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-display: swap;
+}
+
+/* Lato - Portada - A11y options */
+@font-face {
+  font-family: 'Lato';
+  src: url('assets/fonts/Lato-Black.woff2') format('woff2');
+  font-weight: bold;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-Italic.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-Italic.ttf') format('ttf');
+  font-family: 'Lato';
+  src: url('assets/fonts/Lato-Thin.woff2') format('woff2');
+  font-weight: lighter;
   font-display: swap;
+}
+
+/* Montserrat - General */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat-BoldItalic.woff2') format('woff2');
+  font-weight: bold;
   font-style: italic;
-}
-
-/* Light */
-
-@font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-Light.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-Light.ttf') format('ttf');
   font-display: swap;
-  font-weight: 300;
 }
 
 @font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-LightItalic.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-LightItalic.ttf') format('ttf');
-  font-display: swap;
-  font-weight: 300;
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat-Italic.woff2') format('woff2');
+  font-weight: normal;
   font-style: italic;
-}
-
-/* Semi-bold */
-
-@font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-SemiBold.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-SemiBold.ttf') format('ttf');
   font-display: swap;
-  font-weight: 600;
 }
 
 @font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-SemiBoldItalic.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-SemiBoldItalic.ttf') format('ttf');
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: normal; 
   font-display: swap;
-  font-weight: 600;
-  font-style: italic;
 }
 
-/* Bold */
-
+/* Nunito - Footer */
 @font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-Bold.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-Bold.ttf') format('ttf');
+  font-family: 'Nunito';
+  src: url('assets/fonts/Nunito-Bold.woff2') format('woff2');
+  font-weight: bold; 
   font-display: swap;
-  font-weight: 700;
 }
 
+/* Roboto - Menu */
 @font-face {
-  font-family: 'Source Sans Pro';
-  src:
-    url('assets/fonts/SourceSansPro-BoldItalic.woff2') format('woff2'),
-    url('assets/fonts/SourceSansPro-BoldItalic.ttf') format('ttf');
+  font-family: 'Roboto';
+  src: url('assets/fonts/Roboto-Bold.woff2') format('woff2');
+  font-weight: bold; 
   font-display: swap;
-  font-weight: 700;
-  font-style: italic;
 }
 
 @font-face {
-  font-family: 'chalkdust';
-  src:
-    url('assets/fonts/chalkdust.ttf') format('ttf'),
-    url('assets/fonts/chalkdust.woff2') format('woff2');
+  font-family: 'Roboto';
+  src: url('assets/fonts/Roboto-Regular.woff2') format('woff2');
+  font-weight: normal; 
   font-display: swap;
-  font-weight: 700;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Fat';
-  src:
-    url('assets/fonts/Fat-Flamingo5-Woodcut-Inner.ttf') format('ttf'),
-    url('assets/fonts/Fat-Flamingo5-Woodcut-Inner.woff2') format('woff2');
-  font-display: swap;
-  font-weight: 700;
-  font-style: italic;
 }

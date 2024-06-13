@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const Content: React.FC<Props> = ({ addClass, children, ...props }) => {
-  console.log('Content component render 🦑');
   return (
     <motion.section
       className={`${css['content']} ${addClass ?? ''}`}
