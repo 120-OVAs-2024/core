@@ -7,6 +7,7 @@ import css from './modal.module.css';
 
 interface Props extends ModalProps {
   addClass?: string;
+  children: JSX.Element;
 }
 
 export const Modal: React.FC<Props> = ({ addClass, children, onClose, ...props }) => {

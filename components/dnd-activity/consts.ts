@@ -1,3 +1,5 @@
+import type { Announcements } from '@dnd-kit/core'
+
 import { DndClasses, DndTypes } from './types/types';
 
 import css from './dnd.module.css';
@@ -27,7 +29,7 @@ export const i18n = {
 };
 
 
-export const defaultAnnouncements = {
+export const defaultAnnouncements: Announcements = {
   onDragStart({ active }) {
       return `Se ha agarrado la opción ${active.data.current?.label}.`
   },
