@@ -18,7 +18,7 @@ interface Props extends ModalProps {
 
 export const ModalFeedback: React.FC<Props> = ({ type = 'success', label, addClass, audio, children, ...props }) => {
   const { lang } = useOvaContext();
-  const imageURL = `assets/images/${type}.webp`;
+  const imageURL = `assets/base/${type}.webp`;
 
   return (
     <Modal {...props} addClass={`${css['modal']} u-py-6 ${addClass ?? ''}`}>
