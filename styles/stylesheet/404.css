@@ -1,0 +1,21 @@
+
+
+.message-404 h1 {
+    font-size: 15rem;
+    font-family: 'lato';
+    letter-spacing: 1rem;
+    -webkit-text-stroke: 10px var(--clr-text-main);
+    -webkit-text-fill-color: transparent;
+}
+
+.message-404__wrapper {
+    grid-area: main;
+}
+
+.message-404 p {
+    font-size: var(--fs-300);
+}
+
+.message-404 strong {
+    color: var(--clr-accent-dark);
+}

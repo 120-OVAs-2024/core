@@ -4,5 +4,8 @@
 /* Estilos generales*/
 @import url('./stylesheet/global.css');
 
+/* Estilos para la página 404*/
+@import url('./stylesheet/404.css');
+
 /* Dark mode */
 @import url('./stylesheet/dark-mode.css');
