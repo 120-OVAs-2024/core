@@ -15,3 +15,4 @@ export * from './modal';
 export * from './modal-credits';
 export * from './modal-bibliography';
 export * from './modal-feedback';
+export * from './radio-activity'
