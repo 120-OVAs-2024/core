@@ -38,7 +38,7 @@ body {
   position: relative;
   height: 100vh;
   background-color: var(--clr-background);
-  background-image: var(--bg-image, url('assets/images/background.webp'));
+  background-image: var(--bg-image, url('assets/base/background.webp'));
   background-size: cover;
   background-repeat: no-repeat;
   font-family: 'Montserrat', sans-serif;

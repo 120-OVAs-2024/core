@@ -21,7 +21,7 @@ export const Header = () => {
       <Menu />
       <img
         className={css['logo']}
-        src="assets/images/logo.webp"
+        src="assets/base/logo.webp"
         alt="UNAD: Universidad Nacional Abierta y a Distancia"
         width="404"
         height="209"

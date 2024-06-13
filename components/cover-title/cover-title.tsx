@@ -17,7 +17,7 @@ interface Props {
   };
 }
 
-export const CoverTitle: React.FC<Props> = ({ title, url = 'assets/images/cover.webp', audio }) => {
+export const CoverTitle: React.FC<Props> = ({ title, url = 'assets/base/cover.webp', audio }) => {
   const [, setBackground] = useBackground();
 
   useEffect(() => {

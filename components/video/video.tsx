@@ -6,9 +6,9 @@ interface Props extends VideoPlayerProps {
   title?: string;
 }
 
-export const Video: React.FC<Props> = ({ title, alt, ...props }) => (
+export const Video: React.FC<Props> = ({ title, alt, poster = "assets/base/poster.webp", ...props }) => (
   <figure>
-    <VideoPlayer {...props} />
+    <VideoPlayer poster={poster} {...props} />
     <figcaption className="u-font-italic u-my-3 u-text-center">
       <strong>{title}</strong>&nbsp;{alt}
     </figcaption>
