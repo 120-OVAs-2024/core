@@ -29,6 +29,7 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
     <footer className={`${css['footer']}`}>
       <Pagination
         boundaryCount={boundaryCount}
+        siblingCount={1}
         count={routes.length}
         defaultPage={currentPage}
         onChange={handleNavigation}
