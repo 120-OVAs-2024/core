@@ -12,7 +12,9 @@ interface SvgPositionerContextType {
   dimensions: SvgDimensions;
 }
 
-export const SvgPositionerContext = createContext<SvgPositionerContextType | undefined>(undefined);
+export const SvgPositionerContext = createContext<SvgPositionerContextType>({
+  dimensions: { width: 0, height: 0 }
+});
 
 // Tipos para las propiedades del componente SvgPositioner
 interface Props {
@@ -24,8 +26,8 @@ interface Props {
 }
 
 export const SvgPositioner: React.FC<Props> = ({
-  svgWidth,
-  svgHeight,
+  // svgWidth,
+  // svgHeight,
   addClass = '', // Providing a default value for addClass
   maxWidth,
   children,
