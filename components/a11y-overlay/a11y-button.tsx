@@ -2,7 +2,7 @@ import { Icon } from '../icon';
 
 import css from './a11y-overlay.module.css';
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isPressed?: boolean;
   icon: string;
   label: string;
