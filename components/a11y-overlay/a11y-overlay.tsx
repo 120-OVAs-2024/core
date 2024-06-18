@@ -99,7 +99,7 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
             onClick={() => setConfig(ConfigA11yProperty.StopAnimations)}
           />
 
-          <Accordion defaultIndex={0} allowMultiple>
+          <Accordion allowMultiple>
             <Accordion.Item addClass={css['accordion']}>
               <Accordion.Button
                 addClass={css['accordion__button']}
@@ -263,7 +263,11 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
                 {i18n[lang].letterSpacing}
               </Accordion.Button>
               <Accordion.Panel addClass={css['accordion__panel']}>
-                <A11yCard icon="letter-spacing" title={i18n[lang].letterSpacingTitle} main={i18n[lang].letterSpacingMain} />
+                <A11yCard
+                  icon="letter-spacing"
+                  title={i18n[lang].letterSpacingTitle}
+                  main={i18n[lang].letterSpacingMain}
+                />
                 <ul className={css['button-list']}>
                   <li>
                     <A11yButtton

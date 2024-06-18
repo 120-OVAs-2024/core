@@ -1,4 +1,4 @@
-import { useCallback, useEffect,useId, useState } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useHashLocation } from 'wouter/use-hash-location';
 
@@ -68,15 +68,19 @@ export const HeaderTitle = () => {
     };
   }, [updateTitle]);
 
-  return location !== HOME_PATH ? (
+  return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={css['title-slide']}>
-      <p className={css['title-slide__number']} aria-hidden="true">
-        {title.number}.
-      </p>
-      <h1 aria-describedby={uid} aria-hidden="true" dangerouslySetInnerHTML={{ __html: title.title }} />
-      <h1 id={uid} className="u-sr-only">
-        Página {title.number}, {title.title}
-      </h1>
+      {location !== HOME_PATH ? (
+        <>
+          <p className={css['title-slide__number']} aria-hidden="true">
+            {title.number}.
+          </p>
+          <h1 aria-describedby={uid} aria-hidden="true" dangerouslySetInnerHTML={{ __html: title.title }} />
+          <h1 id={uid} className="u-sr-only">
+            Página {title.number}, {title.title}
+          </h1>
+        </>
+      ) : null}
     </motion.div>
-  ) : null;
+  );
 };

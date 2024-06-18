@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'wouter';
 
 import { useOvaContext } from '@/context/ova-context';
@@ -16,9 +17,26 @@ export const Menu = () => {
   const { lang, titles, routes } = useOvaContext();
   const { expanded, handleExpanded } = useHeaderContext();
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav role="navigation" className={css['menu']}>
-      <ul role="list" className={css['list']}>
+      <button
+        className={css['hamburguer__button']}
+        aria-controls="main-menu"
+        aria-label="Menú principal"
+        aria-expanded={isOpen}
+        onClick={handleOpen}>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+
+      <ul role="list" className={`${css['list']} ${css['list--menu']}`}>
         <li className={css['list__item']}>
           <Link to="/" className={css['menu__button']}>
             <Icon name="home" />
@@ -53,7 +71,7 @@ export const Menu = () => {
           </MenuButton>
 
           {expanded.help && (
-            <MenuList data-underline="true">
+            <MenuList data-underline="true" addClass={css['menu-list--fit']}>
               <li>
                 <button className={css['menu-list__button']}>
                   <Icon name="keyboard" />
