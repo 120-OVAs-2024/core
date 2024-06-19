@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { Kbd, Tour } from 'books-ui';
 import { Link } from 'wouter';
 
 import { useOvaContext } from '@/context/ova-context';
 
+import { useA11y } from '../a11y-overlay/hooks/useA11y';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
 
@@ -18,6 +19,7 @@ import css from './header.module.css';
 export const Menu = () => {
   const { lang, titles, routes } = useOvaContext();
   const { expanded, handleExpanded } = useHeaderContext();
+  const { updateHTMLAttributesFromLocalStorage } = useA11y();
 
   // Usado para controlar la apertura y cierre
   // del componente  <Modal/>
@@ -30,6 +32,15 @@ export const Menu = () => {
   const toggleModal = (modal?: string) => {
     setOpenModal(modal || null);
   };
+
+  useLayoutEffect(() => {
+    /**
+     * Obtiene las opciones de accesiblidad que
+     * están en el localStorage y las aplica en el elemento HTML.
+    */
+   updateHTMLAttributesFromLocalStorage();
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -91,8 +102,7 @@ export const Menu = () => {
                 <li>
                   <button
                     className={`${css['menu-list__button']} js-button-specifications`}
-                    onClick={() => toggleModal(MODAL.ESPECIFICATION)}
-                    >
+                    onClick={() => toggleModal(MODAL.ESPECIFICATION)}>
                     <Icon name="settings" />
                     {i18n[lang].specifications}
                   </button>

@@ -20,6 +20,7 @@ export type ConfigA11y = {
   letterSpacing: BasicValuesType;
   darkMode: boolean;
   stopAnimations: boolean;
+  audio: boolean;
 };
 
 export type ContrastValues = (typeof CONTRAST)[keyof typeof CONTRAST];
@@ -30,7 +31,8 @@ export enum ConfigA11yProperty {
   LineHeight = 'lineHeight',
   LetterSpacing = 'letterSpacing',
   DarkMode = 'darkMode',
-  StopAnimations = 'stopAnimations'
+  StopAnimations = 'stopAnimations',
+  Audio = 'audio'
 }
 
 export interface useModalType {

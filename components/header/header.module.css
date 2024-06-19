@@ -69,6 +69,7 @@
     border: 1px solid transparent;
     background-color: transparent;
     font-size: var(--fs-300);
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1280px) {

@@ -18,7 +18,8 @@ export const INITIAL_STATE: ConfigA11y = {
   lineHeight: 'none',
   letterSpacing: 'none',
   darkMode: false,
-  stopAnimations: false
+  stopAnimations: false,
+  audio: false
 };
 
 export const BASIC_VALUES = Object.freeze({
@@ -29,8 +30,6 @@ export const BASIC_VALUES = Object.freeze({
 });
 
 export const INVALID_VALUES = ['no-contrast', 'none', false];
-
-export const KEY_LOCAL_STORAGE = 'ova-a11y-config';
 
 // Constantes para las etiquetas de navegación en múltiples idiomas
 export const i18n = {

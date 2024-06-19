@@ -1,20 +1,42 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useLocalStorage } from 'books-ui';
 
-import { INITIAL_STATE, INVALID_VALUES, KEY_LOCAL_STORAGE } from '../consts';
+import { KEY_LOCAL_STORAGE_A11Y } from '@/shared/consts/keyA11y';
+
+import { INITIAL_STATE, INVALID_VALUES } from '../consts';
 import type { ConfigA11y } from '../types/types';
 
-type ToggleProps = (property: keyof ConfigA11y, value?: string) => void;
+type toggleHTMLDataAttributeType = (property: keyof ConfigA11y, value?: string) => void;
 
-export const useA11y = (): [ConfigA11y, ToggleProps] => {
-  const [configLocalStorage, setConfigLocalStorage] = useLocalStorage(KEY_LOCAL_STORAGE, INITIAL_STATE);
+type useA11y = {
+  config: ConfigA11y;
+  setConfig: toggleHTMLDataAttributeType;
+  updateHTMLAttributesFromLocalStorage: () => void;
+};
+
+export const useA11y = (): useA11y => {
+  //TODO: Arreglar ese useLocalStorage, usar este hook (useA11y) en otro lado el este hook 👇 vuelve a meter el localStorage con el INITIAL_STATE
+  const [configLocalStorage, setConfigLocalStorage] = useLocalStorage(KEY_LOCAL_STORAGE_A11Y, INITIAL_STATE);
   const [config, setConfig] = useState<ConfigA11y>(() => ({ ...configLocalStorage }));
 
   /**
-   * Función utilizada para alternar una propiedad de configuración.
-   * @param {keyof Config} property - Propiedad de la configuración a alternar.
+   * Convierte una propiedad camelCase en un atributo data-*.
+   *
+   * @param {string} property - La propiedad camelCase que se convertirá.
+   * @return {string} - El atributo data-* correspondiente.
    */
-  const handleToggleProp: ToggleProps = (property: keyof ConfigA11y, value?: string) => {
+  const convertToDataAttribute = (property: string) => {
+    return `data-${property
+      .split(/(?<!^)(?=[A-Z])/)
+      .map((str) => str.toLowerCase())
+      .join('-')}`;
+  };
+
+  /**
+   * Función utilizada para alternar una propiedad de la configuración de accesiblidad.
+   * @param {keyof Config} property - Propiedad a alternar.
+   */
+  const toggleHTMLDataAttribute: toggleHTMLDataAttributeType = (property: keyof ConfigA11y, value?: string) => {
     const HTML_SELECTOR = document.querySelector('html');
     if (!HTML_SELECTOR) return;
 
@@ -26,10 +48,7 @@ export const useA11y = (): [ConfigA11y, ToggleProps] => {
     }
 
     // Convierte la propiedad camelCase a data-attribute
-    const propertyDataSet = `data-${property
-      .split(/(?<!^)(?=[A-Z])/)
-      .map((str) => str.toLowerCase())
-      .join('-')}`;
+    const propertyDataSet = convertToDataAttribute(property);
 
     // Establece o elimina el atributo data-* en <html> según el valor
     if (!INVALID_VALUES.includes(propertyValue)) {
@@ -42,5 +61,28 @@ export const useA11y = (): [ConfigA11y, ToggleProps] => {
     setConfig({ ...config, [property]: propertyValue });
   };
 
-  return [config, handleToggleProp];
+  /**
+   * Función utilizada para actualizar el los atributos del HTML
+   * con configuración de accesibilidad almacenada en el
+   * local storage.
+   */
+  const updateHTMLAttributesFromLocalStorage = useCallback(() => {
+    const HTML_SELECTOR = document.querySelector('html');
+    if (!HTML_SELECTOR) return;
+
+    Object.keys(configLocalStorage || {}).forEach((config) => {
+      const value = configLocalStorage[config as keyof ConfigA11y];
+      if (INVALID_VALUES.includes(value)) return;
+
+      // Convierte la propiedad camelCase a data-attribute
+      const property = convertToDataAttribute(config);
+      HTML_SELECTOR.setAttribute(property, String(value));
+    });
+  }, [configLocalStorage]);
+
+  return {
+    config,
+    setConfig: toggleHTMLDataAttribute,
+    updateHTMLAttributesFromLocalStorage
+  };
 };

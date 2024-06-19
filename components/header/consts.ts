@@ -1,20 +1,22 @@
 // Constantes para las etiquetas de navegación en múltiples idiomas
 export const i18n = {
   es: {
-    audio: 'Activar audio',
+    audioPause: 'Activar audio',
+    audioActive: 'Desactivar audio',
     a11y: 'Accesibilidad',
-    home: 'inicio',
-    menu: 'menu',
-    help: 'ayuda',
+    home: 'Inicio',
+    menu: 'Menú',
+    help: 'Ayuda',
     shortcuts: 'Atajos de teclado',
     specifications: 'Especificaciones técnicas'
   },
   en: {
-    audio: 'To activate audio',
-    a11y: 'Accesibility',
-    home: 'home',
-    menu: 'menu',
-    help: 'help',
+    audioPause: 'To activate audio',
+    audioActive: 'Deactivate audio',
+    a11y: 'Accessibility',
+    home: 'Home',
+    menu: 'Menu',
+    help: 'Help',
     shortcuts: 'Keyboard shortcuts',
     specifications: 'Technical specifications'
   }
