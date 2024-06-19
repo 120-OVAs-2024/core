@@ -403,3 +403,80 @@
         align-items: normal;
     }
 }
+
+/* Modals */
+.modal__title {
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--clr-brand);
+}
+
+.modal__wrapper li::marker {
+    color: var(--clr-brand);
+}
+
+
+/* Shortcuts */
+.shortcuts {
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+.shortcuts li {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 30ch), 1fr));
+    place-items: center;
+    gap: 1rem;
+}
+
+.shortcuts>*+* {
+    margin-block-start: 1.5rem;
+}
+
+.shortcuts__box {
+    padding: .5rem 1rem;
+    width: min(100% - 2rem, 25ch);
+    display: grid;
+    grid-template-columns: 1.4rem auto;
+    align-items: center;
+    text-align: center;
+    border: 2px solid var(--clr-brand);
+    border-radius: .6rem;
+}
+
+/* Tour */
+.tour__layer {
+    border: 1px solid #fff;
+    box-shadow: 0 0 4px 1px #ffffff;
+    opacity: .5;
+}
+
+.tour__layer :global(.c-tour-number) {
+    background-color: var(--clr-brand);
+    right: 0;
+    border: 2px solid #ffffff;
+}
+
+div.tour__element {
+    --tour-color: var(--clr-brand);
+    --tour-color-hover: var(--clr-accent-dark);
+    font-family: 'Roboto';
+}
+
+div.tour__element button {
+    --button-bg-color: #fff;
+    --button-padding: .3rem;
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+div.tour__element :global(.tour-description) {
+    margin-block: .5rem;
+}
+
+.tour__element svg {
+    fill: currentColor;
+} 
+
+[data-class="c-layout"] {
+    backdrop-filter: none;
+}

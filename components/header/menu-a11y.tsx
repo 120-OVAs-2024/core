@@ -1,5 +1,3 @@
-// import { Accordion } from 'books-ui';
-
 import { useOvaContext } from '@/context/ova-context';
 
 import { Icon } from '../icon';
@@ -19,7 +17,7 @@ export const MenuA11y = () => {
       <div className={css['menu-a11y']}>
         <ul role="list" className={css['list']}>
           <li>
-            <button aria-label="activar audio" className={css['menu-a11y__button']}>
+            <button aria-label="activar audio" className={`${css['menu-a11y__button']} js-button-audio-a11y`}>
               <Icon name="play" /> <span>{i18n[lang].audio}</span>
             </button>
           </li>
@@ -28,7 +26,7 @@ export const MenuA11y = () => {
             <button
               aria-label="Accesibilidad"
               aria-pressed={expanded.a11y}
-              className={css['menu-a11y__button']}
+              className={`${css['menu-a11y__button']} js-button-a11y`}
               onClick={() => handleExpanded(MenuOptions.A11Y)}>
               <Icon name="hand-a11y" /> <span>{i18n[lang].a11y}</span>
             </button>
