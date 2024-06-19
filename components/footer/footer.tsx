@@ -26,11 +26,12 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
   const boundaryCount = Math.floor(routes.length / QUARTER);
 
   return (
-    <footer className={`${css['footer']}`}>
+    <footer className={css['footer']}>
       <Pagination
         boundaryCount={boundaryCount}
         siblingCount={1}
         count={routes.length}
+        addClass="js-pagination-element"
         defaultPage={currentPage}
         onChange={handleNavigation}
         renderItem={(item) => <PaginationItem item={item} lang={lang} />}
@@ -62,7 +63,7 @@ const PaginationItem: React.FC<PaginationItemProps> = ({ item, lang }) => {
     </Link>
   ) : type === PAGINATION_ITEM_TYPE.NEXT || type === PAGINATION_ITEM_TYPE.PREVIOUS ? (
     <button
-      className={`${css['footer__nav-button']} u-px-2`}
+      className={`${css['footer__nav-button']} u-px-2 ${type === PAGINATION_ITEM_TYPE.NEXT ? 'js-pagination-link-next' : 'js-pagination-link-previous'}`}
       onClick={handleClick}
       data-type={type}
       data-page={page}
