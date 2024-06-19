@@ -7,11 +7,16 @@ div.radio {
     --input-radio-gap: 1rem;
 
     padding: .5rem 1rem;
-    justify-content: space-between;
+    justify-content: flex-start;
     font-style: italic;
     background-color: var(--clr-background);
     border-radius: .5rem;
     box-shadow: 2px 2px 3px 0px #60606057;
+}
+
+div.radio label::first-letter{
+    color: var(--clr-brand);
+    font-weight: bold;
 }
 
 .radio[data-state="right"] {

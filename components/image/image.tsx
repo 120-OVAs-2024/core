@@ -9,6 +9,7 @@ interface Props {
   size: string;
   hasHtml?: boolean;
   addClass?: string;
+  noCaption?: boolean
 }
 
 export const Image: React.FC<Props> = ({ src, title, alt, size, hasHtml, ...props }) => {
