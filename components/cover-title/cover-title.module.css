@@ -36,6 +36,7 @@
     width: fit-content;
     background-color: var(--clr-brand-light);
     font-weight: bold;
+    font-size: var(--fs-300);
     color: var(--clr-text-secondary);
     text-decoration-color: transparent;
     border: 1px solid transparent;
