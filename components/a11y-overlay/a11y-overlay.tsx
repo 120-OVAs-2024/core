@@ -60,12 +60,11 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
     setConfig(ConfigA11yProperty.LetterSpacing, value);
   };
 
-  return (
+  return isOpen ? (
     <>
       <div
         ref={refModal}
         role="dialog"
-        hidden={!isOpen}
         tabIndex={-1}
         aria-modal="true"
         onKeyDown={handleKeyDown}
@@ -301,5 +300,5 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
       </div>
       <Filter />
     </>
-  );
+  ) : null;
 };

@@ -48,9 +48,14 @@ export const PATH_REGEX = /\/page-(\d+)/;
 
 export const HOME_PATH = '/';
 
-export const SPANISH_LANGUAGE = 'es'
+export const SPANISH_LANGUAGE = 'es';
 
 export const MODAL = Object.freeze({
   SHORTCUTS: 'shortcuts',
   ESPECIFICATION: 'especification'
 });
+
+export const KEYCODE = {
+  TAB: 9,
+  ESC: 27
+};

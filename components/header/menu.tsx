@@ -91,7 +91,8 @@ export const Menu = () => {
                 <li>
                   <button
                     className={`${css['menu-list__button']} js-button-specifications`}
-                    onClick={() => toggleModal(MODAL.ESPECIFICATION)}>
+                    onClick={() => toggleModal(MODAL.ESPECIFICATION)}
+                    >
                     <Icon name="settings" />
                     {i18n[lang].specifications}
                   </button>
