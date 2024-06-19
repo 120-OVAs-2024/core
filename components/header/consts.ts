@@ -5,14 +5,18 @@ export const i18n = {
     a11y: 'Accesibilidad',
     home: 'inicio',
     menu: 'menu',
-    help: 'ayuda'
+    help: 'ayuda',
+    shortcuts: 'Atajos de teclado',
+    specifications: 'Especificaciones técnicas'
   },
   en: {
     audio: 'To activate audio',
     a11y: 'Accesibility',
     home: 'home',
     menu: 'menu',
-    help: 'help'
+    help: 'help',
+    shortcuts: 'Keyboard shortcuts',
+    specifications: 'Technical specifications'
   }
 };
 
@@ -43,6 +47,8 @@ export const i18nTour = {
 export const PATH_REGEX = /\/page-(\d+)/;
 
 export const HOME_PATH = '/';
+
+export const SPANISH_LANGUAGE = 'es'
 
 export const MODAL = Object.freeze({
   SHORTCUTS: 'shortcuts',

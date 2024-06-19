@@ -6,7 +6,7 @@
     min-height: min(10vh, 8rem);
     display: grid;
     grid-template-areas: 'a11y title menu logo';
-    grid-template-columns: 25ex 2fr 1fr 10ch;
+    grid-template-columns: 23ex 2fr 1fr 10ch;
     place-content: center;
     align-items: center;
     column-gap: 1em;
@@ -52,6 +52,10 @@
     padding-inline-start: 0;
     margin-block: 0;
     flex-direction: column;
+}
+
+.menu-a11y li {
+    width: 100%;
 }
 
 .menu-a11y__button {
@@ -475,7 +479,7 @@ div.tour__element :global(.tour-description) {
 
 .tour__element svg {
     fill: currentColor;
-} 
+}
 
 [data-class="c-layout"] {
     backdrop-filter: none;
