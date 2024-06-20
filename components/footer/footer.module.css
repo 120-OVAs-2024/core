@@ -83,7 +83,9 @@
     .footer__nav-button svg {
         --icon-size: 1.3rem;
     }
+}
 
+@media screen and (max-width: 768px) {
     .footer__nav-button span {
         display: none;
     }

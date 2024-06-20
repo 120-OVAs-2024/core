@@ -3,7 +3,7 @@
     --clr-text-header: var(--clr-text-secondary);
 
     width: 100vw;
-    min-height: min(10vh, 8rem);
+    min-height: min(5vw, 8rem);
     display: grid;
     grid-template-areas: 'a11y title menu logo';
     grid-template-columns: 23ex 2fr 1fr 10ch;
