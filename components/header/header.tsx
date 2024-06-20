@@ -7,6 +7,7 @@ import { HeaderProvider } from './header-context';
 import { HeaderTitle } from './header-title';
 import { Menu } from './menu';
 import { MenuA11y } from './menu-a11y';
+import { SkipToMain } from './skip-to-main';
 
 import css from './header.module.css';
 
@@ -43,6 +44,7 @@ export const Header = () => {
   return (
     <HeaderProvider value={{ expanded, handleExpanded }}>
       <header id="header" className={`${css['header']} u-px-2 u-py-0.8`}>
+        <SkipToMain/>
         <MenuA11y />
         <HeaderTitle />
         <Menu />
