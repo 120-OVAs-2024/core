@@ -485,3 +485,41 @@ div.tour__element :global(.tour-description) {
 [data-class="c-layout"] {
     backdrop-filter: none;
 }
+
+/* Skip Link */
+.skip-link {
+    --outline-offset: -4px;
+    --radius: .6rem;
+
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: block;
+    width: fit-content;
+    padding: 0.3em 1.5em;
+    margin-inline: auto;
+    color: var(--clr-text-secondary);
+    font-size: var(--fs-300);
+    border: 1px solid transparent;
+    background-color: var(--clr-accent-dark);
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    transform: translateX(-50%);
+}
+
+.skip-link:not(:focus):not(:active) {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 1px;
+    white-space: nowrap;
+}
+
+@media screen and (forced-colors: active) {
+    .skip-link {
+        color: LinkText;
+    }
+}
