@@ -1,6 +1,7 @@
 
 
 button.button {
+    --button-text-color: var(--clr-text-secondary);
     --button-bg-color: var(--clr-accent-dark);
     --button-padding: clamp(0.2rem, 1%, 0.3rem) .5rem;
     --outline-color: var(--clr-accent-dark);

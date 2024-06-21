@@ -1,4 +1,4 @@
-import { Pagination } from 'books-ui';
+import { Pagination, useMedia } from 'books-ui';
 import { Link, useLocation } from 'wouter';
 
 import { useOvaContext } from '@/context/ova-context';
@@ -15,6 +15,9 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
   const [, navigate] = useLocation();
   const { routes, lang } = useOvaContext();
 
+  // Calcula el número de elementos límite para la paginación
+  const boundaryCount = useMedia<number>(['(min-width: 1536px)'], [Math.floor(routes.length / QUARTER)], 1);
+
   /**
    * Maneja la navegación cuando se cambia la página en la paginación.
    */
@@ -22,14 +25,10 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
     navigate(`/page-${value}`);
   };
 
-  // Calcula el número de elementos límite para la paginación
-  const boundaryCount = Math.floor(routes.length / QUARTER);
-
   return (
     <footer className={css['footer']}>
       <Pagination
         boundaryCount={boundaryCount}
-        siblingCount={1}
         count={routes.length}
         addClass="js-pagination-element"
         defaultPage={currentPage}

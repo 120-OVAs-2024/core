@@ -1,6 +1,7 @@
 // Constantes para las etiquetas de navegación en múltiples idiomas
 export const i18n = {
   es: {
+    skipToMain: 'Ir a contenido',
     audioPause: 'Activar audio',
     audioActive: 'Desactivar audio',
     a11y: 'Accesibilidad',
@@ -11,6 +12,7 @@ export const i18n = {
     specifications: 'Especificaciones técnicas'
   },
   en: {
+    skipToMain: 'Skip to main content',
     audioPause: 'To activate audio',
     audioActive: 'Deactivate audio',
     a11y: 'Accessibility',
@@ -59,5 +61,6 @@ export const MODAL = Object.freeze({
 
 export const KEYCODE = {
   TAB: 9,
-  ESC: 27
+  ESC: 27,
+  SPACE: 32
 };
