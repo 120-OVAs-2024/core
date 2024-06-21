@@ -19,3 +19,4 @@ export * from './radio-activity';
 export * from './a11y-overlay';
 export * from './svg-positioner';
 export * from './fullscreen-button'
+export * from './fullscreen-alert'

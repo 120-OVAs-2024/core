@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import type { ButtonProps as ButtonPropsUI } from 'books-ui';
-import { Button } from 'books-ui';
+import { Button, Tooltip } from 'books-ui';
 
 import { useOvaContext } from '@/context/ova-context';
 import { useFullScreen } from '@/shared/hooks/useFullScreen';
@@ -48,15 +48,22 @@ export const FullScreenButton: React.FC<Props> = ({
   }, [controlFullScreen, toggleFullScreen]);
 
   return (
-    <Button
+    <Tooltip
       label={label || DEFAULT_LABEL}
-      aria-pressed={isFullScreen}
-      hasAriaLabel
-      onClick={handleButtonClick}
-      disabled={!isFullScreenEnabled}
-      addClass={`${css['button']} ${addClass ?? ''}`}
-      {...props}>
-      <Icon name={isFullScreen ? 'fullscreen-exit' : 'fullscreen'} />
-    </Button>
+      addClass={css['tooltip']}
+      distance={13}
+      hasArrow
+      isDisabled={!isFullScreenEnabled}>
+      <Button
+        label={label || DEFAULT_LABEL}
+        aria-pressed={isFullScreen}
+        hasAriaLabel
+        onClick={handleButtonClick}
+        disabled={!isFullScreenEnabled}
+        addClass={`${css['button']} ${addClass ?? ''}`}
+        {...props}>
+        <Icon name={isFullScreen ? 'fullscreen-exit' : 'fullscreen'} />
+      </Button>
+    </Tooltip>
   );
 };
