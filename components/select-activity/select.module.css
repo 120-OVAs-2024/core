@@ -29,6 +29,10 @@
     align-items: center;
 }
 
+html[data-dark-mode="true"] .select :global(.c-select-button) {
+    color: var(--clr-text-main);
+}
+
 .select :global(.c-select-button__icon) {
     background-color: var(--select-btn-clr);
 }

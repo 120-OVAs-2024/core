@@ -19,6 +19,17 @@
     z-index: 1;
 }
 
+html[data-dark-mode="true"] .modal {
+    --brand: #00408a;
+    --brand-dark: #06297d;
+    --accent: #525252;
+    --accent-light: #a3a3a3;
+    --color: #f3f3f3;
+    --color-secondary: #f3f3f3;
+    --background: #262527;
+    background: var(--brand);
+}
+
 @supports (height: 100svh) {
     .modal {
         height: 100svh;
@@ -49,6 +60,10 @@
 
 .modal__title kbd:first-child {
     margin-inline-start: 1rem;
+}
+
+html[data-dark-mode="true"] .modal__title kbd {
+    color: var(--color);
 }
 
 .modal__button {
@@ -137,6 +152,10 @@
     border: 1px solid var(--accent);
 }
 
+html[data-dark-mode="true"] .card {
+    background-color: var(--background);
+}
+
 .card svg {
     --icon-size: 2rem;
 }
@@ -174,9 +193,7 @@
     margin-block: 0;
 }
 
-
 /* A11y Button */
-
 .a11y-button {
     --outline-color: var(--brand);
 
@@ -198,6 +215,11 @@
     cursor: pointer;
 }
 
+html[data-dark-mode="true"] .a11y-button {
+    background-color: var(--background);
+    color: var(--color);
+}
+
 .a11y-button:is(:hover, :focus) {
     box-shadow: inset 0 0 0 .1875rem var(--brand);
     transition: box-shadow 120ms ease;
@@ -206,6 +228,10 @@
 .a11y-button[aria-pressed="true"] {
     color: var(--brand);
     box-shadow: inset 0 0 0 .1875rem var(--brand), 0px 0px 0px 5px var(--accent-light);
+}
+
+html[data-dark-mode="true"] .a11y-button[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 .1875rem var(--brand);
 }
 
 .a11y-button svg {
@@ -224,4 +250,8 @@ svg.a11y-checked {
     top: var(--gap);
     right: var(--gap);
     visibility: hidden;
+}
+
+html[data-dark-mode="true"] .a11y-button[aria-pressed="true"]>svg.a11y-checked {
+    color: var(--brand);
 }
