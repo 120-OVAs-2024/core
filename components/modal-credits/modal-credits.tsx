@@ -12,11 +12,12 @@ import css from './modal-credits.module.css';
 interface Props extends ModalProps {
   addClass?: string;
   school: string;
+  course?: string;
   teachers: string[];
   audio?: string;
 }
 
-export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, audio, ...props }) => {
+export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, audio, course, ...props }) => {
   const { lang } = useOvaContext();
 
   return (
@@ -26,6 +27,7 @@ export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, audi
         <p>Vicerrectoría de Medios y Mediaciones Pedagógicas - VIMEP</p>
         <p>Red de Gestión Tecnopedagógica de Cursos y Recursos Educativos Digitales</p>
         <p>{school}</p>
+        {course && <p>{course}</p>}
         {teachers.map((teacher, index) => (
           <Teacher key={`${index}-teacher`} teacher={teacher} />
         ))}

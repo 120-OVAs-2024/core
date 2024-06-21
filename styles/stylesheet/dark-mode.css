@@ -1,4 +1,40 @@
+html[data-dark-mode="true"]:root {
+    --clr-elements-dark-mode: #f7f7f7;
+    --clr-dark-mode: #121212;
 
-:root {
-    box-shadow: none;
+
+    --clr-brand: #002e46;
+    --clr-brand-light: #015c8b;
+    --clr-brand-dark: #6f6f6f;
+    --clr-accent: #de9d04;
+    --clr-accent-dark: #b65611;
+    --clr-text-main: #606060;
+    --clr-text-secondary: var(--clr-elements-dark-mode);
+    --clr-background: var(--clr-dark-mode);
+    --clr-text-main: var(--clr-elements-dark-mode);
+    --clr-activity-success: #46a443;
+    --clr-activity-wrong: #9b3431;
+}
+
+
+html[data-dark-mode="true"] .c-audio__bar {
+    --audio-background-color: var(--clr-elements-dark-mode);
+    --audio-icon-color: var(--clr-dark-mode);
+    --audio-slider-color: var(--clr-dark-mode);
+    box-shadow: 1px 2px 2px 1px #ffffff66;
+}
+
+html[data-dark-mode="true"] .video-player {
+    --video-bg: #01040a;
+    --video-caption-bg: #01040a;
+    --video-slider-bg: #bd0000;
+}
+
+
+html[data-dark-mode="true"] main::-webkit-scrollbar {
+    background-color: var(--clr-background);
+}
+
+html[data-dark-mode="true"] main::-webkit-scrollbar-thumb {
+    border: 2px solid var(--clr-background);
 }
