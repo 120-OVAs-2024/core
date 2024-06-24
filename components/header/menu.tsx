@@ -328,7 +328,7 @@ const TourButton = () => {
         Tour
       </button>
 
-      <Tour steps={TOUR_STEPS} isOpen={openTour} onClose={handleTour} finalFocusRef=".start">
+      <Tour steps={TOUR_STEPS} isOpen={openTour} onClose={handleTour} finalFocusRef=".js-button-tour">
         <Tour.Layer addClass={css['tour__layer']} />
         <Tour.Modal addClass={css['tour__element']} />
       </Tour>
