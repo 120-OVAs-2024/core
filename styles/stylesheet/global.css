@@ -202,6 +202,55 @@ ul[role='tablist'] {
 
 /* Accesibility features */
 
+/* Espaciado de texto */
+html[data-letter-spacing='1'] * {
+  line-height: 1.5 !important;
+  letter-spacing: 0.06em !important;
+  word-spacing: 0.08em !important;
+}
+
+html[data-letter-spacing='1'] p {
+  margin-bottom: 1em !important;
+}
+
+html[data-letter-spacing='2'] * {
+  line-height: 1.5 !important;
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+
+html[data-letter-spacing='2'] p {
+  margin-bottom: 2em !important;
+}
+
+html[data-letter-spacing='3'] * {
+  line-height: 1.8 !important;
+  letter-spacing: 0.15em !important;
+  word-spacing: 0.19em !important;
+}
+
+html[data-letter-spacing='3'] p {
+  margin-bottom: 2.3em !important;
+}
+
+html[data-letter-spacing='3'] {
+  font-size: 200%;
+}
+
+/* Altura de la línea */
+html[data-line-height='1'] * {
+  line-height: 1.5 !important;
+}
+
+html[data-line-height='2'] * {
+  line-height: 1.75 !important;
+}
+
+html[data-line-height='3'] * {
+  line-height: 2 !important;
+}
+
+/* Tamaño de fuente */
 html[data-font-size='1'] {
   font-size: 100%;
 }
@@ -214,6 +263,7 @@ html[data-font-size='3'] {
   font-size: 200%;
 }
 
+/* Contraste */
 #hc_extension_svg_filters {
   visibility: hidden;
   position: absolute;

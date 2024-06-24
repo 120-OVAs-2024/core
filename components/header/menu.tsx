@@ -44,7 +44,7 @@ export const Menu = () => {
 
   return (
     <>
-      <nav role="navigation" className={css['menu']}>
+      <nav role="navigation" aria-label={i18n[lang].nav} className={css['menu']}>
         <HamburguerButton />
         <ul role="list" className={`${css['list']} ${css['list--menu']}`}>
           <li className={css['list__item']}>
