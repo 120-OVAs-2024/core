@@ -24,6 +24,9 @@ export const MenuList: React.FC<Props> = ({ addClass, children, ...props }) => {
    * @returns {boolean}
    */
   const shouldCloseOnInteractOutside = (element: HTMLElement) => {
+    // Comprueba que el elemento no sea parte del componente <Tour/>
+    if (element.closest('div[id^="js-tour-"]') !== null) return true;
+
     if (element.tagName !== 'BUTTON' && element.tagName !== 'svg') return false;
     return element.dataset && element.dataset?.type === 'menu-button';
   };

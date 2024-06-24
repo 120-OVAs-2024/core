@@ -496,11 +496,16 @@ div.tour__element {
     font-family: 'Roboto';
 }
 
+html[data-dark-mode="true"] div.tour__element {
+  background-color: var(--clr-background);
+}
+
 div.tour__element button {
     --button-bg-color: #fff;
     --button-padding: .3rem;
     width: 2.4rem;
     height: 2.4rem;
+    color: #ffffff;
 }
 
 div.tour__element :global(.tour-description) {
@@ -509,6 +514,7 @@ div.tour__element :global(.tour-description) {
 
 .tour__element svg {
     fill: currentColor;
+    pointer-events: none;
 }
 
 [data-class="c-layout"] {

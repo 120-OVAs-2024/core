@@ -49,7 +49,7 @@ body {
 
 main {
   overflow-y: auto;
-  padding-block: 1rem;
+  padding-block: 1rem 1.5rem;
 }
 
 main::-webkit-scrollbar {

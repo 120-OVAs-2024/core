@@ -1,10 +1,8 @@
-
-
 .message-404 h1 {
-    font-size: 15rem;
+    font-size: clamp(3.05rem, 21.75vi + -2.39rem, 18.41rem);
     font-family: 'lato';
     letter-spacing: 1rem;
-    -webkit-text-stroke: 10px var(--clr-text-main);
+    -webkit-text-stroke: max(.2rem, .5vw) var(--clr-text-main);
     -webkit-text-fill-color: transparent;
 }
 
