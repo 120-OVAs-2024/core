@@ -77,7 +77,7 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
             </h2>
             <h2 aria-labelledby={`a11y-overlay-${uid}`} aria-hidden="true" className={css['modal__title']}>
               {i18n[lang].title}
-              <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>D</Kbd>
+              <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>A</Kbd>
             </h2>
 
             <button aria-label={i18n[lang].btnModal} className={css['modal__button']} onClick={onClose}>
