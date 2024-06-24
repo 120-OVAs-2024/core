@@ -2,7 +2,6 @@ import { useCallback, useLayoutEffect, useState } from 'react';
 import { useHashLocation } from 'wouter/use-hash-location';
 
 import { useOvaContext } from '@/context/ova-context';
-import { useKeyboardShortcuts } from '@/shared/hooks/useKeyboardShortcuts';
 
 import { Footer } from '../footer';
 import { Header } from '../header';
@@ -18,8 +17,6 @@ export const Layout: React.FC<Props> = ({ children }) => {
 
   const [location] = useHashLocation();
   const { titles, baseTitle } = useOvaContext();
-
-  useKeyboardShortcuts();
 
   /**
    * Actualiza el título de la página según la página actual.

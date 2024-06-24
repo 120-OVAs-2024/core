@@ -19,6 +19,7 @@ export type ConfigA11y = {
   lineHeight: BasicValuesType;
   letterSpacing: BasicValuesType;
   darkMode: boolean;
+  keyboardShortcuts: boolean;
   stopAnimations: boolean;
   audio: boolean;
 };
@@ -32,7 +33,8 @@ export enum ConfigA11yProperty {
   LetterSpacing = 'letterSpacing',
   DarkMode = 'darkMode',
   StopAnimations = 'stopAnimations',
-  Audio = 'audio'
+  Audio = 'audio',
+  KeyboardShortcuts = 'keyboardShortcuts'
 }
 
 export interface useModalType {

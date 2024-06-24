@@ -37,9 +37,9 @@ export const Menu = () => {
     /**
      * Obtiene las opciones de accesiblidad que
      * están en el localStorage y las aplica en el elemento HTML.
-    */
-   updateHTMLAttributesFromLocalStorage();
-   // eslint-disable-next-line react-hooks/exhaustive-deps
+     */
+    updateHTMLAttributesFromLocalStorage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
