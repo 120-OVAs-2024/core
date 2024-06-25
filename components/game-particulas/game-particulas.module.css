@@ -1,0 +1,88 @@
+.actParticulas {
+    width: 100%;
+    padding: 1rem;
+    min-height: 690px;
+    height: auto;
+    background: rgb(3, 140, 181);
+    background: -moz-radial-gradient(circle, rgba(3, 140, 181, 1) 18%, rgba(51, 78, 116, 1) 43%, rgba(62, 65, 102, 1) 65%);
+    background: -webkit-radial-gradient(circle, rgba(3, 140, 181, 1) 18%, rgba(51, 78, 116, 1) 43%, rgba(62, 65, 102, 1) 65%);
+    background: radial-gradient(circle, rgba(3, 140, 181, 1) 18%, rgba(51, 78, 116, 1) 43%, rgba(62, 65, 102, 1) 65%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#038cb5", endColorstr="#3e4166", GradientType=1);
+    padding-bottom: 5rem;
+    position: relative;
+}
+
+html[data-dark-mode="true"] .actParticulas {
+    background: rgb(97, 88, 88);
+    background: -moz-radial-gradient(circle, rgba(97, 88, 88, 1) 18%, rgba(70, 66, 66, 1) 43%, rgba(18, 18, 18, 1) 65%);
+    background: -webkit-radial-gradient(circle, rgba(97, 88, 88, 1) 18%, rgba(70, 66, 66, 1) 43%, rgba(18, 18, 18, 1) 65%);
+    background: radial-gradient(circle, rgba(97, 88, 88, 1) 18%, rgba(70, 66, 66, 1) 43%, rgba(18, 18, 18, 1) 65%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#615858", endColorstr="#121212", GradientType=1);
+    color: white !important;
+
+}
+
+html[data-dark-mode="true"] .containerQuestion {
+    background-color: var(--ui-color-gray-900);
+}
+
+.containerQuestion {
+    width: 50%;
+    margin: 1rem auto;
+    min-height: 150px;
+    height: auto;
+    border: 3px solid #00ADCF;
+    background-color: var(--ui-color-gray-600);
+    border-radius: 10px;
+    color: white;
+    font-weight: 800;
+    text-align: center;
+    padding: 1rem
+}
+
+.containerQuestion[data-state="true"] {
+    background-color: var(--clr-activity-success);
+}
+
+.containerQuestion[data-state="false"] {
+    background-color: var(--clr-activity-wrong);
+}
+
+@media screen and (max-width: 900px) {
+    .containerQuestion {
+        width: 100%;
+    }
+}
+
+.containerQuestion::after {
+    content: " ";
+    width: 10px;
+    height: 40px;
+    position: absolute;
+    top: -36px;
+    right: 65px;
+    background-color: #E5DABE;
+
+}
+
+.containerQuestion::before {
+    content: " ";
+    width: 10px;
+    height: 40px;
+    position: absolute;
+    top: -36px;
+    left: 65px;
+    background-color: #E5DABE;
+
+
+}
+
+.c-input-radio__box {
+    border: 2px solid white !important;
+}
+
+.actParticulas button {
+    position: relative;
+    z-index: 1;
+
+}

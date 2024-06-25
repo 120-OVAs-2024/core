@@ -1,0 +1,155 @@
+div.radio {
+    --input-radio-clr: var(--clr-background);
+    --input-radio-border-clr: #11203c;
+    --input-radio-bg: #11203c;
+    --input-size: 1.6rem;
+    --input-size-svg: 1.2em;
+    --input-radio-gap: 1rem;
+
+    padding: .5rem 1rem;
+    justify-content: flex-start;
+    font-style: italic;
+    border-radius: .5rem;
+
+}
+
+.containerPlaneAndOption {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: grid;
+
+
+
+}
+
+.containerPlaneAndOption .option {
+    width: auto;
+    padding: 1rem;
+    margin-top: 1rem;
+    min-width: 300px;
+    border: 2px solid #E76732;
+    min-height: 50px;
+    border-radius: 10px;
+    height: auto;
+    min-height: 100px;
+    background-color: var(--ui-color-gray-600);
+    color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+html[data-dark-mode="true"] .containerPlaneAndOption .option {
+    background-color: var(--ui-color-gray-900);
+}
+
+.plane {
+    width: 80px;
+    height: 80px;
+    transform-style: preserve-3d;
+}
+
+.plane.main {
+    margin: auto;
+    transform: rotateX(60deg) rotateZ(-30deg);
+    -webkit-animation: rotate 20s infinite linear;
+    animation: rotate 20s infinite linear;
+}
+
+.plane.main .circle {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    transform-style: preserve-3d;
+    border-radius: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 60px var(--backgroundParticule), inset 0 0 60px var(--backgroundParticule)
+}
+
+.plane.main .circle::before,
+.plane.main .circle::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: var(--backgroundParticule);
+    box-sizing: border-box;
+    box-shadow: 0 0 60px 2px var(--backgroundParticule);
+}
+
+.plane.main .circle::before {
+    transform: translateZ(-90px);
+}
+
+.plane.main .circle::after {
+    transform: translateZ(90px);
+}
+
+.plane.main .circle:nth-child(1) {
+    transform: rotateZ(72deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(2) {
+    transform: rotateZ(144deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(3) {
+    transform: rotateZ(216deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(4) {
+    transform: rotateZ(288deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(5) {
+    transform: rotateZ(360deg) rotateX(63.435deg);
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+.radio>div {
+    border: 2px solid white;
+}
+
+.radio>div:focus-within {
+    outline: max(2px, .08em) solid white;
+}
+
+.radio[data-state="right"] {
+    --input-radio-bg: green;
+}
+
+.radio[data-state="wrong"] {
+    --input-radio-bg: red;
+}
+
+.radio :global(.c-input-radio__icon) svg {
+    width: var(--input-size-svg);
+    height: var(--input-size-svg);
+}

@@ -1,11 +1,26 @@
-import { useEffect, useReducer, useRef } from 'react';
-
+import { useRef, useEffect, useReducer } from "react"
 import type { InitialState, Option } from './types/types'
 import { States } from './types/types';
-import { RadioActivityProvider } from './radio-activity-context';
+import { motion } from "framer-motion"
+import css from "./game-particulas.module.css"
+import { Particule } from "./particule";
 import { RadioButton } from './radio-button';
-import { RadioElement } from './radio-element';
+import { RadioActivityProvider } from './radio-activity-context';
+import { Ray } from "./ray";
+import { FullScreenButton } from '@shared/components';
 
+
+
+
+
+
+interface Props {
+  children: JSX.Element | JSX.Element[];
+  onResult?: ({ result, options }: { result: boolean; options: Option[], }) => void;
+  minSelected?: number;
+  question: string,
+  id: string
+}
 const INITIAL_STATE = Object.freeze({
   validation: false,
   button: true,
@@ -13,56 +28,33 @@ const INITIAL_STATE = Object.freeze({
   options: []
 });
 
-interface Props {
-  children: JSX.Element | JSX.Element[];
-  onResult?: ({ result, options }: { result: boolean; options: Option[] }) => void;
-  minSelected?: number;
-}
 
 type SubComponents = {
-  Radio: typeof RadioElement;
+  Particule: typeof Particule;
   Button: typeof RadioButton;
 };
 
-const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelected = 1 }) => {
 
+export const GameParticulas: React.FC<Props> & SubComponents = ({ children, onResult, minSelected = 1, question, id }) => {
   const [activity, updateActivity] = useReducer(
     (prev: InitialState, next: Partial<InitialState>) => ({ ...prev, ...next }),
     INITIAL_STATE
   );
 
-  // Referencia mutable para almacenar los uid de cada componente <RadioElement/>
   const radioElementsId = useRef<string[]>([]);
 
-  /**
-   * Agrega el ID de un componente RadioElement
-   * para realizar la validación de la actividad.
-   * @param {string} uid - El ID del componente RadioElement.
-   */
   const addRadioElementsId = (uid: string): void => {
     if (!radioElementsId.current.includes(uid)) {
       radioElementsId.current = [...radioElementsId.current, uid];
     }
   };
 
-  /**
-   * Creada para almacenar los radio seleccionados,
-   * se crea un nuevo objecto con el id de la pregunta y el valor del radio.
-   *
-   * @param {String} id - id de la pregunta.
-   * @param {Object} value - valor del radio seleccionado.
-   */
   const addRadiosValues = ({ id, name, state }: Option) => {
     updateActivity({
       options: [...activity.options.filter((option) => option.name !== name), { id, name, state }]
     });
   };
 
-  /**
-   * Se usa para la validación de toda la actividad,
-   * está se encarga de comprobrar que el número de opciones
-   * seleccionadas se igual al total de las correctas.
-   */
   const handleValidation = () => {
     updateActivity({ validation: true, button: true });
 
@@ -72,22 +64,14 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
       onResult({ result, options: activity.options });
     }
 
-    // Actualiza la actividad con el nuevo resultado
+
     updateActivity({ result: result });
   };
 
-  /**
-   * Reinicia la actividad a su estado inicial.
-   */
   const handleReset = () => {
     updateActivity(INITIAL_STATE);
   };
 
-  /**
-  * Usado para observar los cambios en la propiedad options del estado Activity.
-  * esto con el fin del que si el total de opciones seleccionadas es igual al total de preguntas,
-  * entonces active el botón que inicia la comprobación.
-  */
   useEffect(() => {
     if (!activity.options.length) return;
 
@@ -98,8 +82,6 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
       updateActivity({ button: false });
     }
   }, [activity.options, activity.validation, radioElementsId, minSelected]);
-
-
   return (
     <RadioActivityProvider
       value={{
@@ -111,12 +93,32 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
         result: activity.result,
         validation: activity.validation
       }}>
-      {children}
+      <div id={id} className={css.actParticulas}>
+        <FullScreenButton elementId={id}></FullScreenButton>
+        <Ray />
+        <motion.div
+          initial={{
+            transform: "translateY(-200px)"
+          }}
+          animate={{
+            transform: "translateY(0px)"
+          }}
+          transition={{
+            // repeat: 1,
+            repeatType: "mirror",
+            duration: 1,
+
+          }}
+          className={css.containerQuestion}
+          data-state={activity.validation ? activity.result : null}
+        > <p>{question}</p> </motion.div>
+
+        {children}
+
+      </div >
     </RadioActivityProvider>
-  );
+
+  )
 };
-
-Radios.Radio = RadioElement
-Radios.Button = RadioButton
-
-export { Radios };
+GameParticulas.Button = RadioButton
+GameParticulas.Particule = Particule
