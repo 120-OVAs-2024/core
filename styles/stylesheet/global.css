@@ -44,6 +44,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: var(--fs-200);
   color: var(--clr-text-main);
+  background-position: center;
   overflow-y: hidden;
 }
 
@@ -189,6 +190,14 @@ ul[role='tablist'] {
   --audio-slider-color: #ffffff;
   --audio-border-radius: .5rem;
   padding: .4rem;
+  box-shadow: 1px 2px 2px 1px #60606057;
+}
+
+.c-audio__button {
+  --outline-color: #11203c;
+  --button-border-color: transparent;
+  --button-bg-color: #11203c;
+  --audio-btn-background-hover: #1e3a6e;
   box-shadow: 1px 2px 2px 1px #60606057;
 }
 

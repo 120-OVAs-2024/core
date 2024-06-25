@@ -12,7 +12,7 @@
 
 .cover-title__title {
     align-self: start;
-    max-width: 50ch;
+    max-width: 60ch;
     display: grid;
     place-content: center;
     gap: 1em;
@@ -45,4 +45,29 @@
 
 .cover-title__link>svg {
     --icon-size: 1.9rem;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .cover-title {
+        place-items: center;
+        grid-template-rows: auto 2fr;
+        text-align: center;
+    }
+
+    .cover-title__title {
+        max-width: 80ch;
+        display: grid;
+        place-items: center;
+    }
+
+    .cover-title h1 {
+        font-size: var(--fs-600);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .cover-title h1 {
+        font-size: var(--fs-400);
+    }
 }
