@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
 import type { SectionProps } from 'books-ui';
 import { Panel as PanelUI } from 'books-ui';
 
-import { usePanelCoreContext } from './panel-context';
+import { useSectionManager } from './hooks/useSectionManager';
 
 import css from './panel.module.css';
 
@@ -12,16 +11,10 @@ interface Props extends SectionProps {
 }
 
 export const PanelSection: React.FC<Props> = ({ title, addClass, children }) => {
-  const { addSectionTitle } = usePanelCoreContext();
-
-  useEffect(() => {
-    if (title) {
-      addSectionTitle(title);
-    }
-  }, [title, addSectionTitle]);
+  const ref = useSectionManager(title);
 
   return (
-    <PanelUI.Section addClass={`${css['panel__section']} ${addClass ?? ''}`}>
+    <PanelUI.Section ref={ref} addClass={`${css['panel__section']} ${addClass ?? ''}`}>
       {children}
     </PanelUI.Section>
   );
