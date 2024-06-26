@@ -21,3 +21,4 @@ export * from './svg-positioner';
 export * from './fullscreen-button';
 export * from './fullscreen-alert';
 export * from './game-particulas';
+export * from './gif'
