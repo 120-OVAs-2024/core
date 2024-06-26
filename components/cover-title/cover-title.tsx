@@ -42,7 +42,7 @@ export const CoverTitle: React.FC<Props> = ({ title, url = 'assets/base/cover.we
     <div className={css['cover-title']}>
       <div className={css['cover-title__audio']}>{audio ? <Audio a11y src={audio.a11y} /> : null}</div>
       <div className={`${css['cover-title__title']} u-px-9`}>
-        {audio ? <Audio src={audio.a11y} type="button" addClass="u-mx-auto" /> : null}
+        {audio ? <Audio src={audio.title} type="button" addClass="u-mx-auto" /> : null}
         <h1>{title}</h1>
         <Link to="/page-1" className={css['cover-title__link']} aria-label={i18n[lang].label} onClick={focusMainElement}>
           {i18n[lang].label} <Icon name="arrow-right-home" />
