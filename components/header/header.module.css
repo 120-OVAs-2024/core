@@ -10,7 +10,7 @@
     place-content: center;
     align-items: center;
     column-gap: 1em;
-    z-index: 1;
+    z-index: var(--z-index-menu);
     background-image: url(assets/base/banner-header.webp), radial-gradient(circle at 33%, hsl(0deg 0% 100% / 16%) 13%, var(--clr-brand) 48%);
     background-color: var(--clr-brand);
     color: var(--clr-text-header);

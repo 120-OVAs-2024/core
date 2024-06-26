@@ -16,7 +16,7 @@
     height: 100vh;
     background: linear-gradient(to right, rgb(0, 107, 230), rgb(2, 96, 221), rgb(5, 85, 212), rgb(7, 73, 203), rgb(9, 62, 194));
     isolation: isolate;
-    z-index: 1;
+    z-index: var(--z-index-menu);
 }
 
 html[data-dark-mode="true"] .modal {
