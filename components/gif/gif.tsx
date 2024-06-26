@@ -5,9 +5,9 @@ import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
 import css from './gif.module.css';
 
-interface Props {
-  src?: string;
-  alt?: string;
+interface Props extends React.VideoHTMLAttributes<HTMLVideoElement>{
+  src: string;
+  alt: string;
   title?: string;
   size?: string;
   addClass?: string;
@@ -17,12 +17,13 @@ interface Props {
 
 export const Gif: React.FC<Props> = ({
   src,
-  alt = '',
+  alt,
   title = 'Animation 1.',
   size,
   addClass,
   noCaption = false,
-  hasHtml
+  hasHtml,
+  ...props
 }) => {
   const { stopAnimations } = useA11yAttribute();
   const reduceMotion = useReduceMotion();
@@ -56,7 +57,7 @@ export const Gif: React.FC<Props> = ({
       {...(size && {
         style: { '--gif-max-width': size } as React.CSSProperties
       })}>
-      <video ref={ref} autoPlay loop muted playsInline aria-label={parsedAlt}>
+      <video ref={ref} autoPlay loop muted playsInline aria-label={parsedAlt} {...props}>
         <source src={src} type="video/webm" />
       </video>
 
