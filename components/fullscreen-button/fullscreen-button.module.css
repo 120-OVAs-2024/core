@@ -5,11 +5,18 @@ button.button {
     --outline-color: #252329;
     --button-gap: .26em;
 
+    display: none;
     width: fit-content;
     cursor: pointer;
     border-radius: .3125rem;
     font-weight: normal;
     margin: .312rem;
+}
+
+@media screen and (max-width: 1280px)  {
+    button.button  {
+        display: block;
+    }
 }
 
 button.button::first-letter {

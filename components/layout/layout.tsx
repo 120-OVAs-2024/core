@@ -1,7 +1,10 @@
 import { useCallback, useLayoutEffect, useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { useHashLocation } from 'wouter/use-hash-location';
 
 import { useOvaContext } from '@/context/ova-context';
+import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
+import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
 import { Footer } from '../footer';
 import { Header } from '../header';
@@ -17,6 +20,11 @@ export const Layout: React.FC<Props> = ({ children }) => {
 
   const [location] = useHashLocation();
   const { titles, baseTitle } = useOvaContext();
+
+  // Detecta si el usuario prefiere reducir la animación
+  const reduceMotion = useReduceMotion();
+  // Obtener el estado de la propiedad de accesibilidad 'stopAnimations'
+  const { stopAnimations } = useA11yAttribute();
 
   /**
    * Actualiza el título de la página según la página actual.
@@ -42,12 +50,12 @@ export const Layout: React.FC<Props> = ({ children }) => {
   }, [location, updatePageTitle]);
 
   return (
-    <>
+    <MotionConfig reducedMotion={`${stopAnimations || reduceMotion ? 'always' : 'never'}`}>
       <Header />
       <main id="main" tabIndex={-1}>
         {children}
       </main>
       {location !== HOME_PATH ? <Footer currentPage={currentPage} /> : null}
-    </>
+    </MotionConfig>
   );
 };

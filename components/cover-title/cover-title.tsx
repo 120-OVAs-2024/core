@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Audio, useMedia } from 'books-ui';
+import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import { useBackground } from '@shared/hooks/useBackground';
 import { focusMainElement } from '@shared/utils/focusMain';
@@ -39,15 +40,22 @@ export const CoverTitle: React.FC<Props> = ({ title, url = 'assets/base/cover.we
   }, [currentURL, setBackground]);
 
   return (
-    <div className={css['cover-title']}>
+    <motion.section
+      className={css['cover-title']}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}>
       <div className={css['cover-title__audio']}>{audio ? <Audio a11y src={audio.a11y} /> : null}</div>
       <div className={`${css['cover-title__title']} u-px-9`}>
-        {audio ? <Audio src={audio.a11y} type="button" addClass="u-mx-auto" /> : null}
+        {audio ? <Audio src={audio.title} type="button" addClass="u-mx-auto" /> : null}
         <h1>{title}</h1>
-        <Link to="/page-1" className={css['cover-title__link']} aria-label={i18n[lang].label} onClick={focusMainElement}>
+        <Link
+          to="/page-1"
+          className={css['cover-title__link']}
+          aria-label={i18n[lang].label}
+          onClick={focusMainElement}>
           {i18n[lang].label} <Icon name="arrow-right-home" />
         </Link>
       </div>
-    </div>
+    </motion.section>
   );
 };

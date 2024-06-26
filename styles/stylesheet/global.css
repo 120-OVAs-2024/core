@@ -1,7 +1,7 @@
 :root {
-  --z-index-menu: 2;
-  --z-index-modal: 3;
-  --z-index-interpreter: 4;
+  --z-index-menu: 20;
+  --z-index-modal: 30;
+  --z-index-interpreter: 40;
 }
 
 body.debug * {

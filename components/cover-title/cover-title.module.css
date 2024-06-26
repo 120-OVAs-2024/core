@@ -41,12 +41,16 @@
     text-decoration-color: transparent;
     border: 1px solid transparent;
     border-radius: 100vw;
+    transition: background-color 120ms ease-in-out;
+}
+
+.cover-title__link:is(:hover, :focus) {
+    background-color: #18729e;
 }
 
 .cover-title__link>svg {
     --icon-size: 1.9rem;
 }
-
 
 @media screen and (max-width: 1024px) {
     .cover-title {
