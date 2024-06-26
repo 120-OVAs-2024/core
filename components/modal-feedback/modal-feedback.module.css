@@ -10,7 +10,7 @@
 }
 
 .modal__title {
-    color: #11203c;
+    color: var(--clr-elements-dark-mode);
     font-weight: bold;
     font-size: var(--fs-500);
 }

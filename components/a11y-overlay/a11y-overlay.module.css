@@ -12,7 +12,7 @@
     position: absolute;
     left: 0;
     padding-block-end: 2rem;
-    width: min(100%, 520px);
+    width: min(100%, 32.5rem);
     height: 100vh;
     background: linear-gradient(to right, rgb(0, 107, 230), rgb(2, 96, 221), rgb(5, 85, 212), rgb(7, 73, 203), rgb(9, 62, 194));
     isolation: isolate;

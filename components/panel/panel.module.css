@@ -3,6 +3,10 @@
     grid-template-rows: auto 1fr;
 }
 
+.panel__section {
+    opacity: 0;
+}
+
 .progress {
     --wrapper-width: 140ch;
     justify-self: center;

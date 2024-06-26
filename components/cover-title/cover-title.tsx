@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Audio } from 'books-ui';
+import { Audio, useMedia } from 'books-ui';
 import { Link } from 'wouter';
 import { useBackground } from '@shared/hooks/useBackground';
 import { focusMainElement } from '@shared/utils/focusMain';
@@ -32,13 +32,15 @@ export const CoverTitle: React.FC<Props> = ({ title, url = 'assets/base/cover.we
   const [, setBackground] = useBackground();
   const { lang } = useOvaContext();
 
+  const currentURL = useMedia(['(max-width: 1024px)'], ['assets/base/cover-mobile.webp'], url);
+
   useEffect(() => {
-    setBackground(url);
-  }, [url, setBackground]);
+    setBackground(currentURL);
+  }, [currentURL, setBackground]);
 
   return (
     <div className={css['cover-title']}>
-      <div className={css['cover-title__audio']}>{audio ? <Audio src={audio.a11y} /> : null}</div>
+      <div className={css['cover-title__audio']}>{audio ? <Audio a11y src={audio.a11y} /> : null}</div>
       <div className={`${css['cover-title__title']} u-px-9`}>
         {audio ? <Audio src={audio.a11y} type="button" addClass="u-mx-auto" /> : null}
         <h1>{title}</h1>

@@ -37,14 +37,14 @@ export const Menu = () => {
     /**
      * Obtiene las opciones de accesiblidad que
      * están en el localStorage y las aplica en el elemento HTML.
-    */
-   updateHTMLAttributesFromLocalStorage();
-   // eslint-disable-next-line react-hooks/exhaustive-deps
+     */
+    updateHTMLAttributesFromLocalStorage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <nav role="navigation" className={css['menu']}>
+      <nav role="navigation" aria-label={i18n[lang].nav} className={css['menu']}>
         <HamburguerButton />
         <ul role="list" className={`${css['list']} ${css['list--menu']}`}>
           <li className={css['list__item']}>

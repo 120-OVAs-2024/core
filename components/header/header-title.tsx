@@ -72,9 +72,9 @@ export const HeaderTitle = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={css['title-slide']}>
       {location !== HOME_PATH ? (
         <>
-          <p className={css['title-slide__number']} aria-hidden="true">
+          <span className={css['title-slide__number']} aria-hidden="true">
             {title.number}.
-          </p>
+          </span>
           <h1 aria-describedby={uid} aria-hidden="true" dangerouslySetInnerHTML={{ __html: title.title }} />
           <h1 id={uid} className="u-sr-only">
             Página {title.number}, {title.title}

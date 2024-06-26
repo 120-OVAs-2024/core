@@ -44,7 +44,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Header />
-      <main id="main" tabIndex={-1}>{children}</main>
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
       {location !== HOME_PATH ? <Footer currentPage={currentPage} /> : null}
     </>
   );

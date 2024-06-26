@@ -2,6 +2,7 @@ import { useId, useRef } from 'react';
 import { Accordion, Filter, Kbd } from 'books-ui';
 
 import { useOvaContext } from '@/context/ova-context';
+import { useKeyboardShortcuts } from '@/shared/hooks/useKeyboardShortcuts';
 
 import { Icon } from '../icon';
 
@@ -27,6 +28,11 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
 
   const { config, setConfig } = useA11y();
   const { handleKeyDown } = useModal({ ref: refModal, isOpen, onClose });
+
+  /**
+   * Maneja los keyboardShortcuts de l página.
+   */
+  useKeyboardShortcuts(config.keyboardShortcuts);
 
   /**
    *  Función para establecer los diferentes contrastes.
@@ -77,7 +83,7 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
             </h2>
             <h2 aria-labelledby={`a11y-overlay-${uid}`} aria-hidden="true" className={css['modal__title']}>
               {i18n[lang].title}
-              <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>D</Kbd>
+              <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>A</Kbd>
             </h2>
 
             <button aria-label={i18n[lang].btnModal} className={css['modal__button']} onClick={onClose}>
@@ -97,6 +103,13 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
               icon="stop-animations"
               isPressed={config.stopAnimations}
               onClick={() => setConfig(ConfigA11yProperty.StopAnimations)}
+            />
+
+            <A11yButtton
+              label={i18n[lang].keyboardShortcuts}
+              icon="keyboard"
+              isPressed={config.keyboardShortcuts}
+              onClick={() => setConfig(ConfigA11yProperty.KeyboardShortcuts)}
             />
 
             <Accordion allowMultiple>

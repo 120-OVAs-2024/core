@@ -1,6 +1,7 @@
 // Constantes para las etiquetas de navegación en múltiples idiomas
 export const i18n = {
   es: {
+    nav: 'Menú principal',
     skipToMain: 'Ir a contenido',
     audioPause: 'Activar audio',
     audioActive: 'Desactivar audio',
@@ -12,6 +13,7 @@ export const i18n = {
     specifications: 'Especificaciones técnicas'
   },
   en: {
+    nav: 'Main menu',
     skipToMain: 'Skip to main content',
     audioPause: 'To activate audio',
     audioActive: 'Deactivate audio',

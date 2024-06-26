@@ -25,7 +25,7 @@ button.button>svg {
     --icon-size: 1.3rem;
 }
 
-.tooltip {
+div.tooltip {
     --tooltip-bg: #252329;
     --tooltip-arrow-bg: #252329;
     color: var(--clr-text-secondary);

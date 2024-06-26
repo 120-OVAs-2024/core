@@ -18,6 +18,7 @@ export const INITIAL_STATE: ConfigA11y = {
   lineHeight: 'none',
   letterSpacing: 'none',
   darkMode: false,
+  keyboardShortcuts: false,
   stopAnimations: false,
   audio: false
 };
@@ -35,9 +36,10 @@ export const INVALID_VALUES = ['no-contrast', 'none', false];
 export const i18n = {
   es: {
     title: 'Menú de accesibilidad',
-    titleA11y: 'Menú de accesibilidad, puedes utilizar las teclas Ctrl + Alt + D para abrir y cerrar este menu.',
+    titleA11y: 'Menú de accesibilidad, puedes utilizar las teclas Ctrl + Alt + A para abrir y cerrar este menu.',
     btnModal: 'Cerrar modal',
     darkMode: 'Modo oscuro',
+    keyboardShortcuts: 'Deshabilitar los atajos de teclado',
     stopAnimations: 'Detener animaciones',
     contrast: 'Ajuste del contraste',
     contrastTitle: 'Contraste personalizado',
@@ -71,9 +73,10 @@ export const i18n = {
   },
   en: {
     title: 'Accessibility menu',
-    titleA11y: 'Accessibility menu, you can use the Ctrl + Alt + D keys to open and close this menu.',
+    titleA11y: 'Accessibility menu, you can use the Ctrl + Alt + A keys to open and close this menu.',
     btnModal: 'Close modal',
     darkMode: 'Dark mode',
+    keyboardShortcuts: 'Disable keyboard shortcuts',
     stopAnimations: 'Stop animations',
     contrast: 'Contrast adjustment',
     contrastTitle: 'Custom contrast',
