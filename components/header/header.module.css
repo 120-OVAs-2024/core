@@ -99,7 +99,7 @@ html[data-dark-mode="true"] .header {
     margin-inline-end: 1rem;
     font-family: 'Nunito';
     font-size: var(--fs-800);
-    color: transparent;
+    color: var(--clr-text-header);
     -webkit-text-stroke: 1px var(--clr-text-header);
     -webkit-text-fill-color: transparent;
 }
