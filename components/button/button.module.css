@@ -1,7 +1,7 @@
 
 
 button.button {
-    --button-text-color: var(--clr-text-secondary);
+    --button-text-color: #121212;
     --button-bg-color: var(--clr-accent-dark);
     --button-padding: clamp(0.2rem, 1%, 0.3rem) .5rem;
     --outline-color: var(--clr-accent-dark);
@@ -12,13 +12,23 @@ button.button {
     border-radius: .6rem;
     font-weight: normal;
     margin-inline: .5rem;
+    transition: background-color 120ms ease-in-out;
+}
+
+button.button:is(:hover, :focus) {
+    --button-bg-color: #ff9239;
 }
 
 button.button::first-letter {
     text-transform: uppercase;
 }
 
+html[data-dark-mode="true"] button.button {
+    --button-text-color: var(--clr-text-secondary);
+}
+
 button.button:disabled {
+    --button-text-color: var(--clr-text-secondary);
     --button-bg-color: var(--clr-brand-dark);
     cursor: not-allowed;
 }

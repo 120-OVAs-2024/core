@@ -4,7 +4,7 @@
     background-color: var(--clr-background);
     border-radius: var(--border-radious);
     block-size: unset;
-    
+    z-index: var(--z-index-modal);
 }
 
 .modal::after {
@@ -31,6 +31,7 @@
 
 .modal-overlay {
     background: #000000;
+    z-index: var(--z-index-modal);
 }
 
 .modal-button {
