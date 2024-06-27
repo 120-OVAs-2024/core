@@ -80,7 +80,7 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, addClass, ...p
             onClick={() => handleClick(pair.id, pair.text, pair.type)}
             className={`${getClassName(pair.id, pair.text)} ${css['grid-item']}`}
             {...props}>
-            <p className='u-font-bold '>{pair.text}</p>
+            <b>{pair.text}</b>
           </div>
         ))}
       </div>
