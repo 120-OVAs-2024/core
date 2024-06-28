@@ -45,8 +45,8 @@ const TrueFalseCard: FC<TrueFalseCardProps> = ({ question, isCorrect, validation
         <div className={`${css['card-question']}`}>
             <h2>{question}</h2>
             <div className={`${css['card-buttons']}`}>
-                <button className={getClassName(true)} onClick={() => handleButtonClick(true)}><b>Sí</b></button>
-                <button className={getClassName(false)} onClick={() => handleButtonClick(false)}><b>No</b></button>
+                <button className={getClassName(true)} onClick={() => handleButtonClick(true)} disabled={validation}><b>Sí</b></button>
+                <button className={getClassName(false)} onClick={() => handleButtonClick(false)} disabled={validation}><b>No</b></button>
             </div>
         </div>
     );
