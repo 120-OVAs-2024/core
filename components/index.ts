@@ -21,4 +21,6 @@ export * from './svg-positioner';
 export * from './fullscreen-button';
 export * from './fullscreen-alert';
 export * from './game-particulas';
-export * from './gif'
+export * from './gif';
+export * from './relation-concept-activity';
+export * from './true-false-activity';
