@@ -145,7 +145,6 @@ html[data-dark-mode="true"] .modal__title kbd {
     gap: .7rem;
     padding-inline: 1rem;
     padding-block: .8rem;
-    margin-block-end: 1.5rem;
     border-radius: .3rem;
     color: inherit;
     background-color: #fcfafa;
@@ -254,4 +253,45 @@ svg.a11y-checked {
 
 html[data-dark-mode="true"] .a11y-button[aria-pressed="true"]>svg.a11y-checked {
     color: var(--brand);
+}
+
+/* Keyboard Shortcuts */
+.shortcuts {
+    --flow-space: .2rem;
+
+    list-style: none;
+    background-color: #fcfafa;
+    border: 1px solid var(--accent);
+    padding-inline: 1rem;
+    padding-block: .8rem;
+    border-radius: .3rem;
+}
+
+.shortcuts__card {
+    padding-block: .5rem;
+    padding-inline: 1rem;
+    color: inherit;
+}
+
+.shortcuts__card:not(:last-child) {
+    border-bottom: 1px solid var(--accent);
+}
+
+html[data-dark-mode="true"] .shortcuts {
+    background-color: var(--background);
+}
+
+.shortcuts__card-content  {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10ch), 1fr));
+    align-items: center;
+    gap: 1rem;
+}
+
+.shortcuts__card-content kbd {
+    padding: .2rem;
+}
+
+html[data-dark-mode="true"] .shortcuts__card-content kbd {
+    --kbd-bg-color: var(--color);
 }
