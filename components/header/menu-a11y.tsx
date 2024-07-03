@@ -21,7 +21,7 @@ export const MenuA11y = () => {
 
   return (
     <div className={css['menu-a11y']}>
-      <ul role="list" className={css['list']}>
+      <ul className={css['list']}>
         <li>
           <button
             aria-pressed={config.audio}
