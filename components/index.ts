@@ -24,4 +24,5 @@ export * from './game-particulas';
 export * from './gif';
 export * from './relation-concept-activity';
 export * from './true-false-activity';
+export * from './this-or-that-activity';
 export * from './game-fishs';
