@@ -22,6 +22,18 @@
     gap: var(--gap-list);
 }
 
+@media screen and (max-width: 1280px) {
+    .progress__list {
+        --gap-list: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .progress__list {
+        --gap-list: .8125rem;
+    }
+}
+
 .progress__button {
     --outline-color: var(--clr-accent-dark);
 
@@ -53,6 +65,12 @@ html[data-dark-mode="true"] .progress__button {
     height: var(--button-size);
 }
 
+@media screen and (max-width: 1280px) {
+    .progress__item {
+        --button-size: .625rem;
+    }
+}
+
 .progress__item:not(:nth-last-child(2))::after {
     content: '';
     position: absolute;
@@ -64,8 +82,8 @@ html[data-dark-mode="true"] .progress__button {
 }
 
 .progress__item-button {
-    width: 100%;
-    height: 100%;
+    width: var(--button-size);
+    height: var(--button-size);
     border-radius: 50%;
     padding: 1px;
     background-color: var(--button-clr);

@@ -75,13 +75,14 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, addClass, ...p
       <div className={`${css['grid-title']}`}><h3>RELACIÓN DE CONCEPTOS</h3></div>
       <div className={`${css['grid-container']} ${addClass ?? ''}`}>
         {shuffledPairs.map((pair) => (
-          <div
+          <button
             key={pair.id + pair.text}
+            id = {pair.id + pair.text}
             onClick={() => handleClick(pair.id, pair.text, pair.type)}
             className={`${getClassName(pair.id, pair.text)} ${css['grid-item']}`}
             {...props}>
-            <p className='u-font-bold '>{pair.text}</p>
-          </div>
+            <b>{pair.text}</b>
+          </button>
         ))}
       </div>
     </div>

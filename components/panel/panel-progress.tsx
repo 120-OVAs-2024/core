@@ -4,6 +4,7 @@ import { usePanelContext as usePanel } from 'books-ui';
 import { useOvaContext } from '@/context/ova-context';
 import { eventUpdateTitle } from '@/shared/utils/eventUpdateTitle';
 
+import { usePaginationRange } from './hooks/usePaginationRange';
 import { i18n } from './consts';
 import { usePanelCoreContext } from './panel-context';
 
@@ -18,6 +19,7 @@ const KEYCODE = Object.freeze({
   RIGHT: 39
 });
 
+
 export const PanelProgress = () => {
   const { lang } = useOvaContext();
   const { titles } = usePanelCoreContext();
@@ -26,17 +28,9 @@ export const PanelProgress = () => {
   const LAST_SECTION_INDEX = sectionsId.length - 1;
   const FIRST_SECTION_INDEX = 0;
 
-  /**
-   * Creamos está referencia para almacenar
-   * las referencias de los botones usados
-   * para navegar entre secciones.
-   */
-  const refSections = useRef<HTMLButtonElement[]>([]);
-
-  /**
-   * Indice de la sección que está visible.
-   */
+  const refButtonList = useRef<HTMLUListElement>(null);
   const currentSection = useMemo(() => sectionsId.findIndex((uid) => uid === isOpen), [isOpen, sectionsId]);
+  const sections = usePaginationRange({ count: sectionsId.length, currentPage: currentSection + 1 });
 
   /**
    * Objeto que almacena el valor de la sección a la cual el botón
@@ -53,20 +47,6 @@ export const PanelProgress = () => {
   }, [currentSection, sectionsId]);
 
   /**
-   * Función utilizada para obtener y almacenar las referencias de los botones.
-   *
-   * @param {HTMLButtonElement} ref - Referencia del botón.
-   * @returns {HTMLButtonElement[]} - Arreglo de referencias actualizado.
-   */
-  const addNewRef = (ref: HTMLButtonElement): HTMLButtonElement[] => {
-    if (!refSections.current.includes(ref) && ref) {
-      // Agrega la nueva referencia al arreglo y actualiza refSections.current
-      refSections.current = [...refSections.current, ref];
-    }
-    return refSections.current;
-  };
-
-  /**
    * Función utilizada en el evento KeyDown del botón,
    * permite decidir el focus del siguiente elemento
    * utilizando las teclas ArrowLeft o ArrowRight.
@@ -74,28 +54,36 @@ export const PanelProgress = () => {
    * @param {Event} event - Evento disparado por KeyDown
    */
   const handleKeyTrap = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (!refButtonList.current) return;
+
+    const sectionsElement: HTMLButtonElement[] = Array.from(
+      refButtonList.current.querySelectorAll('button[role="tab"]')
+    );
+
+    if (sectionsElement.length === 0) return;
+
     // Obtenemos la primera sección.
-    const FIRST_SECTION = refSections.current[0];
+    const FIRST_SECTION = sectionsElement[0];
     // Obtenemos la última sección.
-    const LAST_SECTION = refSections.current[refSections.current.length - 1];
+    const LAST_SECTION = sectionsElement[sectionsElement.length - 1];
 
     // Si la tecla pulsada ArrowLeft
     if ((event.keyCode || event.which) === KEYCODE.LEFT) {
       if (event.target === FIRST_SECTION) {
         LAST_SECTION.focus();
       } else {
-        const prevFocusButton = refSections.current.indexOf(event.target as HTMLButtonElement) - 1;
+        const prevFocusButton = sectionsElement.indexOf(event.target as HTMLButtonElement) - 1;
         // Agregamos el focus al botón anterior
-        refSections.current[prevFocusButton].focus();
+        sectionsElement[prevFocusButton].focus();
       }
     } else if ((event.keyCode || event.which) === KEYCODE.RIGHT) {
       // Si la tecla pulsada es ArrowRight
       if (event.target === LAST_SECTION) {
         FIRST_SECTION.focus();
       } else {
-        const nextFocusButton = refSections.current.indexOf(event.target as HTMLButtonElement) + 1;
+        const nextFocusButton = sectionsElement.indexOf(event.target as HTMLButtonElement) + 1;
         // Agregamos el focus al siguiente botón
-        refSections.current[nextFocusButton].focus();
+        sectionsElement[nextFocusButton].focus();
       }
     }
   };
@@ -132,6 +120,7 @@ export const PanelProgress = () => {
         {i18n[lang].section} {currentSection + 1} / {sectionsId.length}
       </p>
       <ul
+        ref={refButtonList}
         className={css['progress__list']}
         role="tablist"
         aria-labelledby="panel-progress-navigation"
@@ -145,14 +134,13 @@ export const PanelProgress = () => {
             {i18n[lang].next}
           </button>
         </li>
-        {sectionsId.map((uid, index) => (
+        {sections.map((uid) => (
           <PanelProgressItem
             key={`section-${uid}`}
-            ref={addNewRef}
-            uid={uid}
-            section={index}
-            beforeToActive={index < currentSection + 1}
-            isSelected={validation(sectionsId[index])}
+            uid={sectionsId[uid - 1]}
+            section={uid}
+            beforeToActive={uid - 1 < currentSection + 1}
+            isSelected={validation(sectionsId[uid - 1])}
             handleNavigation={handleClick}
             handleKeyDown={handleKeyTrap}
           />

@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useRef } from 'react';
 
-import type { InitialState, Option } from './types/types'
+import type { InitialState, Option } from './types/types';
 import { States } from './types/types';
 import { RadioActivityProvider } from './radio-activity-context';
 import { RadioButton } from './radio-button';
@@ -25,7 +25,6 @@ type SubComponents = {
 };
 
 const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelected = 1 }) => {
-
   const [activity, updateActivity] = useReducer(
     (prev: InitialState, next: Partial<InitialState>) => ({ ...prev, ...next }),
     INITIAL_STATE
@@ -84,10 +83,10 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
   };
 
   /**
-  * Usado para observar los cambios en la propiedad options del estado Activity.
-  * esto con el fin del que si el total de opciones seleccionadas es igual al total de preguntas,
-  * entonces active el botón que inicia la comprobación.
-  */
+   * Usado para observar los cambios en la propiedad options del estado Activity.
+   * esto con el fin del que si el total de opciones seleccionadas es igual al total de preguntas,
+   * entonces active el botón que inicia la comprobación.
+   */
   useEffect(() => {
     if (!activity.options.length) return;
 
@@ -98,7 +97,6 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
       updateActivity({ button: false });
     }
   }, [activity.options, activity.validation, radioElementsId, minSelected]);
-
 
   return (
     <RadioActivityProvider
@@ -116,7 +114,7 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
   );
 };
 
-Radios.Radio = RadioElement
-Radios.Button = RadioButton
+Radios.Radio = RadioElement;
+Radios.Button = RadioButton;
 
 export { Radios };

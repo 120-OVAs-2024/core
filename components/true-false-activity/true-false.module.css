@@ -3,6 +3,10 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .activity-wrapper{
@@ -50,13 +54,16 @@
 /* Ture and False carousel */
 
 .nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid var(--clr-text-secondary);
     background: #008e8c;
     border-radius: 50px;
-    padding: 5px;
     color: var(--clr-brand-dark);
     cursor: pointer;
     margin: 0 5px;
+    min-width: 10px;
 }
 
 .nav-button svg {
@@ -80,7 +87,7 @@
     border-radius: 15px; 
     padding: 50px 60px 20px 60px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    width: clamp(300px, 35vw, 600px);
+    width: clamp(14rem, 35vw, 600px);
     margin: 20px auto; 
     text-align: center;
     box-sizing: border-box;
@@ -96,28 +103,28 @@
 .card-buttons{
     display: flex;
     justify-content: center;
+    width: 100%;
+    max-width: 300px;
 }
 
 .button {
     border: 3px solid var(--clr-text-secondary);
     border-radius: 50px;
     margin: 5px;
-    width: 80px;
+    padding: 5px 0;
+    width: 7.5rem;
     height: 50%;
     background-color: #008e8c;
     color : var(--clr-text-secondary);
     text-align: center;
+    font-size: 2rem;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.button b {
-    font-size: 1.5rem;
-}
-
 .button.selected{
     background: var(--clr-accent-dark);
-    color: #121212;
+    color: var(--clr-dark-mode);
 }
 
 .button.correct {
@@ -130,9 +137,10 @@
     color: white;
     background-color: #85a321;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     display: flex;
+    font-size: 1.2rem;
     align-items: center;
     justify-content: center;
     position: absolute;
@@ -150,9 +158,10 @@
     color: white;
     background-color: #c22e41;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     display: flex;
+    font-size: 1.2rem;
     align-items: center;
     justify-content: center;
     position: absolute;
@@ -163,4 +172,8 @@
 /* Dark mode */
 html[data-dark-mode="true"] .nav-button{
     background-color: #005b5a;
+}
+
+html[data-dark-mode="true"] .button.selected{
+    color: var(--clr-text-secondary);
 }

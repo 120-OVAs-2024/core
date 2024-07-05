@@ -5,7 +5,7 @@ import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
 import css from './gif.module.css';
 
-interface Props extends React.VideoHTMLAttributes<HTMLVideoElement>{
+interface Props extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src: string;
   alt: string;
   title?: string;
@@ -57,7 +57,7 @@ export const Gif: React.FC<Props> = ({
       {...(size && {
         style: { '--gif-max-width': size } as React.CSSProperties
       })}>
-      <video ref={ref} autoPlay loop muted playsInline aria-label={parsedAlt} {...props}>
+      <video ref={ref} autoPlay loop muted playsInline aria-label={`${title} ${parsedAlt}`} {...props}>
         <source src={src} type="video/webm" />
       </video>
 

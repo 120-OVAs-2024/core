@@ -52,8 +52,8 @@ export const Header = () => {
           className={css['logo']}
           src="assets/base/logo.webp"
           alt="UNAD: Universidad Nacional Abierta y a Distancia"
-          width="404"
-          height="209"
+          width="135"
+          height="102"
         />
       </header>
       <A11yOverlay isOpen={expanded.a11y} onClose={() => handleExpanded(MenuOptions.A11Y)} />

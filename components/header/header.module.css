@@ -6,7 +6,7 @@
     min-height: min(5vw, 8rem);
     display: grid;
     grid-template-areas: 'a11y title menu logo';
-    grid-template-columns: 23ex 2fr 1fr 10ch;
+    grid-template-columns: 23ex 2fr 1fr 13ch;
     place-content: center;
     align-items: center;
     column-gap: 1em;
@@ -38,8 +38,8 @@ html[data-dark-mode="true"] .header {
 /* Logo */
 .logo {
     grid-area: logo;
-    width: auto;
-    height: max(3rem, 4vw);
+    width: max(5rem, 6vw);
+    height: auto;
     justify-self: center;
 }
 
@@ -73,6 +73,7 @@ html[data-dark-mode="true"] .header {
     border: 1px solid transparent;
     background-color: transparent;
     font-size: var(--fs-300);
+    font-weight: 100;
     cursor: pointer;
 }
 
@@ -107,7 +108,7 @@ html[data-dark-mode="true"] .header {
 .title-slide__number::after {
     content: '';
     top: 50%;
-    right: -.5rem;
+    right: -0.5rem;
     height: 55%;
     position: absolute;
     border-right: 1px solid rgb(255 255 255 / 70%);
@@ -152,6 +153,7 @@ html[data-dark-mode="true"] .header {
 }
 
 .list {
+    list-style: none;
     padding-inline-start: 0;
     display: flex;
     align-items: center;
@@ -199,14 +201,15 @@ html[data-dark-mode="true"] .header {
     align-items: center;
     justify-content: center;
     gap: 0.5em;
-    padding-block: 0.4rem;
-    padding-inline: 0.2rem;
+    padding-block: .4rem;
+    padding-inline: .2rem;
     font-size: var(--fs-300);
     text-decoration-color: transparent;
     border: 1px solid transparent;
     background-color: transparent;
     text-transform: capitalize;
     font-family: 'Roboto';
+    stroke-width: .1125rem;
 }
 
 @media screen and (max-width: 1536px) {
@@ -264,7 +267,7 @@ html[data-dark-mode="true"] .header {
     --element-height: 1.3rem;
     --total-elements: 15;
     --outline-button: max(2px, .08em);
-    --gap: 0.5rem;
+    --gap: .5rem;
 
     position: absolute;
     top: calc(100% + 2rem);
@@ -280,6 +283,7 @@ html[data-dark-mode="true"] .header {
     border-radius: 8px;
     border: 2px solid #e3e3e3;
     box-shadow: 0px 3px 0px 0px #e3e3e3;
+    list-style: none;
 }
 
 .menu-list--fit {
@@ -367,7 +371,7 @@ html[data-dark-mode="true"] .menu-list::-webkit-scrollbar-thumb {
     justify-items: start;
     gap: .5rem;
     grid-template-columns: auto 1fr auto;
-    padding: 0.3rem .8rem;
+    padding: .3rem .8rem;
     margin-inline: auto;
     width: 100%;
     min-height: var(--element-height);
@@ -392,7 +396,7 @@ html[data-dark-mode="true"] .menu-list::-webkit-scrollbar-thumb {
     --outline-color: var(--clr-brand);
 
     display: none;
-    padding: 0.125rem;
+    padding: .125rem;
     width: fit-content;
     border-radius: 50%;
     border: 1px solid transparent;
@@ -403,7 +407,7 @@ html[data-dark-mode="true"] .menu-list::-webkit-scrollbar-thumb {
 
 .hamburguer__button span {
     display: block;
-    height: 0.125rem;
+    height: .125rem;
     width: 1rem;
     background-color: #f5f5f5;
     transition: .2s cubic-bezier(0, 0, 0, 1) all;
@@ -423,7 +427,7 @@ html[data-dark-mode="true"] .menu-list::-webkit-scrollbar-thumb {
 }
 
 .hamburguer__button[aria-expanded="true"] span:nth-child(3) {
-    transform: rotate(-45deg) translateY(-.3125rem) translateX(.3125rem);
+    transform: rotate(-45deg) translateY(-0.3125rem) translateX(.3125rem);
 }
 
 @media screen and (max-width: 1280px) {
@@ -431,7 +435,7 @@ html[data-dark-mode="true"] .menu-list::-webkit-scrollbar-thumb {
         display: block;
     }
 
-    .hamburguer__button[aria-expanded="true"]+ul[role="list"] {
+    .hamburguer__button[aria-expanded="true"]+.list--menu {
         display: flex;
         flex-direction: column;
         align-items: normal;

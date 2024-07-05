@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
-import { Kbd, Tour } from 'books-ui';
+import { Tour } from 'books-ui';
 import { Link } from 'wouter';
 
 import { useOvaContext } from '@/context/ova-context';
@@ -46,7 +46,7 @@ export const Menu = () => {
     <>
       <nav role="navigation" aria-label={i18n[lang].nav} className={css['menu']}>
         <HamburguerButton />
-        <ul role="list" className={`${css['list']} ${css['list--menu']}`}>
+        <ul className={`${css['list']} ${css['list--menu']}`}>
           <li className={css['list__item']}>
             <Link to="/" className={`${css['menu__button']} js-link-home`}>
               <Icon name="home" />
@@ -89,14 +89,6 @@ export const Menu = () => {
             {expanded.help && (
               <MenuList data-underline="true" addClass={css['menu-list--fit']}>
                 <li>
-                  <button
-                    className={`${css['menu-list__button']} js-button-shortcuts`}
-                    onClick={() => toggleModal(MODAL.SHORTCUTS)}>
-                    <Icon name="keyboard" />
-                    {i18n[lang].shortcuts}
-                  </button>
-                </li>
-                <li>
                   <TourButton />
                 </li>
                 <li>
@@ -112,70 +104,6 @@ export const Menu = () => {
           </li>
         </ul>
       </nav>
-
-      <Modal isOpen={modal === MODAL.SHORTCUTS} onClose={toggleModal} finalFocusRef=".js-button-shortcuts">
-        <section className={`${css['modal__wrapper']} u-flow u-px-3 u-py-2`}>
-          <h2 className={`${css['modal__title']} u-mb-4`}>
-            {lang === SPANISH_LANGUAGE ? 'Atajos de teclado' : 'Keyboard Shortcuts'}
-          </h2>
-          <ul className={css.shortcuts}>
-            <li>
-              <p className={css['shortcuts__box']}>
-                <Icon name="arrow-right-footer" />
-                <span>{lang === SPANISH_LANGUAGE ? 'Siguiente página' : 'Next page'}</span>
-              </p>
-
-              <div>
-                <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>D</Kbd>
-              </div>
-            </li>
-
-            <li>
-              <p className={css['shortcuts__box']}>
-                <Icon name="arrow-left-footer" />
-                <span>{lang === SPANISH_LANGUAGE ? 'Página anterior' : 'Previous Page'}</span>
-              </p>
-
-              <div>
-                <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>S</Kbd>
-              </div>
-            </li>
-
-            <li>
-              <p className={css['shortcuts__box']}>
-                <Icon name="home" />
-                <span>{lang === SPANISH_LANGUAGE ? 'Inicio' : 'Home'}</span>
-              </p>
-
-              <div>
-                <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>C</Kbd>
-              </div>
-            </li>
-
-            <li>
-              <p className={css['shortcuts__box']}>
-                <Icon name="hand-a11y" />
-                <span>{lang === SPANISH_LANGUAGE ? 'Accesibilidad' : 'Accessibility'}</span>
-              </p>
-
-              <div>
-                <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>A</Kbd>
-              </div>
-            </li>
-
-            <li>
-              <p className={css['shortcuts__box']}>
-                <Icon name="help" />
-                <span>{lang === SPANISH_LANGUAGE ? 'Ayuda' : 'Help'}</span>
-              </p>
-
-              <div>
-                <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>H</Kbd>
-              </div>
-            </li>
-          </ul>
-        </section>
-      </Modal>
 
       <Modal isOpen={modal === MODAL.ESPECIFICATION} onClose={toggleModal} finalFocusRef=".js-button-specifications">
         <section className={`${css['modal__wrapper']} u-flow u-px-3 u-py-2`}>

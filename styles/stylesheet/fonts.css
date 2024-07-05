@@ -16,8 +16,8 @@
 
 @font-face {
   font-family: 'Lato';
-  src: url('assets/fonts/Lato-Thin.woff2') format('woff2');
-  font-weight: lighter;
+  src: url('assets/fonts/Lato-Light.woff2') format('woff2');
+  font-weight: 100; 
   font-display: swap;
 }
 

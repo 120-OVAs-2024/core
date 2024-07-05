@@ -1,4 +1,4 @@
-import type { Announcements } from '@dnd-kit/core'
+import type { Announcements } from '@dnd-kit/core';
 
 import { DndClasses, DndTypes } from './types/types';
 
@@ -20,7 +20,7 @@ export const DND_CLASSES: Record<DndTypes, DndClasses> = {
 export const i18n = {
   es: {
     screenReaderInstruction:
-      'Si usas un lector de pantalla, desactiva el mouse virtual. Para recoger un elemento arrastrable, presiona la barra espaciadora o la tecla Enter. Mientras arrastras, usa las teclas de flecha para mover el elemento en cualquier dirección deseada. Presiona nuevamente la barra espaciadora o la tecla Enter para soltar el elemento en su nueva posición, o presiona Escape para cancelar.'
+      'Si usas un lector de pantalla, desactiva el mouse virtual. Para seleccionar un elemento arrastrable, presiona la barra espaciadora o la tecla Enter. Mientras mantienes seleccionado, usa las teclas de flecha para mover el elemento en cualquier dirección deseada. Presiona nuevamente la barra espaciadora o la tecla Enter para soltar el elemento en su nueva posición, o presiona Escape para cancelar.'
   },
   en: {
     screenReaderInstruction:
@@ -28,26 +28,25 @@ export const i18n = {
   }
 };
 
-
 export const defaultAnnouncements: Announcements = {
   onDragStart({ active }) {
-      return `Se ha agarrado la opción ${active.data.current?.label}.`
+    return `Se ha seleccionado la opción ${active.data.current?.label}.`;
   },
   onDragOver({ active, over }) {
-      if (over) {
-          return `la opción ${active.data.current?.label} se movió sobre la ${over.data.current?.label} opción desplegable.`
-      }
+    if (over) {
+      return `la opción ${active.data.current?.label} se movió sobre la ${over.data.current?.label} opción desplegable.`;
+    }
 
-      return `la opción ${active.data.current?.label} ya no está sobre una opción desplegable.`
+    return `la opción ${active.data.current?.label} ya no está sobre una opción desplegable.`;
   },
   onDragEnd({ active, over }) {
-      if (over) {
-          return `la opción ${active.data.current?.label} se soltó sobre la ${over.data.current?.label} opción desplegable.`
-      }
+    if (over) {
+      return `la opción ${active.data.current?.label} se soltó sobre la ${over.data.current?.label} opción desplegable.`;
+    }
 
-      return `la opción ${active.data.current?.label} se eliminó.`
+    return `la opción ${active.data.current?.label} se eliminó.`;
   },
   onDragCancel({ active }) {
-      return `Se cancelo el arrastre. la opción ${active.data.current?.label} se eliminó.`
+    return `Se cancelo la selección. la opción ${active.data.current?.label} se eliminó.`;
   }
-}
+};
