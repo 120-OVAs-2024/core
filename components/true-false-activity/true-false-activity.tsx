@@ -36,9 +36,9 @@ const TrueFalseActivity: FC<Props> & SubComponents = ({ children, questions }) =
     const handleValidation = () => {
         if (activity.selectedAnswer === null) return;
         const isCorrect = questions[activity.currentQuestionIndex].correct === activity.selectedAnswer;
-        updateActivity({ validation: true, button: false });
+        updateActivity({ validation: true, button: true });
         if (isCorrect) {
-            updateActivity({ score: activity.score + questions[activity.currentQuestionIndex].score});
+            updateActivity({ score: activity.score + questions[activity.currentQuestionIndex].score });
         }
     };
 
@@ -54,7 +54,7 @@ const TrueFalseActivity: FC<Props> & SubComponents = ({ children, questions }) =
      * @param {boolean} answer - La respuesta seleccionada (verdadero o falso).
      */
     const handleAnswerSelect = (answer: boolean) => {
-        updateActivity({ selectedAnswer: answer });
+        updateActivity({ selectedAnswer: answer, button: false });
     };
 
     /**

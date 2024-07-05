@@ -19,9 +19,10 @@ const MODALS = {
 
 interface TrueFalseCarouselProps {
     questions: Question[];
+    text: string;
 }
 
-const TrueFalseCarousel: FC<TrueFalseCarouselProps> = ({ questions }) => {
+const TrueFalseCarousel: FC<TrueFalseCarouselProps> = ({ questions, text }) => {
     const { selectedAnswer, score, validation, currentQuestionIndex, handleNextQuestion, handlePreviousQuestion } = useTrueFalseActivityContext();
     const [isOpen, setIsOpen] = useState<string | null>(null);
 
@@ -44,9 +45,7 @@ const TrueFalseCarousel: FC<TrueFalseCarouselProps> = ({ questions }) => {
             <Row justifyContent="center" alignItems="center">
                 <Col xs="11" mm="10" md="9" lg="8" hd="7" addClass="u-flow">
                     <Audio src={`${questions[currentQuestionIndex].audioSrc}`} key={currentQuestionIndex}/>
-                    <p className="u-font-italic u-text-center">
-                        Haga clic sobre “Si” o “No”, teniendo en cuenta sí las palabras estan relacionadas con una problemática en el contexto laboral o no lo estan
-                    </p>
+                    <h2 className="u-font-italic u-text-center u-fs-300">{text}</h2>
                     <div className={css['carousel-wrapper']}>
                         <button onClick={handlePreviousQuestion} className={css['nav-button']} disabled={currentQuestionIndex === 0}><Icon name="arrow-left-footer" /></button>
                         <div className={css['activity-wrapper']}>
