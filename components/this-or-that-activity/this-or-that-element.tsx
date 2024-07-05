@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 import { useThisOrThatActivityContext } from './this-or-that-activity-context';
 
@@ -16,6 +16,8 @@ export const ThisOrThatElement: React.FC<Props> = ({selects, question, addClass,
   const uid = reactId;
   const radioName = `radio-group-name-${uid}`;
 
+  const [ariaPressed, setAriaPressed] = useState<{ [key: string]: boolean }>({});
+
   /**
    * Maneja el evento de clic en un botón.
    * Añade el valor seleccionado al estado de la actividad y establece el ID seleccionado.
@@ -25,6 +27,20 @@ export const ThisOrThatElement: React.FC<Props> = ({selects, question, addClass,
   const handleClick = (selectId: string, state: 'wrong' | 'success') => {
     addRadiosValues({ id: selectId, name: radioName, state });
     setSelectedId(selectId);
+
+    setAriaPressed(prev => {
+
+      // Crear un nuevo objeto con todos los valores en false
+      const newAriaPressed = Object.keys(prev).reduce((acc, key) => {
+        acc[key] = false;
+        return acc;
+      }, {} as { [key: string]: boolean });
+
+      // Establecer el valor true para el elemento seleccionado
+      newAriaPressed[selectId] = true;
+      return newAriaPressed;
+    });
+    
   };
 
   /**
@@ -71,7 +87,7 @@ export const ThisOrThatElement: React.FC<Props> = ({selects, question, addClass,
             className={`${css['radio-element']} ${getClassName(select.id)}`}
             onClick={() => handleClick(select.id, select.state)}
             disabled={validation}
-            aria-pressed={selectedId === uid}
+            aria-pressed={ariaPressed[select.id] ? 'true' : 'false'}
             {...props}
             >
               <div className={css['circle']}>{select.id}</div>
