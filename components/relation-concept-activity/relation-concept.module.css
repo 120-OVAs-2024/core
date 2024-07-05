@@ -31,7 +31,7 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     grid-auto-rows: minmax(12rem, auto);
     gap : 5px;
     width: 100%;
@@ -64,7 +64,7 @@
 
 .card.selected{
     background: var(--clr-accent-dark);
-    color: #121212;
+    color: var(--clr-dark-mode);
 }
 
 .card.correct {
@@ -77,8 +77,8 @@
     color: white;
     background-color: #85a321;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,8 +97,8 @@
     color: white;
     background-color: #c22e41;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
