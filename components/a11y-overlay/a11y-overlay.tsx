@@ -104,15 +104,74 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
               isPressed={config.stopAnimations}
               onClick={() => setConfig(ConfigA11yProperty.StopAnimations)}
             />
-
-            <A11yButtton
-              label={i18n[lang].keyboardShortcuts}
-              icon="keyboard"
-              isPressed={config.keyboardShortcuts}
-              onClick={() => setConfig(ConfigA11yProperty.KeyboardShortcuts)}
-            />
-
             <Accordion allowMultiple>
+              <Accordion.Item addClass={css['accordion']}>
+                <Accordion.Button
+                  addClass={css['accordion__button']}
+                  expandedIcon={<Icon name="square-expand" />}
+                  closedIcon={<Icon name="square-close-expanded" />}>
+                  {i18n[lang].KBSC}
+                </Accordion.Button>
+
+                <Accordion.Panel addClass={css['accordion__panel']}>
+                  <A11yCard icon="keyboard" title={i18n[lang].KBSCTitle} main={i18n[lang].KBSCMain} />
+
+                  <ul className={`${css['shortcuts']} u-flow`}>
+                    <li className={css['shortcuts__card']}>
+                      <div className={css['shortcuts__card-content']}>
+                        <p>{i18n[lang].KBSCNextPage}</p>
+                        <p>
+                          <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>D</Kbd>
+                        </p>
+                      </div>
+                    </li>
+
+                    <li className={css['shortcuts__card']}>
+                      <div className={css['shortcuts__card-content']}>
+                        <p>{i18n[lang].KBSCPrevPage}</p>
+                        <p>
+                          <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>S</Kbd>
+                        </p>
+                      </div>
+                    </li>
+
+                    <li className={css['shortcuts__card']}>
+                      <div className={css['shortcuts__card-content']}>
+                        <p>{i18n[lang].KBSCHome}</p>
+                        <p>
+                          <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>C</Kbd>
+                        </p>
+                      </div>
+                    </li>
+
+                    <li className={css['shortcuts__card']}>
+                      <div className={css['shortcuts__card-content']}>
+                        <p>{i18n[lang].KBSCA11y}</p>
+                        <p>
+                          <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>A</Kbd>
+                        </p>
+                      </div>
+                    </li>
+
+                    <li className={css['shortcuts__card']}>
+                      <div className={css['shortcuts__card-content']}>
+                        <p>{i18n[lang].KBSCHelp}</p>
+                        <p>
+                          <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>H</Kbd>
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <A11yButtton
+                    label={i18n[lang].KBSCBtn}
+                    icon="keyboard"
+                    isPressed={config.keyboardShortcuts}
+                    onClick={() => setConfig(ConfigA11yProperty.KeyboardShortcuts)}
+                  />
+                </Accordion.Panel>
+              </Accordion.Item>
+
               <Accordion.Item addClass={css['accordion']}>
                 <Accordion.Button
                   addClass={css['accordion__button']}

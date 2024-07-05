@@ -21,7 +21,7 @@ export const MenuA11y = () => {
 
   return (
     <div className={css['menu-a11y']}>
-      <ul role="list" className={css['list']}>
+      <ul className={css['list']}>
         <li>
           <button
             aria-pressed={config.audio}
@@ -39,7 +39,7 @@ export const MenuA11y = () => {
             aria-pressed={expanded.a11y}
             className={`${css['menu-a11y__button']} js-button-a11y`}
             onClick={() => handleExpanded(MenuOptions.A11Y)}>
-            <Icon name="hand-a11y" /> <span>{i18n[lang].a11y}</span>
+            <Icon name="a11y" /> <span>{i18n[lang].a11y}</span>
           </button>
         </li>
       </ul>

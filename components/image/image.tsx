@@ -9,15 +9,15 @@ interface Props {
   size: string;
   hasHtml?: boolean;
   addClass?: string;
-  noCaption?: boolean
+  noCaption?: boolean;
 }
 
 export const Image: React.FC<Props> = ({ src, title, alt, size, hasHtml, ...props }) => {
-  return !hasHtml ? (
-    <ImageUI src={src} alt={alt} title={title} size={size} {...props} />
-  ) : (
+  const parsedAlt = hasHtml ? alt.replace(/<[^>]*>/g, '') : alt;
+
+  return (
     <figure>
-      <ImageUI src={src} alt={alt.replace(/<[^>]*>/g, '')} size={size} noCaption {...props} />
+      <ImageUI src={src} alt={`${title} ${parsedAlt}`} size={size} noCaption {...props} />
       <figcaption className={css['image__figcaption']}>
         <p className="u-font-bold">{title}</p>&nbsp;
         <p dangerouslySetInnerHTML={{ __html: alt }}></p>

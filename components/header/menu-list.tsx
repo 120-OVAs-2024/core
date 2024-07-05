@@ -88,7 +88,6 @@ export const MenuList: React.FC<Props> = ({ addClass, children, ...props }) => {
   return (
     <ul
       ref={getRefElement}
-      role="list"
       onKeyDown={handleKeyDownForMenuList}
       className={`${css['menu-list']} ${addClass ?? ''}`}
       {...props}>

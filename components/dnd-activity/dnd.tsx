@@ -20,7 +20,13 @@ type SubComponents = {
   Button: typeof DndButton;
 };
 
-const DndActivity: React.FC<Props> & SubComponents = ({ id, children, minCorrectDrags, onResult }) => {
+const DndActivity: React.FC<Props> & SubComponents = ({
+  id,
+  children,
+  minCorrectDrags,
+  announcements = defaultAnnouncements,
+  onResult
+}) => {
   const { lang } = useOvaContext();
   const [activity, updatedActivity] = useReducer(
     (prev: InitialState, next: Partial<InitialState>) => ({ ...prev, ...next }),
@@ -78,7 +84,7 @@ const DndActivity: React.FC<Props> & SubComponents = ({ id, children, minCorrect
   /**
    * Recorre todos los hijos del componente en busca de los
    * componentes del 'DragAndDrop' para aplicarle estilos a estos.
-   * 
+   *
    * @param {React.ReactNode} children
    * @returns React.ReactNode
    */
@@ -124,7 +130,7 @@ const DndActivity: React.FC<Props> & SubComponents = ({ id, children, minCorrect
         id={id}
         validate={activity.validation}
         onValidate={handleNewDrag}
-        announcements={defaultAnnouncements}
+        announcements={announcements}
         screenReaderInstructions={i18n[lang].screenReaderInstruction}>
         <div className={css['wrapper']}>{styleChildren(children)}</div>
       </DragAndDrop>

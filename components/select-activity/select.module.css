@@ -29,6 +29,12 @@
     align-items: center;
 }
 
+.select :global(.c-select-button__text) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 html[data-dark-mode="true"] .select :global(.c-select-button) {
     color: var(--clr-text-main);
 }
