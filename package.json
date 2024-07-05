@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "better-react-mathjax": "^2.0.3",
-    "books": "^0.0.0",
     "wicg-inert": "^3.0.3"
   }
 }
