@@ -27,6 +27,7 @@
     }
   },
   "dependencies": {
+    "books": "^0.0.0",
     "wicg-inert": "^3.0.3"
   }
 }
