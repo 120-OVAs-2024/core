@@ -18,8 +18,10 @@ interface propsLevel {
   index?: number;
   intro?: boolean;
   onResult?(result: boolean): void;
+  title?: string;
+  alt?: string;
 }
-export default function Level({ question, index, intro, onResult }: propsLevel) {
+export default function Level({ question, index, intro, onResult, title, alt }: propsLevel) {
   if (!question)
     question = {
       mockAnswers: [],
@@ -101,7 +103,7 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
         {question.audio_description && <Audio src={question.audio_description} a11y />}
         {question.audio_content && <Audio src={question.audio_content} />}
       </Col>
-      <Col lg="12" mm="11">
+      <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
           <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_back} />
           <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} />
@@ -153,8 +155,9 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
             </button>
           ))}
 
-          {[...Array(8)].map(() => (
+          {[...Array(8)].map((_, index) => (
             <img
+              key={`bubble-${index}`}
               src="assets/images/page-9/Burbuja de aire.webp"
               className={css.bubble}
               style={{ animationDelay: 2 + Math.random() * 10 + 's', left: Math.random() * 100 + '%' }}
@@ -174,6 +177,12 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
               alt="Felicitaciones, has completado correctamente tu ejercicio."
             />
           )}
+        </div>
+        <div>
+          <p className="u-text-center u-font-italic">
+            <b>{title} </b>
+            {alt}
+          </p>
         </div>
         <div className={css.container_controls}>
           <Button
