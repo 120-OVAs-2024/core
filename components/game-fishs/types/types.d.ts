@@ -1,6 +1,8 @@
 export interface question_game {
   paragraphParts: Array<partBlank | partText>;
   mockAnswers: string[];
+  audio_description?: string;
+  audio_content?: string;
 }
 
 export interface partText {
