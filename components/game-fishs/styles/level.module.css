@@ -5,11 +5,20 @@
   overflow: hidden;
 }
 
+.fullScreen__button {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.image_back {
+  aspect-ratio: 21/9;
+}
 .image_depth {
   position: absolute;
   top: 0;
   left: 0;
   transform: scale(1.05);
+  aspect-ratio: 21/9;
 }
 
 .modal_depth {
@@ -34,8 +43,7 @@
 
 .container__question {
   color: #000;
-  min-width: 250px;
-  max-width: 500px;
+
   background-color: rgb(213, 239, 252);
   padding: 15px;
   border-radius: 15px;
@@ -49,8 +57,8 @@
 
   position: absolute;
   top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10%;
+  right: 10%;
 }
 
 .fish {
@@ -147,8 +155,12 @@
 }
 
 @media screen and (max-width: 720px) {
+  .container__question {
+    font-size: 10px;
+    font-weight: 400;
+  }
   .wrapper_depths {
-    filter: blur(10px);
+    filter: grayscale(0.8);
   }
 }
 

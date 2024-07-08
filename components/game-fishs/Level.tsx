@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
-import { Audio, Col, Panel } from 'books-ui';
+import { Audio, Col, Panel, Row } from 'books-ui';
 import { Panel as PanelUI } from 'books-ui';
 
-import { Button } from '@/shared/components';
+import { Button, FullScreenButton } from '@/shared/components';
 
 import { DATA_fishs } from './data/data';
 import { question_game } from './types/types';
@@ -27,7 +27,9 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           content:
             'Seleccione el pez que lleva la palabra correcta para cada  oración. Los peces van nadando y usted debe hacer clic el que lleva la palabra correcta'
         }
-      ]
+      ],
+      audio_description: 'assets/audios/a11y.mp3',
+      audio_content: 'assets/audios/content.mp3'
     };
 
   const [selectAnswers, setSelectAnswers] = useState<string[]>([]);
@@ -90,14 +92,14 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
     if (refDeph4.current) refDeph4.current.style.top = offsetY / 100 + 'px';
   };
   return (
-    <>
-      <Col className="u-mb-10">
+    <Row alignItems="center" justifyContent="center">
+      <Col>
         {question.audio_description && <Audio src={question.audio_description} a11y />}
         {question.audio_content && <Audio src={question.audio_content} />}
       </Col>
-      <Col lg="12">
+      <Col lg="12" mm="11">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
-          <img src="assets/images/page-9/Fondo_mar.webp" />
+          <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_back} />
           <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} />
           <img
             src="assets/images/page-9/Fondo_algas detrás de la arena.webp"
@@ -106,6 +108,8 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           />
           <img src="assets/images/page-9/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} />
           <img src="assets/images/page-9/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} />
+          <FullScreenButton elementId="fullscreen__section" addClass={css.fullScreen__button} />
+
           <div className={css.container__question}>
             <img src="assets/images/page-9/Ancla.webp" />
             <p className="u-font-bold u-text-center">
@@ -188,6 +192,6 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           )}
         </div>
       </Col>
-    </>
+    </Row>
   );
 }
