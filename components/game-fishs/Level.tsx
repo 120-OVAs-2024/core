@@ -13,6 +13,8 @@ import css from './styles/level.module.css';
 
 const scales = ['-1', '1'];
 
+const MARGIN_FISH = 0.7;
+const PERCENT_SPACE_FISHS = 80;
 interface propsLevel {
   question?: question_game;
   index?: number;
@@ -21,19 +23,18 @@ interface propsLevel {
   title?: string;
   alt?: string;
 }
-export default function Level({ question, index, intro, onResult, title, alt }: propsLevel) {
-  if (!question)
-    question = {
-      mockAnswers: [],
-      paragraphParts: [
-        {
-          type: 'text',
-          content:
-            'Seleccione el pez que lleva la palabra correcta para cada  oración. Los peces van nadando y usted debe hacer clic el que lleva la palabra correcta'
-        }
-      ]
-    };
 
+const DEFAULT_QUESTON: question_game = {
+  mockAnswers: [],
+  paragraphParts: [
+    {
+      type: 'text',
+      content:
+        'Seleccione el pez que lleva la palabra correcta para cada  oración. Los peces van nadando y usted debe hacer clic el que lleva la palabra correcta'
+    }
+  ]
+};
+export default function Level({ question = DEFAULT_QUESTON, index, intro, onResult, title, alt }: propsLevel) {
   const cancelAnimation = useReduceMotion();
   const { stopAnimations } = useA11yAttribute();
 
@@ -105,19 +106,20 @@ export default function Level({ question, index, intro, onResult, title, alt }: 
       </Col>
       <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
-          <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_back} />
-          <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} />
+          <img src="assets/images/Fondo_mar.webp" className={css.image_back} alt="" />
+          <img src="assets/images/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} alt="" />
           <img
-            src="assets/images/page-9/Fondo_algas detrás de la arena.webp"
+            src="assets/images/Fondo_algas detrás de la arena.webp"
             className={css.image_depth}
             ref={refDeph3}
+            alt=""
           />
-          <img src="assets/images/page-9/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} />
-          <img src="assets/images/page-9/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} />
+          <img src="assets/images/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} alt="" />
+          <img src="assets/images/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} alt="" />
           <FullScreenButton elementId="fullscreen__section" addClass={css.fullScreen__button} />
 
           <div className={css.container__question}>
-            <img src="assets/images/page-9/Ancla.webp" />
+            <img src="assets/images/Ancla.webp" alt="" />
             <p className="u-font-bold u-text-center">
               {question.paragraphParts.map((part, index) =>
                 part.type === 'text' ? (
@@ -129,7 +131,7 @@ export default function Level({ question, index, intro, onResult, title, alt }: 
                 )
               )}
             </p>
-            <img src="assets/images/page-9/Ancla.webp" />
+            <img src="assets/images/Ancla.webp" alt="" />
           </div>
           {intro && (
             <PanelUI.Button section={1}>
@@ -139,10 +141,11 @@ export default function Level({ question, index, intro, onResult, title, alt }: 
           {answers.map((q, i) => (
             <button
               key={q + i}
+              aria-label={q}
               className={`${css.fish} ${selectAnswers.includes(q) && css.selectAnswer}`}
               style={{
                 top: `${35 + Math.random() * 40}%`,
-                left: (80 / answers.length) * (i + 0.7) + '%',
+                left: (PERCENT_SPACE_FISHS / answers.length) * (i + MARGIN_FISH) + '%',
                 animationDelay: Math.random() * 2 + 's'
               }}
               onClick={() => addSelectAnswer(q)}>
@@ -158,9 +161,10 @@ export default function Level({ question, index, intro, onResult, title, alt }: 
           {[...Array(8)].map((_, index) => (
             <img
               key={`bubble-${index}`}
-              src="assets/images/page-9/Burbuja de aire.webp"
+              src="assets/images/Burbuja de aire.webp"
               className={css.bubble}
               style={{ animationDelay: 2 + Math.random() * 10 + 's', left: Math.random() * 100 + '%' }}
+              alt=""
             />
           ))}
           {openModal === 'wrong' && (
