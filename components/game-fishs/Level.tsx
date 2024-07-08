@@ -3,6 +3,8 @@ import { Audio, Col, Panel, Row } from 'books-ui';
 import { Panel as PanelUI } from 'books-ui';
 
 import { Button, FullScreenButton } from '@/shared/components';
+import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
+import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
 import { DATA_fishs } from './data/data';
 import { question_game } from './types/types';
@@ -27,10 +29,11 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           content:
             'Seleccione el pez que lleva la palabra correcta para cada  oración. Los peces van nadando y usted debe hacer clic el que lleva la palabra correcta'
         }
-      ],
-      audio_description: 'assets/audios/a11y.mp3',
-      audio_content: 'assets/audios/content.mp3'
+      ]
     };
+
+  const cancelAnimation = useReduceMotion();
+  const { stopAnimations } = useA11yAttribute();
 
   const [selectAnswers, setSelectAnswers] = useState<string[]>([]);
   const [openModal, setOpenModal] = useState<'success' | 'wrong' | null>(null);
@@ -64,7 +67,6 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           onResult(false);
         } else {
           setOpenModal('wrong');
-          setSelectAnswers([]);
         }
         return;
       }
@@ -78,22 +80,24 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
   };
 
   const handleDepthMove: React.MouseEventHandler = (e) => {
-    const offsetX = window.innerWidth / 2 - e.nativeEvent.clientX;
-    const offsetY = window.innerHeight / 2 - e.nativeEvent.clientY;
+    if (!cancelAnimation && !stopAnimations) {
+      const offsetX = window.innerWidth / 2 - e.nativeEvent.clientX;
+      const offsetY = window.innerHeight / 2 - e.nativeEvent.clientY;
 
-    if (refDeph1.current) refDeph1.current.style.left = offsetX / 25 + 'px';
-    if (refDeph2.current) refDeph2.current.style.left = offsetX / 100 + 'px';
-    if (refDeph3.current) refDeph3.current.style.left = offsetX / 150 + 'px';
-    if (refDeph4.current) refDeph4.current.style.left = offsetX / 100 + 'px';
+      if (refDeph1.current) refDeph1.current.style.left = offsetX / 25 + 'px';
+      if (refDeph2.current) refDeph2.current.style.left = offsetX / 100 + 'px';
+      if (refDeph3.current) refDeph3.current.style.left = offsetX / 150 + 'px';
+      if (refDeph4.current) refDeph4.current.style.left = offsetX / 100 + 'px';
 
-    if (refDeph1.current) refDeph1.current.style.top = offsetY / 25 + 'px';
-    if (refDeph2.current) refDeph2.current.style.top = offsetY / 100 + 'px';
-    if (refDeph3.current) refDeph3.current.style.top = offsetY / 150 + 'px';
-    if (refDeph4.current) refDeph4.current.style.top = offsetY / 100 + 'px';
+      if (refDeph1.current) refDeph1.current.style.top = offsetY / 25 + 'px';
+      if (refDeph2.current) refDeph2.current.style.top = offsetY / 100 + 'px';
+      if (refDeph3.current) refDeph3.current.style.top = offsetY / 150 + 'px';
+      if (refDeph4.current) refDeph4.current.style.top = offsetY / 100 + 'px';
+    }
   };
   return (
     <Row alignItems="center" justifyContent="center">
-      <Col>
+      <Col addClass="u-mb-2 u-flow">
         {question.audio_description && <Audio src={question.audio_description} a11y />}
         {question.audio_content && <Audio src={question.audio_content} />}
       </Col>
@@ -174,11 +178,12 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
         <div className={css.container_controls}>
           <Button
             label="Comprobar"
-            disabled={spaceBlank.length > selectAnswers.length}
+            disabled={spaceBlank.length !== selectAnswers.length || intro || openModal !== null}
             onClick={checkAnswers}
             id="button-comprobar"
           />
           <Button
+            disabled={selectAnswers.length <= 0 || intro || openModal === 'success'}
             label="Reintentar"
             onClick={() => {
               setSelectAnswers([]);
