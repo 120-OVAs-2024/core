@@ -8,15 +8,17 @@ interface props_GameFish {
   questions: question_game[];
   onResult?(result: boolean): void;
   initData: question_game;
+  title?: string;
+  alt?: string;
 }
-export function GameFish({ questions, onResult, initData }: props_GameFish) {
+export function GameFish({ questions, onResult, initData, title, alt }: props_GameFish) {
   return (
     <Panel>
       <div id="fullscreen__section">
         <FullScreenAlert />
 
         <Panel.Section>
-          <Level intro question={initData} />
+          <Level intro question={initData} title={title} alt={alt} />
         </Panel.Section>
         {questions.map((quest, index) => (
           <Panel.Section key={index}>
@@ -24,6 +26,8 @@ export function GameFish({ questions, onResult, initData }: props_GameFish) {
               question={quest}
               index={index + 1 === questions.length ? undefined : index + 1}
               onResult={onResult}
+              title={title}
+              alt={alt}
             />
           </Panel.Section>
         ))}
