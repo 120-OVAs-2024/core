@@ -19,6 +19,10 @@ div.radio label::first-letter {
     font-weight: bold;
 }
 
+.radio:has(input:checked) label::first-letter {
+    color: var(--clr-brand);
+}
+
 .radio[data-state="right"] {
     --input-radio-bg: var(--clr-activity-success);
 }
