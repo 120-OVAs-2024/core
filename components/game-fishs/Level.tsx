@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react';
-import { Audio, Col, Panel } from 'books-ui';
+import { Audio, Col, Panel, Row } from 'books-ui';
 import { Panel as PanelUI } from 'books-ui';
 
-import { Button } from '@/shared/components';
+import { Button, FullScreenButton } from '@/shared/components';
+import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
+import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
 import { DATA_fishs } from './data/data';
 import { question_game } from './types/types';
@@ -11,24 +13,30 @@ import css from './styles/level.module.css';
 
 const scales = ['-1', '1'];
 
+const MARGIN_FISH = 0.7;
+const PERCENT_SPACE_FISHS = 80;
 interface propsLevel {
   question?: question_game;
   index?: number;
   intro?: boolean;
   onResult?(result: boolean): void;
+  title?: string;
+  alt?: string;
 }
-export default function Level({ question, index, intro, onResult }: propsLevel) {
-  if (!question)
-    question = {
-      mockAnswers: [],
-      paragraphParts: [
-        {
-          type: 'text',
-          content:
-            'Seleccione el pez que lleva la palabra correcta para cada  oración. Los peces van nadando y usted debe hacer clic el que lleva la palabra correcta'
-        }
-      ]
-    };
+
+const DEFAULT_QUESTON: question_game = {
+  mockAnswers: [],
+  paragraphParts: [
+    {
+      type: 'text',
+      content:
+        'Seleccione el pez que lleva la palabra correcta para cada  oración. Los peces van nadando y usted debe hacer clic el que lleva la palabra correcta'
+    }
+  ]
+};
+export default function Level({ question = DEFAULT_QUESTON, index, intro, onResult, title, alt }: propsLevel) {
+  const cancelAnimation = useReduceMotion();
+  const { stopAnimations } = useA11yAttribute();
 
   const [selectAnswers, setSelectAnswers] = useState<string[]>([]);
   const [openModal, setOpenModal] = useState<'success' | 'wrong' | null>(null);
@@ -62,7 +70,6 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           onResult(false);
         } else {
           setOpenModal('wrong');
-          setSelectAnswers([]);
         }
         return;
       }
@@ -76,38 +83,43 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
   };
 
   const handleDepthMove: React.MouseEventHandler = (e) => {
-    const offsetX = window.innerWidth / 2 - e.nativeEvent.clientX;
-    const offsetY = window.innerHeight / 2 - e.nativeEvent.clientY;
+    if (!cancelAnimation && !stopAnimations) {
+      const offsetX = window.innerWidth / 2 - e.nativeEvent.clientX;
+      const offsetY = window.innerHeight / 2 - e.nativeEvent.clientY;
 
-    if (refDeph1.current) refDeph1.current.style.left = offsetX / 25 + 'px';
-    if (refDeph2.current) refDeph2.current.style.left = offsetX / 100 + 'px';
-    if (refDeph3.current) refDeph3.current.style.left = offsetX / 150 + 'px';
-    if (refDeph4.current) refDeph4.current.style.left = offsetX / 100 + 'px';
+      if (refDeph1.current) refDeph1.current.style.left = offsetX / 25 + 'px';
+      if (refDeph2.current) refDeph2.current.style.left = offsetX / 100 + 'px';
+      if (refDeph3.current) refDeph3.current.style.left = offsetX / 150 + 'px';
+      if (refDeph4.current) refDeph4.current.style.left = offsetX / 100 + 'px';
 
-    if (refDeph1.current) refDeph1.current.style.top = offsetY / 25 + 'px';
-    if (refDeph2.current) refDeph2.current.style.top = offsetY / 100 + 'px';
-    if (refDeph3.current) refDeph3.current.style.top = offsetY / 150 + 'px';
-    if (refDeph4.current) refDeph4.current.style.top = offsetY / 100 + 'px';
+      if (refDeph1.current) refDeph1.current.style.top = offsetY / 25 + 'px';
+      if (refDeph2.current) refDeph2.current.style.top = offsetY / 100 + 'px';
+      if (refDeph3.current) refDeph3.current.style.top = offsetY / 150 + 'px';
+      if (refDeph4.current) refDeph4.current.style.top = offsetY / 100 + 'px';
+    }
   };
   return (
-    <>
-      <Col className="u-mb-10">
+    <Row alignItems="center" justifyContent="center">
+      <Col addClass="u-mb-2 u-flow">
         {question.audio_description && <Audio src={question.audio_description} a11y />}
         {question.audio_content && <Audio src={question.audio_content} />}
       </Col>
-      <Col lg="12">
+      <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
-          <img src="assets/images/page-9/Fondo_mar.webp" />
-          <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} />
+          <img src="assets/images/Fondo_mar.webp" className={css.image_back} alt="" />
+          <img src="assets/images/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} alt="" />
           <img
-            src="assets/images/page-9/Fondo_algas detrás de la arena.webp"
+            src="assets/images/Fondo_algas detrás de la arena.webp"
             className={css.image_depth}
             ref={refDeph3}
+            alt=""
           />
-          <img src="assets/images/page-9/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} />
-          <img src="assets/images/page-9/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} />
+          <img src="assets/images/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} alt="" />
+          <img src="assets/images/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} alt="" />
+          <FullScreenButton elementId="fullscreen__section" addClass={css.fullScreen__button} />
+
           <div className={css.container__question}>
-            <img src="assets/images/page-9/Ancla.webp" />
+            <img src="assets/images/Ancla.webp" alt="" />
             <p className="u-font-bold u-text-center">
               {question.paragraphParts.map((part, index) =>
                 part.type === 'text' ? (
@@ -119,7 +131,7 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
                 )
               )}
             </p>
-            <img src="assets/images/page-9/Ancla.webp" />
+            <img src="assets/images/Ancla.webp" alt="" />
           </div>
           {intro && (
             <PanelUI.Button section={1}>
@@ -129,10 +141,11 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           {answers.map((q, i) => (
             <button
               key={q + i}
+              aria-label={q}
               className={`${css.fish} ${selectAnswers.includes(q) && css.selectAnswer}`}
               style={{
                 top: `${35 + Math.random() * 40}%`,
-                left: (80 / answers.length) * (i + 0.7) + '%',
+                left: (PERCENT_SPACE_FISHS / answers.length) * (i + MARGIN_FISH) + '%',
                 animationDelay: Math.random() * 2 + 's'
               }}
               onClick={() => addSelectAnswer(q)}>
@@ -145,11 +158,13 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
             </button>
           ))}
 
-          {[...Array(8)].map(() => (
+          {[...Array(8)].map((_, index) => (
             <img
-              src="assets/images/page-9/Burbuja de aire.webp"
+              key={`bubble-${index}`}
+              src="assets/images/Burbuja de aire.webp"
               className={css.bubble}
               style={{ animationDelay: 2 + Math.random() * 10 + 's', left: Math.random() * 100 + '%' }}
+              alt=""
             />
           ))}
           {openModal === 'wrong' && (
@@ -167,14 +182,21 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
             />
           )}
         </div>
+        <div>
+          <p className="u-text-center u-font-italic">
+            <b>{title} </b>
+            {alt}
+          </p>
+        </div>
         <div className={css.container_controls}>
           <Button
             label="Comprobar"
-            disabled={spaceBlank.length > selectAnswers.length}
+            disabled={spaceBlank.length !== selectAnswers.length || intro || openModal !== null}
             onClick={checkAnswers}
             id="button-comprobar"
           />
           <Button
+            disabled={selectAnswers.length <= 0 || intro || openModal === 'success'}
             label="Reintentar"
             onClick={() => {
               setSelectAnswers([]);
@@ -188,6 +210,6 @@ export default function Level({ question, index, intro, onResult }: propsLevel) 
           )}
         </div>
       </Col>
-    </>
+    </Row>
   );
 }
