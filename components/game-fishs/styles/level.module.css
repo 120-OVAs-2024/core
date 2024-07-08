@@ -18,7 +18,7 @@
   left: 0;
 
   animation-name: modalIn;
-  animation-duration: 1s;
+  animation-duration: 0.4s;
 }
 
 .bubble {
@@ -33,6 +33,7 @@
 }
 
 .container__question {
+  color: #000;
   min-width: 250px;
   max-width: 500px;
   background-color: rgb(213, 239, 252);
@@ -119,6 +120,38 @@
   justify-content: center;
 }
 
+.init_button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+
+  transform: translate(-50%, -50%);
+
+  background-image: url('./assets/images/Botón Inicio.webp');
+  width: 221px;
+  height: 63px;
+  color: white;
+  font-size: xx-large;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+
+.init_button:hover {
+  filter: brightness(1.2);
+}
+
+@media screen and (max-width: 720px) {
+  .wrapper_depths {
+    filter: blur(10px);
+  }
+}
+
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -149,7 +182,7 @@
 @keyframes modalIn {
   from {
     opacity: 0;
-    transform: translateY(-100%) scale(0.3);
+    transform: translateY(100%) scale(0.3);
   }
   to {
     opacity: 1;

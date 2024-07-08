@@ -1,20 +1,35 @@
 import { useRef, useState } from 'react';
-import { Panel } from 'books-ui';
+import { Audio, Col, Panel } from 'books-ui';
+import { Panel as PanelUI } from 'books-ui';
 
 import { Button } from '@/shared/components';
 
 import { DATA_fishs } from './data/data';
 import { question_game } from './types/types';
 
-import css from './styles/ova-02-p09.module.css';
+import css from './styles/level.module.css';
 
 const scales = ['-1', '1'];
 
 interface propsLevel {
-  question: question_game;
-  index: number;
+  question?: question_game;
+  index?: number;
+  intro?: boolean;
+  onResult?(result: boolean): void;
 }
-export default function Level({ question, index }: propsLevel) {
+export default function Level({ question, index, intro, onResult }: propsLevel) {
+  if (!question)
+    question = {
+      mockAnswers: [],
+      paragraphParts: [
+        {
+          type: 'text',
+          content:
+            'Seleccione el pez que lleva la palabra correcta para cada  oración. Los peces van nadando y usted debe hacer clic el que lleva la palabra correcta'
+        }
+      ]
+    };
+
   const [selectAnswers, setSelectAnswers] = useState<string[]>([]);
   const [openModal, setOpenModal] = useState<'success' | 'wrong' | null>(null);
 
@@ -43,12 +58,20 @@ export default function Level({ question, index }: propsLevel) {
   const checkAnswers = () => {
     for (const space of spaceBlank) {
       if (!selectAnswers.includes(space.content)) {
-        setOpenModal('wrong');
-        setSelectAnswers([]);
+        if (onResult) {
+          onResult(false);
+        } else {
+          setOpenModal('wrong');
+          setSelectAnswers([]);
+        }
         return;
       }
     }
-    setOpenModal('success');
+    if (onResult) {
+      onResult(true);
+    } else {
+      setOpenModal('success');
+    }
     return;
   };
 
@@ -68,80 +91,103 @@ export default function Level({ question, index }: propsLevel) {
   };
   return (
     <>
-      <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
-        <img src="assets/images/page-9/Fondo_mar.webp" />
-        <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} />
-        <img
-          src="assets/images/page-9/Fondo_algas detrás de la arena.webp"
-          className={css.image_depth}
-          ref={refDeph3}
-        />
-        <img src="assets/images/page-9/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} />
-        <img src="assets/images/page-9/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} />
-        <div className={css.container__question}>
-          <img src="assets/images/page-9/Ancla.webp" />
-          <p className="u-font-bold u-text-center">
-            {question.paragraphParts.map((part, index) =>
-              part.type === 'text' ? (
-                <span key={index}>{part.content}</span>
-              ) : (
-                <span key={index} className={selectParagraph(part.index)}>
-                  {part.index < selectAnswers.length ? ' ' + selectAnswers[part.index] + ' ' : '____'}
-                </span>
-              )
-            )}
-          </p>
-          <img src="assets/images/page-9/Ancla.webp" />
-        </div>
-        {answers.map((q, i) => (
-          <button
-            key={q}
-            className={`${css.fish} ${selectAnswers.includes(q) && css.selectAnswer}`}
-            style={{
-              top: `${35 + Math.random() * 40}%`,
-              left: 5 + i * 12 + '%',
-              animationDelay: Math.random() * 2 + 's'
-            }}
-            onClick={() => addSelectAnswer(q)}>
-            <img src={DATA_fishs[i].image} style={{ transform: `scaleX(${scales[Math.round(Math.random())]})` }} />
-            <p className={css.paragraph__fish}>{q}</p>
-          </button>
-        ))}
-        <p className={css.score}>Puntaje</p>
-        {[...Array(8)].map(() => (
+      <Col className="u-mb-10">
+        {question.audio_description && <Audio src={question.audio_description} a11y />}
+        {question.audio_content && <Audio src={question.audio_content} />}
+      </Col>
+      <Col lg="12">
+        <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
+          <img src="assets/images/page-9/Fondo_mar.webp" />
+          <img src="assets/images/page-9/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} />
           <img
-            src="assets/images/page-9/Burbuja de aire.webp"
-            className={css.bubble}
-            style={{ animationDelay: 2 + Math.random() * 10 + 's', left: Math.random() * 100 + '%' }}
+            src="assets/images/page-9/Fondo_algas detrás de la arena.webp"
+            className={css.image_depth}
+            ref={refDeph3}
           />
-        ))}
-        {openModal === 'wrong' && (
-          <img src="assets/images/Ova_002_sld_15_Haz fallado.webp" className={css.modal_depth} />
-        )}
-        {openModal === 'success' && (
-          <img src="assets/images/Ova_002_sld_15_Felicidades.webp" className={css.modal_depth} />
-        )}
-      </div>
-      <div className={css.container_controls}>
-        <Button
-          label="Comprobar"
-          disabled={spaceBlank.length > selectAnswers.length}
-          onClick={checkAnswers}
-          id="button-comprobar"
-        />
-        <Button
-          label="Reintentar"
-          onClick={() => {
-            setSelectAnswers([]);
-            setOpenModal(null);
-          }}
-        />
-        {openModal === 'success' && (
-          <Panel.Button section={index + 1}>
-            <Button label="Continuar" />
-          </Panel.Button>
-        )}
-      </div>
+          <img src="assets/images/page-9/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} />
+          <img src="assets/images/page-9/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} />
+          <div className={css.container__question}>
+            <img src="assets/images/page-9/Ancla.webp" />
+            <p className="u-font-bold u-text-center">
+              {question.paragraphParts.map((part, index) =>
+                part.type === 'text' ? (
+                  <span key={index + part.content}>{part.content}</span>
+                ) : (
+                  <span key={index + part.content} className={selectParagraph(part.index)}>
+                    {part.index < selectAnswers.length ? ' ' + selectAnswers[part.index] + ' ' : '____'}
+                  </span>
+                )
+              )}
+            </p>
+            <img src="assets/images/page-9/Ancla.webp" />
+          </div>
+          {intro && (
+            <PanelUI.Button section={1}>
+              <button className={css.init_button}>INICIO</button>
+            </PanelUI.Button>
+          )}
+          {answers.map((q, i) => (
+            <button
+              key={q + i}
+              className={`${css.fish} ${selectAnswers.includes(q) && css.selectAnswer}`}
+              style={{
+                top: `${35 + Math.random() * 40}%`,
+                left: (80 / answers.length) * (i + 0.7) + '%',
+                animationDelay: Math.random() * 2 + 's'
+              }}
+              onClick={() => addSelectAnswer(q)}>
+              <img
+                src={DATA_fishs[i].image}
+                style={{ transform: `scaleX(${scales[Math.round(Math.random())]})` }}
+                alt={q}
+              />
+              <p className={css.paragraph__fish}>{q}</p>
+            </button>
+          ))}
+
+          {[...Array(8)].map(() => (
+            <img
+              src="assets/images/page-9/Burbuja de aire.webp"
+              className={css.bubble}
+              style={{ animationDelay: 2 + Math.random() * 10 + 's', left: Math.random() * 100 + '%' }}
+            />
+          ))}
+          {openModal === 'wrong' && (
+            <img
+              src="assets/images/Ova_002_sld_15_Haz fallado.webp"
+              className={css.modal_depth}
+              alt="has fallado, vuelve a intentar"
+            />
+          )}
+          {openModal === 'success' && (
+            <img
+              src="assets/images/Ova_002_sld_15_Felicidades.webp"
+              className={css.modal_depth}
+              alt="Felicitaciones, has completado correctamente tu ejercicio."
+            />
+          )}
+        </div>
+        <div className={css.container_controls}>
+          <Button
+            label="Comprobar"
+            disabled={spaceBlank.length > selectAnswers.length}
+            onClick={checkAnswers}
+            id="button-comprobar"
+          />
+          <Button
+            label="Reintentar"
+            onClick={() => {
+              setSelectAnswers([]);
+              setOpenModal(null);
+            }}
+          />
+          {openModal === 'success' && index && (
+            <Panel.Button section={index + 1}>
+              <Button label="Continuar" />
+            </Panel.Button>
+          )}
+        </div>
+      </Col>
     </>
   );
 }
