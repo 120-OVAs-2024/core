@@ -109,13 +109,13 @@ export default function Level({ question = DEFAULT_QUESTON, index, intro, onResu
           <img src="assets/images/Fondo_mar.webp" className={css.image_back} alt="" />
           <img src="assets/images/Fondo_mar.webp" className={css.image_depth} ref={refDeph4} alt="" />
           <img
-            src="assets/images/Fondo_algas detrás de la arena.webp"
+            src="assets/images/Fondo_algas_detras_de_la_arena.webp"
             className={css.image_depth}
             ref={refDeph3}
             alt=""
           />
           <img src="assets/images/Fondo_arena.webp" className={css.image_depth} ref={refDeph2} alt="" />
-          <img src="assets/images/Fondo_Primer plano.webp" className={css.image_depth} ref={refDeph1} alt="" />
+          <img src="assets/images/Fondo_Primer_plano.webp" className={css.image_depth} ref={refDeph1} alt="" />
           <FullScreenButton elementId="fullscreen__section" addClass={css.fullScreen__button} />
 
           <div className={css.container__question}>
@@ -161,7 +161,7 @@ export default function Level({ question = DEFAULT_QUESTON, index, intro, onResu
           {[...Array(8)].map((_, index) => (
             <img
               key={`bubble-${index}`}
-              src="assets/images/Burbuja de aire.webp"
+              src="assets/images/Burbuja_de_aire.webp"
               className={css.bubble}
               style={{ animationDelay: 2 + Math.random() * 10 + 's', left: Math.random() * 100 + '%' }}
               alt=""
@@ -169,7 +169,7 @@ export default function Level({ question = DEFAULT_QUESTON, index, intro, onResu
           ))}
           {openModal === 'wrong' && (
             <img
-              src="assets/images/Ova_002_sld_15_Haz fallado.webp"
+              src="assets/images/Ova_002_sld_15_Haz_fallado.webp"
               className={css.modal_depth}
               alt="has fallado, vuelve a intentar"
             />
