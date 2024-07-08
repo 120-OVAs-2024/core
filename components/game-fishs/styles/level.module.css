@@ -5,36 +5,37 @@
   overflow: hidden;
 }
 
+.fullScreen__button {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.image_back {
+  aspect-ratio: 21/9;
+}
 .image_depth {
   position: absolute;
   top: 0;
   left: 0;
   transform: scale(1.05);
+  aspect-ratio: 21/9;
 }
 
 .modal_depth {
   position: absolute;
   top: 0;
   left: 0;
-
-  animation-name: modalIn;
-  animation-duration: 1s;
 }
 
 .bubble {
   position: absolute;
 
   transform: scale(0.3);
-
-  animation-name: bubble;
-  animation-duration: 6s;
-  animation-timing-function: ease-out;
-  animation-iteration-count: infinite;
 }
 
 .container__question {
-  min-width: 250px;
-  max-width: 500px;
+  color: #000;
+
   background-color: rgb(213, 239, 252);
   padding: 15px;
   border-radius: 15px;
@@ -48,33 +49,21 @@
 
   position: absolute;
   top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10%;
+  right: 10%;
 }
 
 .fish {
   position: absolute;
   top: 0;
   left: 0;
-  transition:
-    top 0.8s,
-    left 0.3s,
-    transform 0.3s;
 
   background-color: transparent;
   border: none;
   cursor: pointer;
-
-  animation-name: float;
-  animation-duration: 3s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
 }
 .fish:hover {
   filter: brightness(1.2);
-}
-.fish:active {
-  transform: scale(0.9);
 }
 
 .paragraph__fish {
@@ -119,6 +108,75 @@
   justify-content: center;
 }
 
+.init_button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+
+  transform: translate(-50%, -50%);
+
+  background-image: url('./assets/images/Boton_Inicio.webp');
+  width: 221px;
+  height: 63px;
+  color: white;
+  font-size: xx-large;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+
+.init_button:hover {
+  filter: brightness(1.2);
+}
+
+@media screen and (max-width: 500px) {
+  .container__question {
+    font-size: 10px;
+    font-weight: 400;
+  }
+  .wrapper_depths {
+    filter: grayscale(0.8);
+  }
+  .fish img {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-stop-animations='true']) .fish {
+    transition:
+      top 0.8s,
+      left 0.3s,
+      transform 0.6s;
+
+    animation-name: float;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  html:not([data-stop-animations='true']) .bubble {
+    animation-name: bubble;
+    animation-duration: 6s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+  }
+
+  html:not([data-stop-animations='true']) .modal_depth {
+    animation-name: modalIn;
+    animation-duration: 0.4s;
+  }
+}
+
+html[data-dark-mode='true'] .wrapper_depths {
+  opacity: 0.8;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -149,7 +207,7 @@
 @keyframes modalIn {
   from {
     opacity: 0;
-    transform: translateY(-100%) scale(0.3);
+    transform: translateY(100%) scale(0.3);
   }
   to {
     opacity: 1;
