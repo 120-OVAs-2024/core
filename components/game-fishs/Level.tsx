@@ -115,7 +115,7 @@ export default function Level({
         {question.audio_description && openModal === null && <Audio src={question.audio_description} a11y />}
         {question.audio_content && openModal === null && <Audio src={question.audio_content} />}
         {audio_success && openModal === 'success' && <Audio src={audio_success} />}
-        {audio_wrong && openModal === 'success' && <Audio src={audio_wrong} />}
+        {audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
       </Col>
       <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
