@@ -8,10 +8,12 @@ interface props_GameFish {
   questions: question_game[];
   onResult?(result: boolean): void;
   initData: question_game;
+  audio_success?: string;
+  audio_wrong?: string;
   title?: string;
   alt?: string;
 }
-export function GameFish({ questions, onResult, initData, title, alt }: props_GameFish) {
+export function GameFish({ questions, onResult, initData, title, alt, audio_success, audio_wrong }: props_GameFish) {
   return (
     <Panel>
       <div id="fullscreen__section">
@@ -28,6 +30,8 @@ export function GameFish({ questions, onResult, initData, title, alt }: props_Ga
               onResult={onResult}
               title={title}
               alt={alt}
+              audio_success={audio_success}
+              audio_wrong={audio_wrong}
             />
           </Panel.Section>
         ))}

@@ -27,6 +27,7 @@
     background-color: var(--clr-background);
     border-radius: .5rem;
     text-align: start;
+    height: auto;
     align-items: center;
 }
 
