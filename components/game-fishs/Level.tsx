@@ -58,7 +58,7 @@ export default function Level({
   const refDeph4 = useRef<HTMLImageElement>(null);
 
   const spaceBlank = question.paragraphParts.filter((part) => part.type === 'space');
-  const answers = [...question.mockAnswers, ...spaceBlank.map((ans) => ans.content)];
+  const answers = [...question.mockAnswers];
 
   const addSelectAnswer = (answer: string) => {
     if (spaceBlank.length > selectAnswers.length) {
@@ -75,22 +75,13 @@ export default function Level({
     return '';
   };
   const checkAnswers = () => {
-    for (const space of spaceBlank) {
-      if (!selectAnswers.includes(space.content)) {
-        if (onResult) {
-          onResult(false);
-        } else {
-          setOpenModal('wrong');
-        }
+    for (const spaceIndex in spaceBlank) {
+      if (spaceBlank[spaceIndex].content !== selectAnswers[spaceIndex]) {
+        onResult ? onResult(false) : setOpenModal('wrong');
         return;
       }
     }
-    if (onResult) {
-      onResult(true);
-    } else {
-      setOpenModal('success');
-    }
-    return;
+    onResult ? onResult(true) : setOpenModal('success');
   };
 
   const handleDepthMove: React.MouseEventHandler = (e) => {
@@ -115,7 +106,7 @@ export default function Level({
         {question.audio_description && openModal === null && <Audio src={question.audio_description} a11y />}
         {question.audio_content && openModal === null && <Audio src={question.audio_content} />}
         {audio_success && openModal === 'success' && <Audio src={audio_success} />}
-        {audio_wrong && openModal === 'success' && <Audio src={audio_wrong} />}
+        {audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
       </Col>
       <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
@@ -209,7 +200,7 @@ export default function Level({
             id="button-comprobar"
           />
           <Button
-            disabled={selectAnswers.length <= 0 || intro || openModal === 'success'}
+            disabled={intro || openModal !== 'wrong'}
             label="Reintentar"
             onClick={() => {
               setSelectAnswers([]);
