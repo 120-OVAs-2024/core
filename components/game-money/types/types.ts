@@ -1,9 +1,11 @@
+// Representa una pregunta con su texto y una indicación de si es correcta.
 export interface Question {
     id: string;
     text: string;
     correct: boolean;
 }
 
+// Representa un modal con mensajes de audio y texto para estados de éxito y error.
 export interface Modal {
     audio_success?: string;
     audio_wrong?: string;
@@ -11,6 +13,7 @@ export interface Modal {
     text_wrong: string;
 }
 
+// Define la interfaz para el estado inicial de la actividad
 export interface InitialState {
     validation: boolean;
     button: boolean;
@@ -20,7 +23,7 @@ export interface InitialState {
     correctOption: string | null;
 }
 
-// Define la interfaz para el contexto de actividad de selección
+// Define la interfaz para el contexto de actividad de selección de opciones
 export interface GameMoneyContextType {
     addSelectedOption: (id: string) => void;
     handleValidation: () => void;
