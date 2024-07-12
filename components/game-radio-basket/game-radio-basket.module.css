@@ -1,0 +1,106 @@
+.radios__container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.radio__options {
+    background: url(assets/images/ova_33_sld_12_fund.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    place-content: center;
+    padding: 4rem;
+}
+
+.radio__options_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin: 0 auto;
+    gap: 1rem;
+
+    .radio__option {
+        background-color: white;
+        color: black;
+        font-weight: 600;
+        width: 220px;
+        height: 70px;
+        border-radius: 12px;
+        display: grid;
+        place-content: center;
+        margin: 0.5rem;
+        border: 2px solid black;
+        position: relative;
+        cursor: pointer;
+    }
+}
+
+
+.radio__option:focus-within {
+    background-color: rgb(228, 164, 164);
+}
+
+.radio__option[data-state="correct"] {
+    background-color: var(--clr-activity-success);
+    font-weight: bold;
+}
+
+.radio__option[data-state="incorrect"] {
+    background-color: var(--clr-activity-wrong);
+    font-weight: bold;
+}
+
+.radio__option[data-state="incorrect"]::before {
+    content: "✖";
+    position: absolute;
+    top: 0.1rem;
+    right: 0.5rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    background-color: rgb(233, 93, 93);
+    color: white;
+    font-weight: 800;
+}
+
+.radio__option[data-state="correct"]::before {
+    content: "✔";
+    position: absolute;
+    top: 0.1rem;
+    right: 0.5rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    background-color: rgb(38, 160, 64);
+    color: white;
+    font-weight: 800;
+}
+
+.radio__option input[type="radio"]:disabled+.label {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.radio__option input[type="radio"]:disabled+.label+input {
+    pointer-events: none;
+}
+
+.radio__question {
+    background-color: rgba(22, 3, 3, 0.952);
+    color: white;
+    padding: 0.4rem;
+}
+
+/* radio */
+.input {
+    position: absolute;
+    left: -9999px;
+}
