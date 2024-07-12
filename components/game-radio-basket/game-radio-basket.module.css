@@ -1,17 +1,18 @@
 .radios__container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: auto;
 }
 
 .radio__options {
-    background: url(assets/images/ova_33_sld_12_fund.webp);
+    background: url(assets/images/ova_33_sld_12_game-fund.webp);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
     place-content: center;
     padding: 4rem;
+    position: relative;
 }
 
 .radio__options_container {
@@ -22,23 +23,37 @@
     max-width: 500px;
     margin: 0 auto;
     gap: 1rem;
-
-    .radio__option {
-        background-color: white;
-        color: black;
-        font-weight: 600;
-        width: 220px;
-        height: 70px;
-        border-radius: 12px;
-        display: grid;
-        place-content: center;
-        margin: 0.5rem;
-        border: 2px solid black;
-        position: relative;
-        cursor: pointer;
-    }
 }
 
+
+.radio__option {
+    background-color: white;
+    color: black;
+    font-weight: 600;
+    width: 220px;
+    height: 70px;
+    border-radius: 12px;
+    display: grid;
+    place-content: center;
+    margin: 0.5rem;
+    border: 2px solid black;
+    position: relative;
+    cursor: pointer;
+}
+
+.img__basket {
+    margin-left: -1.8rem;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-70px);
+    }
+}
 
 .radio__option:focus-within {
     background-color: rgb(228, 164, 164);
@@ -85,7 +100,7 @@
 }
 
 .radio__option input[type="radio"]:disabled+.label {
-    opacity: 0.4;
+    opacity: 0.8;
     cursor: not-allowed;
 }
 
@@ -94,7 +109,7 @@
 }
 
 .radio__question {
-    background-color: rgba(22, 3, 3, 0.952);
+    background-color: black;
     color: white;
     padding: 0.4rem;
 }
@@ -103,4 +118,29 @@
 .input {
     position: absolute;
     left: -9999px;
+}
+
+/* medias queries */
+
+@media screen and (min-width:1024px) {
+    .img__basket {
+        position: absolute;
+        right: 100px;
+        bottom: 70px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .radio__options_container {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html:not([data-stop-animations="true"]) {
+        .img__basket {
+            animation: bounce 0.6s ease-in-out infinite alternate;
+        }
+    }
+
 }

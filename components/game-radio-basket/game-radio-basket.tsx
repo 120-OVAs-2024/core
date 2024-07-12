@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button } from '@shared/components';
 
 import { RadioInput } from './radio-input';
-import { RadioQuestion } from './radio-question';
 
 import css from './game-radio-basket.module.css';
 
@@ -19,11 +18,7 @@ interface Props {
   data: Data[];
 }
 
-type SubComponents = {
-  RadioQuestion: typeof RadioQuestion;
-};
-
-export const GameRadioBasket: React.FC<Props> & SubComponents = ({ data, onResult, children }) => {
+export const GameRadioBasket: React.FC<Props> = ({ data, onResult, children }) => {
   const [state, setState] = useState<string | null>('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [disabledInput, setDisabledInput] = useState<boolean>(false);
@@ -45,7 +40,7 @@ export const GameRadioBasket: React.FC<Props> & SubComponents = ({ data, onResul
 
   /**
    * Realiza la validación de la selección de un radio button y actualiza el estado visual en consecuencia.
-   * Deshabilita la interacción con los radio buttons después de la validación y llama a `onResult` 
+   * Deshabilita la interacción con los radio buttons después de la validación y llama a `onResult`
    * con el estado actual.
    */
   const validation = () => {
@@ -104,9 +99,12 @@ export const GameRadioBasket: React.FC<Props> & SubComponents = ({ data, onResul
               disabled={disabledInput}
             />
           ))}
-
           <Button disabled={disabledButton.check} label="Comprobar" onClick={validation} />
           <Button type="reset" disabled={disabledButton.reset} label="Reiniciar" onClick={handleReset} />
+        </div>
+
+        <div className={css.img__basket}>
+          <img src="assets/images/ova_33_sld_12_ball.webp" alt="Balon de basket" />
         </div>
       </div>
       <div className={css.radio__question}>{children}</div>
@@ -116,5 +114,3 @@ export const GameRadioBasket: React.FC<Props> & SubComponents = ({ data, onResul
     </div>
   );
 };
-
-GameRadioBasket.RadioQuestion = RadioQuestion;
