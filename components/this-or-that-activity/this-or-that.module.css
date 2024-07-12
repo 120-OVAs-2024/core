@@ -158,6 +158,12 @@ html[data-dark-mode="true"] .card-selected .circle{
 
 /* Responsive */
 
+@media screen and (max-width: 1580px) {
+    .question{
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 820px) {
     .question{
         width: 100%;
