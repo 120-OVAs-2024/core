@@ -12,7 +12,7 @@ interface Props {
   noCaption?: boolean;
 }
 
-export const Image: React.FC<Props> = ({ src, title, alt, size, hasHtml, ...props }) => {
+export const Image: React.FC<Props> = ({ src, title = '', alt = '', size, hasHtml, ...props }) => {
   const parsedAlt = hasHtml ? alt.replace(/<[^>]*>/g, '') : alt;
 
   return (
