@@ -28,3 +28,4 @@ export * from './true-false-activity';
 export * from './this-or-that-activity';
 export * from './game-fishs';
 export * from './game-radio-basket';
+export * from './game-money';

@@ -58,7 +58,7 @@ export default function Level({
   const refDeph4 = useRef<HTMLImageElement>(null);
 
   const spaceBlank = question.paragraphParts.filter((part) => part.type === 'space');
-  const answers = [...question.mockAnswers, ...spaceBlank.map((ans) => ans.content)];
+  const answers = [...question.mockAnswers];
 
   const addSelectAnswer = (answer: string) => {
     if (spaceBlank.length > selectAnswers.length) {
@@ -75,22 +75,13 @@ export default function Level({
     return '';
   };
   const checkAnswers = () => {
-    for (const space of spaceBlank) {
-      if (!selectAnswers.includes(space.content)) {
-        if (onResult) {
-          onResult(false);
-        } else {
-          setOpenModal('wrong');
-        }
+    for (const spaceIndex in spaceBlank) {
+      if (spaceBlank[spaceIndex].content !== selectAnswers[spaceIndex]) {
+        onResult ? onResult(false) : setOpenModal('wrong');
         return;
       }
     }
-    if (onResult) {
-      onResult(true);
-    } else {
-      setOpenModal('success');
-    }
-    return;
+    onResult ? onResult(true) : setOpenModal('success');
   };
 
   const handleDepthMove: React.MouseEventHandler = (e) => {
@@ -209,7 +200,7 @@ export default function Level({
             id="button-comprobar"
           />
           <Button
-            disabled={selectAnswers.length <= 0 || intro || openModal === 'success'}
+            disabled={intro || openModal !== 'wrong'}
             label="Reintentar"
             onClick={() => {
               setSelectAnswers([]);

@@ -2,6 +2,14 @@ interface Score{
     score: number;
 }
 
+// Representa un modal con mensajes de audio y texto para estados de éxito y error.
+export interface Modal {
+    audio_success?: string;
+    audio_wrong?: string;
+    text_success: string; 
+    text_wrong: string;
+}
+
 // Tipo para una pregunta
 export interface Question extends Score {
     text: string;
