@@ -20,7 +20,7 @@ export const DND_CLASSES: Record<DndTypes, DndClasses> = {
 export const i18n = {
   es: {
     screenReaderInstruction:
-      'Si usas un lector de pantalla, desactiva el mouse virtual. Para seleccionar un elemento arrastrable, presiona la barra espaciadora o la tecla Enter. Mientras mantienes seleccionado, usa las teclas de flecha para mover el elemento en cualquier dirección deseada. Presiona nuevamente la barra espaciadora o la tecla Enter para soltar el elemento en su nueva posición, o presiona Escape para cancelar.'
+      'Si usas un lector de pantalla, desactiva el mouse virtual (insert+Z). Para seleccionar un elemento arrastrable, presiona la barra espaciadora o la tecla Enter. Mientras mantienes seleccionado, usa las teclas de flecha para mover el elemento en cualquier dirección deseada. Presiona nuevamente la barra espaciadora o la tecla Enter para soltar el elemento en su nueva posición, o presiona Escape para cancelar.'
   },
   en: {
     screenReaderInstruction:
