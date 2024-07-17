@@ -39,33 +39,35 @@ export default function Bottle({
   }, [enable]);
   return (
     <button {...props} className={css.container} style={{ animationDelay: `${Math.random() * 3}s` }}>
-      <img src={!enable ? 'assets/images/Botella_sin_corcho.webp' : 'assets/images/Botella.webp'} />
-      {!enable && (
-        <>
-          <img src="assets/images/Corcho.webp" className={css.corcho} ref={refCorcho} />
-          <img
-            src="assets/images/Burbuja_de_aire.webp"
-            className={css.bubble}
-            style={{ transform: `scale(0.2)` }}
-            ref={refBubble1}
-          />
-          <img
-            src="assets/images/Burbuja_de_aire.webp"
-            className={css.bubble}
-            style={{ transform: `scale(0.2)` }}
-            ref={refBubble2}
-          />
-          <img
-            src="assets/images/Burbuja_de_aire.webp"
-            className={css.bubble}
-            style={{ transform: `scale(0.2)` }}
-            ref={refBubble3}
-          />
-        </>
-      )}
-      <p className={css.letter} style={{ opacity: !enable ? 0.3 : 1 }}>
-        {letter}
-      </p>
+      <div className={css.container__responsive}>
+        <img src={!enable ? 'assets/images/Botella_sin_corcho.webp' : 'assets/images/Botella.webp'} />
+        {!enable && (
+          <>
+            <img src="assets/images/Corcho.webp" className={css.corcho} ref={refCorcho} />
+            <img
+              src="assets/images/Burbuja_de_aire.webp"
+              className={css.bubble}
+              style={{ transform: `scale(0.2)` }}
+              ref={refBubble1}
+            />
+            <img
+              src="assets/images/Burbuja_de_aire.webp"
+              className={css.bubble}
+              style={{ transform: `scale(0.2)` }}
+              ref={refBubble2}
+            />
+            <img
+              src="assets/images/Burbuja_de_aire.webp"
+              className={css.bubble}
+              style={{ transform: `scale(0.2)` }}
+              ref={refBubble3}
+            />
+          </>
+        )}
+        <p className={css.letter} style={{ opacity: !enable ? 0.3 : 1 }}>
+          {letter}
+        </p>
+      </div>
     </button>
   );
 }

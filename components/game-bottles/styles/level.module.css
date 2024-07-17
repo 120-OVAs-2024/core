@@ -70,7 +70,7 @@
   right: 0;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 
   font-weight: 600;
   font-size: 30px;
@@ -82,7 +82,7 @@
   border-radius: 20px;
 }
 .container_word button {
-  padding: 0 15px;
+  padding: 0 2px;
   cursor: pointer;
   background-color: transparent;
   border: none;
