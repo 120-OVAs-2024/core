@@ -27,9 +27,10 @@
     }
   },
   "dependencies": {
+    "@gsap/react": "^2.1.1",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "better-react-mathjax": "^2.0.3",
-    "wicg-inert": "^3.0.3",
-    "gsap": "^3.12.5"
+    "gsap": "^3.12.5",
+    "wicg-inert": "^3.0.3"
   }
 }
