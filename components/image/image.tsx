@@ -2,7 +2,7 @@ import { Image as ImageUI } from 'books-ui';
 
 import css from './image.module.css';
 
-interface Props {
+interface Props extends React.ImgHTMLAttributes<HTMLImageElement>  {
   src: string;
   alt: string;
   title?: string;
