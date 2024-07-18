@@ -1,7 +1,7 @@
 .container {
   position: relative;
   width: 32px;
-  filter: hue-rotate(90deg);
+  /* filter: hue-rotate(90deg); */
 }
 
 .torso {

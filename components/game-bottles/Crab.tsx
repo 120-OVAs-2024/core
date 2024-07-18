@@ -1,27 +1,31 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
 import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
 import css from './styles/crab.module.css';
 export default function Crab() {
+  const tl = useMemo(() => gsap.timeline(), []);
   const cancelAnimation = useReduceMotion();
   const { stopAnimations } = useA11yAttribute();
 
   const refContainer = useRef<HTMLDivElement>(null);
   const refPatDer = useRef<HTMLImageElement>(null);
   const refPatIzq = useRef<HTMLImageElement>(null);
+  useGSAP(() => {
+    tl.to(refPatIzq.current, { rotate: 30, duration: 0.5, repeat: -1, yoyo: true }, 0);
+    tl.to(refPatDer.current, { rotate: -15, duration: 0.5, repeat: -1, yoyo: true }, 0);
+    tl.to(refContainer.current, { x: 300, duration: 8, repeat: -1, yoyo: true, ease: 'power1.inOut' }, 0);
+  }, []);
   useEffect(() => {
-    if (!cancelAnimation && !stopAnimations) {
-      const ctx = gsap.context(() => {
-        gsap.to(refPatIzq.current, { rotate: 30, duration: 0.5, repeat: Infinity, yoyo: true });
-        gsap.to(refPatDer.current, { rotate: -15, duration: 0.5, repeat: Infinity, yoyo: true });
-        gsap.to(refContainer.current, { x: 300, duration: 8, repeat: Infinity, yoyo: true, ease: 'power1.inOut' });
-      });
-      return () => ctx.clear();
+    tl.restart();
+    if (cancelAnimation || stopAnimations) {
+      tl.pause();
     }
   }, [cancelAnimation, stopAnimations]);
+
   return (
     <div className={css.container} ref={refContainer}>
       <img src="assets/images/Cangrejo 1_pat_izq.webp" className={css.pat_izq} ref={refPatIzq} />

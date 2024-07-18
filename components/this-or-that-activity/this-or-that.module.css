@@ -30,7 +30,7 @@
     align-items: center;
     justify-content: center;
 
-    background-color: #00828c;
+    background: #00828c;
     border: 2px solid var(--clr-background);
     color : var(--clr-background);  
     border-radius: 18px;
@@ -41,8 +41,12 @@
     transition: all 0.3s ease;
 }
 
+.radio-element:disabled {
+    cursor: not-allowed;
+}
+
 .circle {
-    background-color: none;
+    background-color: transparent;
     color: var(--clr-background);
     border-radius: 50%;
     border: 2px solid var(--clr-background);
@@ -57,7 +61,7 @@
 }
 
 .radio-element span{
-    font-size: var(--fs-400);
+    font-size: var(--fs-300);
 }
 
 .card-selected .circle{
@@ -137,6 +141,10 @@
 
 /* Dark mode */
 
+html[data-dark-mode="true"] .radio-element {
+    background-color: #24a6b0;
+}
+
 html[data-dark-mode="true"] .question{
     background-color: #efec9e;
 }
@@ -156,6 +164,14 @@ html[data-dark-mode="true"] .card-selected .circle{
     color: var(--clr-text-main);
 }
 
+html[data-dark-mode="true"] .card-success{
+    background-color: #5da855;
+}
+
+html[data-dark-mode="true"] .card-wrong{
+    background-color: #db5463;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 1580px) {
@@ -168,7 +184,8 @@ html[data-dark-mode="true"] .card-selected .circle{
     .question{
         width: 100%;
     }
-    .radio-element span{
-        font-size: var(--fs-300);
+
+    .container-options{
+        grid-template-columns: 1fr;
     }
 }

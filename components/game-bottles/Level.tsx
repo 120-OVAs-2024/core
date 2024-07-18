@@ -117,6 +117,8 @@ export default function Level({ word = 'sofia', index, onResult, title, alt, aud
   };
 
   const ALREADY_FILL = spaces.find((obj) => obj === null) === undefined ? true : false;
+  const PARCIAL_WORD = spaces.map((obj) => (obj ? obj.letter : '')).join('');
+  console.log(PARCIAL_WORD);
   return (
     <Row alignItems="center" justifyContent="center">
       <Col addClass="u-mb-2 u-flow">
@@ -168,6 +170,9 @@ export default function Level({ word = 'sofia', index, onResult, title, alt, aud
           ))}
           {/* Palabra */}
           <div className={`${css.container_word} ${css[openModal || '']}`}>
+            <p aria-live="assertive" style={{ position: 'absolute', opacity: 0 }}>
+              {'palabra armada : ' + PARCIAL_WORD}
+            </p>
             {openModal && (
               <img
                 src={
@@ -178,8 +183,8 @@ export default function Level({ word = 'sofia', index, onResult, title, alt, aud
                 className={css.icon}
               />
             )}
-            {spaces[selectIndex] && (
-              <button className={css.cancel_button} onClick={removeLetter}>
+            {spaces[selectIndex] && openModal === null && (
+              <button className={css.cancel_button} onClick={removeLetter} aria-label="eliminar letra seleccionada">
                 ❌
               </button>
             )}
