@@ -79,6 +79,15 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
    * Reinicia la actividad a su estado inicial.
    */
   const handleReset = () => {
+    activity.options.forEach(({ id }) => {
+      // Busca el elemento del DOM correspondiente al nombre de opción y tipo de input 'radio'
+      const element = document.querySelector(`input[type='radio'][id='${id}']`) as HTMLInputElement;
+
+      if (element) {
+        // Si se encuentra el elemento, establece su propiedad 'checked' en false para deseleccionarlo
+        element.checked = false;
+      }
+    });
     updateActivity(INITIAL_STATE);
   };
 
