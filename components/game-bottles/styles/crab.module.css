@@ -22,17 +22,20 @@
   right: -10px;
   top: 10px;
 }
+
 .tenaza_izq {
   position: absolute;
   top: -16px;
   left: -15px;
 }
+
 .tenaza_der {
   position: absolute;
   top: -16px;
   right: -15px;
   transform: scaleX(-1);
 }
+
 .shadow {
   position: absolute;
   z-index: 10;

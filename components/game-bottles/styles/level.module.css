@@ -10,9 +10,11 @@
   top: 0;
   left: 0;
 }
+
 .image_back {
   aspect-ratio: 21/9;
 }
+
 .image_depth {
   position: absolute;
   top: 0;
@@ -45,11 +47,13 @@
   bottom: 20%;
   left: 20%;
 }
+
 .crap_surface {
   position: absolute;
   top: 0;
   left: 0;
 }
+
 .container__bottles {
   display: flex;
   flex-wrap: wrap;
@@ -62,6 +66,7 @@
   width: 100%;
   justify-content: center;
 }
+
 .container_word {
   opacity: 0.8;
   position: absolute;
@@ -81,25 +86,31 @@
   border: 3px solid rgb(150, 103, 1);
   border-radius: 20px;
 }
+
 .container_word button {
   padding: 0 2px;
   cursor: pointer;
   background-color: transparent;
   border: none;
 }
+
 .container_word button.select {
   background-color: rgb(152, 227, 230);
 }
+
 .container_word button:hover {
   outline: 3px solid rgb(214, 211, 7);
   border-radius: 15px;
 }
+
 .container_word.wrong {
   background-color: rgb(243, 123, 123);
 }
+
 .container_word.success {
   background-color: rgb(161, 243, 123);
 }
+
 .container_word .icon {
   position: absolute;
   top: 0;
@@ -119,6 +130,7 @@ button.cancel_button {
   padding: 5px;
   cursor: pointer;
 }
+
 .cancel_button:hover {
   filter: brightness(1.2);
 }
@@ -141,6 +153,7 @@ button.cancel_button {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
   }
+
   html:not([data-stop-animations='true']) .bubble {
     animation-name: bubble;
     animation-duration: 6s;
@@ -152,6 +165,7 @@ button.cancel_button {
     animation-name: modalIn;
     animation-duration: 0.4s;
   }
+
   html:not([data-stop-animations='true']) .container_word span {
     transition: background-color 0.5s;
   }
@@ -165,9 +179,11 @@ html[data-dark-mode='true'] .wrapper_depths {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -178,10 +194,12 @@ html[data-dark-mode='true'] .wrapper_depths {
     bottom: 0%;
     opacity: 0.7;
   }
+
   50% {
     bottom: 100%;
     opacity: 0;
   }
+
   100% {
     bottom: 100%;
     opacity: 0;
@@ -193,6 +211,7 @@ html[data-dark-mode='true'] .wrapper_depths {
     opacity: 0;
     transform: translateY(100%) scale(0.3);
   }
+
   to {
     opacity: 1;
     transform: translateY(0%) scale(1);
