@@ -53,17 +53,17 @@ main {
   padding-block: 1rem 1.5rem;
 }
 
-main::-webkit-scrollbar {
+::-webkit-scrollbar {
   border-radius: .625rem;
   background-color: #f5f5f5;
   width: .625rem;
 }
 
-main::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-main::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   border: 2px solid #f5f5f5;
   background-color: var(--clr-brand);
   border-radius: .4375rem;
