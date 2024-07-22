@@ -160,6 +160,10 @@ main {
   -ms-transform: rotateY(-180deg);
 }
 
+html[data-dark-mode="true"] .u-white-bg {
+  background-color: #fefefe;
+}
+
 /* Elements */
 @supports (height: 100svh) {
   body {
@@ -173,6 +177,10 @@ main {
 
 :where(body, h1, h2, h3, h4, p, figure, blockquote, dl, dd) {
   margin: 0;
+}
+
+:is(h2, h3, h4, h5, h6) {
+  font-size: var(--fs-200);
 }
 
 ul[role='list'],
