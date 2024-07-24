@@ -1,10 +1,11 @@
 import { Panel } from '@/shared/components';
 import { FullScreenAlert } from '@/shared/components';
 
+import { TypeWord } from './types/types';
 import Level from './Level';
 
 interface props_GameBottle {
-  words: string[];
+  words: TypeWord[];
   onResult?(result: boolean): void;
 
   audio_success?: string;

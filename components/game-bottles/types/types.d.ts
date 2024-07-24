@@ -14,3 +14,9 @@ export type spaceProp = {
   index: string;
   letter: string;
 } | null;
+
+export interface TypeWord {
+  word: string;
+  content?: string;
+  a11y?: string;
+}

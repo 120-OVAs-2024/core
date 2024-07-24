@@ -5,14 +5,14 @@ import { Button, FullScreenButton } from '@/shared/components';
 import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
 import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
-import { letterProp, spaceProp } from './types/types';
+import { letterProp, spaceProp, TypeWord } from './types/types';
 import Bottle from './Bottle';
 import Crab from './Crab';
 
 import css from './styles/level.module.css';
 
 interface propsLevel {
-  word?: string;
+  word: TypeWord;
   index?: number;
   onResult?(result: boolean): void;
   title?: string;
@@ -21,18 +21,18 @@ interface propsLevel {
   audio_wrong?: string;
 }
 
-export default function Level({ word = 'sofia', index, onResult, title, alt, audio_success, audio_wrong }: propsLevel) {
+export default function Level({ word, index, onResult, title, alt, audio_success, audio_wrong }: propsLevel) {
   const cancelAnimation = useReduceMotion();
   const { stopAnimations } = useA11yAttribute();
 
   const [openModal, setOpenModal] = useState<'success' | 'wrong' | null>(null);
   const [words, setWords] = useState<letterProp[]>(
-    word
+    word.word
       .split('')
       .map((letter) => ({ letter, index: crypto.randomUUID(), enable: true }))
       .sort(() => Math.random() - 0.5)
   );
-  const [spaces, setSpaces] = useState<spaceProp[]>([...Array(word.length)].map(() => null));
+  const [spaces, setSpaces] = useState<spaceProp[]>([...Array(word.word.length)].map(() => null));
 
   const [selectIndex, setSelectIndex] = useState<number>(0);
 
@@ -82,7 +82,7 @@ export default function Level({ word = 'sofia', index, onResult, title, alt, aud
       .map((obj) => obj?.letter)
       .join('')
       .toLowerCase();
-    if (word.toLowerCase() === finalyWord) {
+    if (word.word.toLowerCase() === finalyWord) {
       setOpenModal('success');
       onResult && onResult(true);
     } else {
@@ -124,6 +124,8 @@ export default function Level({ word = 'sofia', index, onResult, title, alt, aud
       <Col addClass="u-mb-2 u-flow">
         {audio_success && openModal === 'success' && <Audio src={audio_success} />}
         {audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
+        {word.a11y && <Audio a11y src={word.a11y} />}
+        {word.content && <Audio src={word.content} />}
       </Col>
       <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
@@ -170,7 +172,7 @@ export default function Level({ word = 'sofia', index, onResult, title, alt, aud
           ))}
           {/* Palabra */}
           <div className={`${css.container_word} ${css[openModal || '']}`}>
-            <p aria-live="assertive" style={{ position: 'absolute', opacity: 0 }}>
+            <p aria-live="assertive" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}>
               {'palabra armada : ' + PARCIAL_WORD}
             </p>
             {openModal && (
