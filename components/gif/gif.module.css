@@ -16,14 +16,11 @@
 
 .gif__figcaption {
     margin-top: .9375rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
     font-style: italic;
 }
 
-.image__figcaption>* {
+.gif__figcaption > * {
     display: inline;
 }
 

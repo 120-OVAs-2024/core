@@ -30,3 +30,4 @@ export * from './game-fishs';
 export * from './game-bottles';
 export * from './game-radio-basket';
 export * from './game-money';
+export * from './checkbox-activity'

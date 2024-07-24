@@ -77,7 +77,7 @@ export const ThisOrThatElement: React.FC<Props> = ({selects, question, addClass,
 
   return (
     <div className={`${css['container-element']} ${addClass ?  addClass : ''}`}>
-      <div data-id='card' role="group" aria-labelledby="question">
+      <div data-id='card' role="group" aria-labelledby="question" className={css['card-element']}>
         <div className={`${css['question']} ${getClassQuestion()}`} data-id='question'>
           <p className='u-font-bold u-text-center'>{question}</p>
         </div>

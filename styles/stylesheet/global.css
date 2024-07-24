@@ -53,17 +53,17 @@ main {
   padding-block: 1rem 1.5rem;
 }
 
-main::-webkit-scrollbar {
+::-webkit-scrollbar {
   border-radius: .625rem;
   background-color: #f5f5f5;
   width: .625rem;
 }
 
-main::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-main::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   border: 2px solid #f5f5f5;
   background-color: var(--clr-brand);
   border-radius: .4375rem;
@@ -160,6 +160,10 @@ main::-webkit-scrollbar-thumb {
   -ms-transform: rotateY(-180deg);
 }
 
+html[data-dark-mode="true"] .u-white-bg {
+  background-color: #fefefe;
+}
+
 /* Elements */
 @supports (height: 100svh) {
   body {
@@ -173,6 +177,10 @@ main::-webkit-scrollbar-thumb {
 
 :where(body, h1, h2, h3, h4, p, figure, blockquote, dl, dd) {
   margin: 0;
+}
+
+:is(h2, h3, h4, h5, h6) {
+  font-size: var(--fs-200);
 }
 
 ul[role='list'],

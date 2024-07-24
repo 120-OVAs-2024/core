@@ -12,6 +12,10 @@
     box-sizing: border-box;
 }
 
+.card-element{
+    width: 80%;
+}
+
 /* Elementos de la actividad */
 
 .container-options{
@@ -118,7 +122,6 @@
     align-items: center;
     justify-content: center;
     background-color: #f9f8db;
-    width: 81%;
     padding: 2rem 1rem;
     border-radius: 10px;
     border: 2px solid #6072a5;
