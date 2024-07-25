@@ -19,10 +19,11 @@ interface Props extends SelectPropsUI {
   addClass?: string;
   correctAnswer: string;
   options: OptionType[];
+  name: string;
   placeholder?: string;
 }
 
-export const SelectElement: React.FC<Props> = ({ id, correctAnswer, addClass, options, placeholder = "", ...props }) => {
+export const SelectElement: React.FC<Props> = ({ id, correctAnswer, addClass, options, placeholder = "", name,  ...props }) => {
   const reactId = useId();
   const uid = id || reactId;
 
@@ -70,10 +71,11 @@ export const SelectElement: React.FC<Props> = ({ id, correctAnswer, addClass, op
       isDisabled={validation}
       onSelectionChange={handleSelectionChange}
       placeholder={placeholder}
+      name={name}
       {...props}>
       {options.map(({ id, option }) => (
         <Item key={id}>
-          <span dangerouslySetInnerHTML={{ __html: option }}></span>
+          <span id={name} dangerouslySetInnerHTML={{ __html: option }}></span>
         </Item>
       ))}
     </Select>

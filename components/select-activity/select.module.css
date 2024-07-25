@@ -48,6 +48,7 @@ html[data-dark-mode="true"] .select :global(.c-select-button) {
 :global(.c-select-popover) {
     background-color: var(--clr-background);
     border: 2px solid var(--clr-brand);
+    overflow-y: auto;
 }
 
 :global(.c-select-list) {
