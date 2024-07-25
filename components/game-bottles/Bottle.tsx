@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import React from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -44,27 +43,30 @@ export default function Bottle({
       aria-label={'letra  ' + letter}
       disabled={!enable}>
       <div className={css.container__responsive}>
-        <img src={!enable ? 'assets/images/Botella_sin_corcho.webp' : 'assets/images/Botella.webp'} />
+        <img src={!enable ? 'assets/images/Botella_sin_corcho.webp' : 'assets/images/Botella.webp'} alt="" />
         {!enable && (
           <>
-            <img src="assets/images/Corcho.webp" className={css.corcho} ref={refCorcho} />
+            <img src="assets/images/Corcho.webp" className={css.corcho} ref={refCorcho} alt="" />
             <img
               src="assets/images/Burbuja_de_aire.webp"
               className={css.bubble}
               style={{ transform: `scale(0.2)` }}
               ref={refBubble1}
+              alt=""
             />
             <img
               src="assets/images/Burbuja_de_aire.webp"
               className={css.bubble}
               style={{ transform: `scale(0.2)` }}
               ref={refBubble2}
+              alt=""
             />
             <img
               src="assets/images/Burbuja_de_aire.webp"
               className={css.bubble}
               style={{ transform: `scale(0.2)` }}
               ref={refBubble3}
+              alt=""
             />
           </>
         )}

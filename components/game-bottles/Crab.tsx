@@ -28,12 +28,12 @@ export default function Crab() {
 
   return (
     <div className={css.container} ref={refContainer}>
-      <img src="assets/images/Cangrejo 1_pat_izq.webp" className={css.pat_izq} ref={refPatIzq} />
-      <img src="assets/images/Cangrejo1_torso.webp" className={css.torso} />
-      <img src="assets/images/Cangrejo 1_pat_der.webp" className={css.pat_der} ref={refPatDer} />
-      <img src="assets/images/Cangrejo 1_tenaza.webp" className={css.tenaza_izq} />
-      <img src="assets/images/Cangrejo 1_tenaza.webp" className={css.tenaza_der} />
-      <img src="assets/images/Cangrejos_sombras.webp" className={css.shadow} />
+      <img src="assets/images/Cangrejo 1_pat_izq.webp" className={css.pat_izq} ref={refPatIzq} alt="" />
+      <img src="assets/images/Cangrejo1_torso.webp" className={css.torso} alt="" />
+      <img src="assets/images/Cangrejo 1_pat_der.webp" className={css.pat_der} ref={refPatDer} alt="" />
+      <img src="assets/images/Cangrejo 1_tenaza.webp" className={css.tenaza_izq} alt="" />
+      <img src="assets/images/Cangrejo 1_tenaza.webp" className={css.tenaza_der} alt="" />
+      <img src="assets/images/Cangrejos_sombras.webp" className={css.shadow} alt="" />
     </div>
   );
 }
