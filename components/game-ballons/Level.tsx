@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import { Audio, Col, Panel, Row } from 'books-ui';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -16,6 +16,7 @@ interface propsLevel {
   word: TypeWord;
   index?: number;
   onResult?(result: boolean): void;
+  content?: ReactNode;
   title?: string;
   alt?: string;
   audio_success?: string;
@@ -24,7 +25,7 @@ interface propsLevel {
 
 const ANIMATION_CLOUD = 45;
 
-export default function Level({ word, index, onResult, title, alt }: propsLevel) {
+export default function Level({ word, index, onResult, title, alt, content }: propsLevel) {
   const cancelAnimation = useReduceMotion();
   const { stopAnimations } = useA11yAttribute();
 
@@ -58,11 +59,14 @@ export default function Level({ word, index, onResult, title, alt }: propsLevel)
       { left: '-100%', duration: ANIMATION_CLOUD, repeat: Infinity, ease: 'none', delay: ANIMATION_CLOUD / 2 }
     );
 
-    if (cancelAnimation || stopAnimations) {
-      console.log('pause');
-      animated1.pause();
-      animated2.pause();
-    }
+    setTimeout(() => {
+      if (cancelAnimation || stopAnimations) {
+        console.log('pause');
+
+        animated1.pause();
+        animated2.pause();
+      }
+    }, 100);
   }, [cancelAnimation, stopAnimations]);
 
   const addLetter = (obj: letterProp) => {
@@ -147,6 +151,7 @@ export default function Level({ word, index, onResult, title, alt }: propsLevel)
       <Col addClass="u-mb-2 u-flow">
         {word.a11y && <Audio a11y src={word.a11y} />}
         {word.content && <Audio src={word.content} />}
+        {content}
       </Col>
       <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>
@@ -161,7 +166,7 @@ export default function Level({ word, index, onResult, title, alt }: propsLevel)
           <img src="assets/images/Fondo_Primer_plano_arbustos.webp" className={css.image_depth} ref={refDeph1} alt="" />
 
           <FullScreenButton elementId="fullscreen__section" addClass={css.fullScreen__button} />
-          {/* Bottellas */}
+          {/* GLOBOS */}
           {openModal === null && (
             <div className={css.container__bottles}>
               {words.map((props, i) => (
@@ -187,7 +192,7 @@ export default function Level({ word, index, onResult, title, alt }: propsLevel)
           {/* Palabra */}
           <div className={`${css.container_word} ${css[openModal || '']}`}>
             <p aria-live="assertive" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}>
-              {'palabra armada : ' + PARCIAL_WORD}
+              {'frase armada : ' + PARCIAL_WORD}
             </p>
             {openModal && (
               <img

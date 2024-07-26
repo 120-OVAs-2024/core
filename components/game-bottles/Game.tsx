@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Panel } from '@/shared/components';
 import { FullScreenAlert } from '@/shared/components';
 
@@ -7,13 +9,13 @@ import Level from './Level';
 interface props_GameBottle {
   words: TypeWord[];
   onResult?(result: boolean): void;
-
+  content?: ReactNode;
   audio_success?: string;
   audio_wrong?: string;
   title?: string;
   alt?: string;
 }
-export function GameBottle({ onResult, words, title, alt, audio_success, audio_wrong }: props_GameBottle) {
+export function GameBottle({ onResult, words, title, alt, audio_success, audio_wrong, content }: props_GameBottle) {
   return (
     <Panel>
       <div id="fullscreen__section">
@@ -22,6 +24,7 @@ export function GameBottle({ onResult, words, title, alt, audio_success, audio_w
         {words.map((word, index) => (
           <Panel.Section key={index}>
             <Level
+              content={content}
               word={word}
               index={index + 1 === words.length ? undefined : index + 1}
               onResult={onResult}

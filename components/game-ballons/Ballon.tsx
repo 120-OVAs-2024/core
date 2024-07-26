@@ -49,7 +49,7 @@ export default function Ballon({
       {...props}
       className={css.container}
       style={{ animationDelay: `${role * 0.5}s` }}
-      aria-label={'letra  ' + letter}
+      aria-label={'palabra  ' + letter}
       disabled={!enable}>
       <div className={css.container__responsive}>
         <img src={ballons[role]} />

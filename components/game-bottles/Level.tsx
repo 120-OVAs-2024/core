@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import { Audio, Col, Panel, Row } from 'books-ui';
 
 import { Button, FullScreenButton } from '@/shared/components';
@@ -15,13 +15,14 @@ interface propsLevel {
   word: TypeWord;
   index?: number;
   onResult?(result: boolean): void;
+  content?: ReactNode;
   title?: string;
   alt?: string;
   audio_success?: string;
   audio_wrong?: string;
 }
 
-export default function Level({ word, index, onResult, title, alt, audio_success, audio_wrong }: propsLevel) {
+export default function Level({ word, index, onResult, title, alt, audio_success, audio_wrong, content }: propsLevel) {
   const cancelAnimation = useReduceMotion();
   const { stopAnimations } = useA11yAttribute();
 
@@ -126,6 +127,7 @@ export default function Level({ word, index, onResult, title, alt, audio_success
         {audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
         {word.a11y && <Audio a11y src={word.a11y} />}
         {word.content && <Audio src={word.content} />}
+        {content}
       </Col>
       <Col lg="12" mm="11" className="u-flow">
         <div className={css.wrapper_depths} onMouseMove={handleDepthMove}>

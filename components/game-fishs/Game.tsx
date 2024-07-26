@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Panel } from '@/shared/components';
 import { FullScreenAlert } from '@/shared/components';
 
@@ -7,13 +9,23 @@ import Level from './Level';
 interface props_GameFish {
   questions: question_game[];
   onResult?(result: boolean): void;
+  content?: ReactNode;
   initData: question_game;
   audio_success?: string;
   audio_wrong?: string;
   title?: string;
   alt?: string;
 }
-export function GameFish({ questions, onResult, initData, title, alt, audio_success, audio_wrong }: props_GameFish) {
+export function GameFish({
+  questions,
+  onResult,
+  initData,
+  title,
+  alt,
+  audio_success,
+  audio_wrong,
+  content
+}: props_GameFish) {
   return (
     <Panel>
       <div id="fullscreen__section">
@@ -25,6 +37,7 @@ export function GameFish({ questions, onResult, initData, title, alt, audio_succ
         {questions.map((quest, index) => (
           <Panel.Section key={index}>
             <Level
+              content={content}
               question={quest}
               index={index + 1 === questions.length ? undefined : index + 1}
               onResult={onResult}
