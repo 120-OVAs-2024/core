@@ -8,7 +8,7 @@ import Level from './Level';
 
 interface props_GameBottle {
   pharases: TypeWord[];
-  onResult?(result: boolean): void;
+  onResult?(result: boolean, section: number): void;
   content?: ReactNode;
   audio_success?: string;
   audio_wrong?: string;
@@ -27,7 +27,9 @@ export function GameBallons({ onResult, pharases, title, alt, audio_success, aud
               content={content}
               word={word}
               index={index + 1 === pharases.length ? undefined : index + 1}
-              onResult={onResult}
+              onResult={(res: boolean) => {
+                onResult && onResult(res, index);
+              }}
               title={title}
               alt={alt}
               audio_success={audio_success}
