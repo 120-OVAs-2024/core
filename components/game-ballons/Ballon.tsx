@@ -52,7 +52,7 @@ export default function Ballon({
       aria-label={'palabra  ' + letter}
       disabled={!enable}>
       <div className={css.container__responsive}>
-        <img src={ballons[role]} />
+        <img src={ballons[role % 7]} />
 
         <div ref={refWord} className={css.letter}>
           <p>{letter}</p>

@@ -159,6 +159,7 @@ export default function Level({ word, index, onResult, title, alt, content }: pr
           <img src="assets/images/Fondo_cielo.webp" className={css.image_back} alt="" />
           <img src="assets/images/Fondo_cielo.webp" className={css.image_depth} ref={refDeph4} alt="" />
           <img src="assets/images/Fondo_montañas2.webp" className={css.image_depth} ref={refDeph3} alt="" />
+          {/* Nubes */}
           <img src="assets/images/Fondo nubes.webp" className={css.image_depth_clouds} ref={refClouds} alt="" />
           <img src="assets/images/Fondo nubes.webp" className={css.image_depth_clouds} ref={refClouds2} alt="" />
           <img src="assets/images/Fondo_montañas.webp" alt="" ref={refDeph2} className={css.image_depth} />
@@ -175,20 +176,6 @@ export default function Level({ word, index, onResult, title, alt, content }: pr
             </div>
           )}
 
-          {/* Burbujas */}
-          {[...Array(8)].map((_, index) => (
-            <img
-              key={`bubble-${index}`}
-              src="assets/images/Burbuja_de_aire.webp"
-              className={css.bubble}
-              style={{
-                animationDelay: 2 + Math.random() * 10 + 's',
-                left: Math.random() * 100 + '%',
-                transform: `scale(${Math.min(Math.random(), 0.4)})`
-              }}
-              alt=""
-            />
-          ))}
           {/* Palabra */}
           <div className={`${css.container_word} ${css[openModal || '']}`}>
             <p aria-live="assertive" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}>
