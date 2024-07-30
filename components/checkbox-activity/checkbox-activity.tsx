@@ -2,9 +2,9 @@ import { useEffect, useReducer, useRef } from 'react';
 
 import type { InitialState, Option } from './types/types';
 import { States } from './types/types';
-import { RadioActivityProvider } from './radio-activity-context';
-import { RadioButton } from './radio-button';
-import { RadioElement } from './radio-element';
+import { CheckboxActivityProvider } from './checkbox-activity-context';
+import { CheckboxButton } from './checkbox-button';
+import { CheckboxElement } from './checkbox-element';
 
 const INITIAL_STATE = Object.freeze({
   validation: false,
@@ -20,27 +20,27 @@ interface Props {
 }
 
 type SubComponents = {
-  Radio: typeof RadioElement;
-  Button: typeof RadioButton;
+  Checkbox: typeof CheckboxElement;
+  Button: typeof CheckboxButton;
 };
 
-const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelected = 1 }) => {
+const Checkboxs: React.FC<Props> & SubComponents = ({ children, onResult, minSelected = 1 }) => {
   const [activity, updateActivity] = useReducer(
     (prev: InitialState, next: Partial<InitialState>) => ({ ...prev, ...next }),
     INITIAL_STATE
   );
 
   // Referencia mutable para almacenar los uid de cada componente <RadioElement/>
-  const radioElementsId = useRef<string[]>([]);
+  const checkboxElementsId = useRef<string[]>([]);
 
   /**
    * Agrega el ID de un componente RadioElement
    * para realizar la validación de la actividad.
    * @param {string} uid - El ID del componente RadioElement.
    */
-  const addRadioElementsId = (uid: string): void => {
-    if (!radioElementsId.current.includes(uid)) {
-      radioElementsId.current = [...radioElementsId.current, uid];
+  const addCheckboxElementsId = (uid: string): void => {
+    if (!checkboxElementsId.current.includes(uid)) {
+      checkboxElementsId.current = [...checkboxElementsId.current, uid];
     }
   };
 
@@ -51,9 +51,9 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
    * @param {String} id - id de la pregunta.
    * @param {Object} value - valor del radio seleccionado.
    */
-  const addRadiosValues = ({ id, name, state }: Option) => {
+  const addCheckboxsValues = ({ id, name, state }: Option) => {
     updateActivity({
-      options: [...activity.options.filter((option) => option.name !== name), { id, name, state }]
+      options: [...activity.options.filter((option) => option.id !== id), { id, name, state }]
     });
   };
 
@@ -66,6 +66,7 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
     updateActivity({ validation: true, button: true });
 
     const result = activity.options.every(({ state }) => state === States.SUCCESS);
+    console.log("🚀 ~ handleValidation ~ result:", result)
 
     if (onResult) {
       onResult({ result, options: activity.options });
@@ -81,7 +82,7 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
   const handleReset = () => {
     activity.options.forEach(({ id }) => {
       // Busca el elemento del DOM correspondiente al nombre de opción y tipo de input 'radio'
-      const element = document.querySelector(`input[type='radio'][id='${id}']`) as HTMLInputElement;
+      const element = document.querySelector(`input[type='checkbox'][id='${id}']`) as HTMLInputElement;
 
       if (element) {
         // Si se encuentra el elemento, establece su propiedad 'checked' en false para deseleccionarlo
@@ -100,30 +101,30 @@ const Radios: React.FC<Props> & SubComponents = ({ children, onResult, minSelect
     if (!activity.options.length) return;
 
     const MITAD = 2;
-    const MIN_SELECTED = minSelected || radioElementsId.current.length / MITAD;
+    const MIN_SELECTED = minSelected || checkboxElementsId.current.length / MITAD;
 
     if (MIN_SELECTED === activity.options.length && !activity.validation) {
       updateActivity({ button: false });
     }
-  }, [activity.options, activity.validation, radioElementsId, minSelected]);
+  }, [activity.options, activity.validation, checkboxElementsId, minSelected]);
 
   return (
-    <RadioActivityProvider
+    <CheckboxActivityProvider
       value={{
-        addRadiosValues,
+        addCheckboxsValues,
         handleValidation,
-        addRadioElementsId,
+        addCheckboxElementsId,
         handleReset,
         button: activity.button,
         result: activity.result,
         validation: activity.validation
       }}>
       {children}
-    </RadioActivityProvider>
+    </CheckboxActivityProvider>
   );
 };
 
-Radios.Radio = RadioElement;
-Radios.Button = RadioButton;
+Checkboxs.Checkbox = CheckboxElement;
+Checkboxs.Button = CheckboxButton;
 
-export { Radios };
+export { Checkboxs };

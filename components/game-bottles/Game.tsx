@@ -3,46 +3,30 @@ import { ReactNode } from 'react';
 import { Panel } from '@/shared/components';
 import { FullScreenAlert } from '@/shared/components';
 
-import { question_game } from './types/types';
+import { TypeWord } from './types/types';
 import Level from './Level';
 
-interface props_GameFish {
-  questions: question_game[];
+interface props_GameBottle {
+  words: TypeWord[];
   onResult?(result: boolean): void;
   content?: ReactNode;
-  initData: question_game;
   audio_success?: string;
   audio_wrong?: string;
   title?: string;
   alt?: string;
-  isSpace?: boolean;
 }
-export function GameFish({
-  questions,
-  onResult,
-  initData,
-  title,
-  alt,
-  audio_success,
-  audio_wrong,
-  content,
-  isSpace = true
-}: props_GameFish) {
+export function GameBottle({ onResult, words, title, alt, audio_success, audio_wrong, content }: props_GameBottle) {
   return (
     <Panel>
       <div id="fullscreen__section">
         <FullScreenAlert />
 
-        <Panel.Section>
-          <Level intro question={initData} title={title} alt={alt} />
-        </Panel.Section>
-        {questions.map((quest, index) => (
+        {words.map((word, index) => (
           <Panel.Section key={index}>
             <Level
-              isSpace={isSpace}
               content={content}
-              question={quest}
-              index={index + 1 === questions.length ? undefined : index + 1}
+              word={word}
+              index={index + 1 === words.length ? undefined : index + 1}
               onResult={onResult}
               title={title}
               alt={alt}
