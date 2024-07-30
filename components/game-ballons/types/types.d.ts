@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes } from 'react';
+
 export interface partBlank {
   type: 'space';
   content: string;
@@ -16,7 +18,15 @@ export type spaceProp = {
 } | null;
 
 export interface TypeWord {
-  word: string;
+  word: string[];
   content?: string;
   a11y?: string;
+}
+
+export interface BallonProps extends React.ButtonHTMLAttributes<ButtonHTMLAttributes> {
+  role: number;
+  letter: string;
+  index: string;
+  enable: boolean;
+  onResult?: ({ index, letter }: spaceProp) => void;
 }

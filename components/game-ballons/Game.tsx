@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 import { Panel } from '@/shared/components';
-import { FullScreenAlert } from '@/shared/components';
 
 import { TypeWord } from './types/types';
 import Level from './Level';
@@ -15,17 +14,16 @@ interface props_GameBottle {
   title?: string;
   alt?: string;
 }
+
 export function GameBallons({ onResult, pharases, title, alt, audio_success, audio_wrong, content }: props_GameBottle) {
   return (
     <Panel>
       <div id="fullscreen__section">
-        <FullScreenAlert />
-
         {pharases.map((word, index) => (
           <Panel.Section key={index}>
             <Level
               content={content}
-              word={word}
+              baseWords={word}
               index={index + 1 === pharases.length ? undefined : index + 1}
               onResult={(res: boolean) => {
                 onResult && onResult(res, index);
