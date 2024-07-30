@@ -25,6 +25,7 @@ interface propsLevel {
   alt?: string;
   audio_success?: string;
   audio_wrong?: string;
+  isSpace?: boolean;
 }
 
 const DEFAULT_QUESTON: question_game = {
@@ -46,7 +47,8 @@ export default function Level({
   alt,
   audio_success,
   audio_wrong,
-  content
+  content,
+  isSpace = true
 }: propsLevel) {
   const cancelAnimation = useReduceMotion();
   const { stopAnimations } = useA11yAttribute();
@@ -132,9 +134,11 @@ export default function Level({
                 part.type === 'text' ? (
                   <span key={index + part.content}>{part.content}</span>
                 ) : (
-                  <span key={index + part.content} className={selectParagraph(part.index)}>
-                    {part.index < selectAnswers.length ? ' ' + selectAnswers[part.index] + ' ' : '____'}
-                  </span>
+                  isSpace && (
+                    <span key={index + part.content} className={selectParagraph(part.index)}>
+                      {part.index < selectAnswers.length ? ' ' + selectAnswers[part.index] + ' ' : '____'}
+                    </span>
+                  )
                 )
               )}
             </p>

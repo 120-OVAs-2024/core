@@ -15,6 +15,7 @@ interface props_GameFish {
   audio_wrong?: string;
   title?: string;
   alt?: string;
+  isSpace?: boolean;
 }
 export function GameFish({
   questions,
@@ -24,7 +25,8 @@ export function GameFish({
   alt,
   audio_success,
   audio_wrong,
-  content
+  content,
+  isSpace = true
 }: props_GameFish) {
   return (
     <Panel>
@@ -37,6 +39,7 @@ export function GameFish({
         {questions.map((quest, index) => (
           <Panel.Section key={index}>
             <Level
+              isSpace={isSpace}
               content={content}
               question={quest}
               index={index + 1 === questions.length ? undefined : index + 1}
