@@ -68,19 +68,37 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, title, addClas
     return `${css.card}`;
   };
 
+  /**
+   * Obtiene el valor del atributo data-id para una tarjeta específica basado en su estado.
+   * @param id - ID de la tarjeta.
+   * @param text - Texto de la tarjeta.
+   * @returns Valor del atributo data-id.
+   */
+  const getDataId = (id: string, text: string) => {
+    const selected = selectedPairs.find(pair => pair.id === id && pair.text === text);
+
+    const correct = correctPairs.find(pair => pair.id === id && !pair.isIncorrect);
+    const incorrect = correctPairs.find(pair => pair.id.includes(id) && pair.isIncorrect && (pair.word === text || pair.definition === text));
+
+    if (correct) return 'correct';
+    if (incorrect) return 'incorrect';
+    if (selected) return 'selected';
+  }
+
   return (
-    <div className={`${css['grid-wrapper']}`} id="relation-concept">
+    <div className={`${css['grid-wrapper']} ${addClass ?? ''}`} id="relation-concept">
       <div className={`${css['grid-overlay']}`}>
         <FullScreenButton elementId='relation-concept' />
       </div>
       <div className={`${css['grid-title']}`}><h2 className='u-fs-400'>{title}</h2></div>
-      <div className={`${css['grid-container']} ${addClass ?? ''}`}>
+      <div className={`${css['grid-container']}`} data-id='card-container'>
         {shuffledPairs.map((pair) => (
           <button
             key={pair.id + pair.text}
             id = {pair.id + pair.text}
             onClick={() => handleClick(pair.id, pair.text, pair.type)}
             className={`${getClassName(pair.id, pair.text)} ${css['grid-item']}`}
+            data-id={getDataId(pair.id, pair.text)}
             {...props}>
             <b>{pair.text}</b>
           </button>
