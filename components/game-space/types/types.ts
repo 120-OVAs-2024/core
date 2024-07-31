@@ -4,29 +4,36 @@ export type Option = {
     id: string;
     name: string;
     state: RadioStates;
+    formula?: string;
 };
+
+// Representa un modal con mensajes de audio y texto para estados de éxito y error.
+export interface Modal {
+    audio_success?: string;
+    audio_wrong?: string;
+    text_success?: string; 
+    text_wrong?: string;
+}
 
 export interface InitialState {
     validation: boolean;
     button: boolean;
     result: boolean;
     options: Option[];
+    selectedId: string | null;
 }
 
-// Define la interfaz para el contexto de actividad
-export interface ThisOrThatActivityContextType {
-    addRadiosValues: (option: Option) => void;
+export interface GameSpaceContextType {
+    addOptionValues: (option: Option) => void;
     handleValidation: () => void;
     handleReset: () => void;
     validation: boolean;
     button: boolean;
     result: boolean;
-    addElementsId: (uid: string) => void;
     selectedId: string | null;
-    setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
-    options: Option[];
+    addOptionElementsId: (id: string | null) => void;
 }
-  
+
 // Enumeración para los estados posibles
 export enum States {
     SUCCESS = 'success',
