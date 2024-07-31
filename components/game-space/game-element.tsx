@@ -73,17 +73,7 @@ export const RadioSpace: React.FC<OptionProps> = ({ options, question, universeT
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, optionId: string) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          if (!validation) {
             addOptionElementsId(optionId);
-          }
-        }
-    
-        if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-          event.preventDefault();
-          const currentIndex = options.findIndex(option => option.id === optionId);
-          const nextIndex = (currentIndex + (event.key === 'ArrowUp' ? -1 : 1) + options.length) % options.length;
-          const nextOptionId = options[nextIndex].id;
-          document.getElementById(nextOptionId)?.focus();
         }
     };
 
@@ -116,43 +106,41 @@ export const RadioSpace: React.FC<OptionProps> = ({ options, question, universeT
         <div className={` u-flow ${addClass ?? ''}`} {...props} role='group'>
             <FullScreenAlert/>
             <div className={`${css['space-container']}`} style={{ backgroundImage: `url(${background})`}}  onMouseMove={handleAsteroidMove} id={uniqueElementId}>
-                <FullScreenButton elementId={uniqueElementId} addClass={css.fullScreen__button}/>
                 {universeData.map((item, index) => {
                     const [key, value] = Object.entries(item)[0];
                     if (key === 'background') return null;
                     return <img key={index} src={value} alt={key} className={`${css[key]}`}/>;
                 })}
-                <img src='/assets/svgs/Astronauta.svg' alt='Astronauta' className={` ${css['astronaut']}`}/>
-                <img src='/assets/svgs/asteroid.svg' alt='Asteroide' className={` ${css['image_depth']}`} ref={refAsteroid} aria-hidden='true' />
+                <img src='assets/svgs/asteroid.svg' alt='Asteroide' className={` ${css['image_depth']}`} ref={refAsteroid} aria-hidden='true' />
+                <img src='assets/svgs/Astronauta.svg' alt='Astronauta' className={` ${css['astronaut']}`}/>
+                <FullScreenButton elementId={uniqueElementId} addClass={css.fullScreen__button}/>
                 <div className={`${css['wrapper-container']}`}>
                     <div className={`${css['question']}`} role='heading' aria-level={2}>
-                        <img src='/assets/svgs/icon.svg' className={css['icon']} aria-hidden="true"/>
+                        <img src='assets/svgs/icon.svg' className={css['icon']} aria-hidden="true"/>
                         <h2>{question}</h2>
-                        <img src='/assets/svgs/icon.svg' className={`${css['icon']} ${css['icon-reverse']}`} aria-hidden="true"/>
+                        <img src='assets/svgs/icon.svg' className={`${css['icon']} ${css['icon-reverse']}`} aria-hidden="true"/>
                     </div>
-                    <div className={`${css['options-container']}`} role='radiogroup' aria-labelledby='options'>
-                        {options.map((option) => ( 
-                            <label 
-                                key={option.id}
-                                className={`${css['option']} ${selectedId === option.id ? css['selected'] : ''} ${selectedId === option.id ? getSelectedOptionClass() : ''}`}
-                                htmlFor={option.id}>
-                                <input 
-                                    type='radio' 
-                                    name={`radio-group-${option.id}`}
-                                    id={option.id} 
-                                    checked={selectedId === option.id}
-                                    disabled = {validation}
-                                    onChange={handleOptionChange}
-                                    onKeyDown={(event) => handleKeyDown(event, option.id)}
-                                    aria-checked={selectedId === option.id}
-                                />
-                                <span dangerouslySetInnerHTML={{ __html: option.name}}/>
-                                {option.formula && (
-                                    <MathContainer className='u-fs-400'>{`${option.formula}`}</MathContainer>
-                                )}
-                            </label>
-                        ))}
-                    </div>
+                    {options.map((option) => ( 
+                        <label 
+                            key={option.id}
+                            className={`${css['option']} ${selectedId === option.id ? css['selected'] : ''} ${selectedId === option.id ? getSelectedOptionClass() : ''}`}
+                            htmlFor={option.id}>
+                            <input 
+                                type='radio' 
+                                name={`radio-group-${option.name}`}
+                                id={option.id} 
+                                checked={selectedId === option.id}
+                                disabled = {validation}
+                                onChange={handleOptionChange}
+                                onKeyDown={(event) => handleKeyDown(event, option.id)}
+                                aria-checked={selectedId === option.id}
+                            />
+                            <span dangerouslySetInnerHTML={{ __html: option.name}}/>
+                            {option.formula && (
+                                <MathContainer className='u-fs-400'>{`${option.formula}`}</MathContainer>
+                            )}
+                        </label>
+                    ))}
                 </div>
             </div>
             <p className="u-text-center u-font-italic">
