@@ -73,7 +73,7 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, title, addClas
       <div className={`${css['grid-overlay']}`}>
         <FullScreenButton elementId='relation-concept' />
       </div>
-      <div className={`${css['grid-title']}`}><h3>{title}</h3></div>
+      <div className={`${css['grid-title']}`}><h2 className='u-fs-400'>{title}</h2></div>
       <div className={`${css['grid-container']} ${addClass ?? ''}`}>
         {shuffledPairs.map((pair) => (
           <button
