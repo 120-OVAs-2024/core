@@ -32,3 +32,4 @@ export * from './game-radio-basket';
 export * from './game-money';
 export * from './checkbox-activity';
 export * from './game-ballons';
+export * from './game-space';
