@@ -7,6 +7,7 @@ import css from './relation-concept.module.css';
 
 interface CardProps {
   addClass?: string;
+  title: string;
   pairs: { id: string; word: string; definition: string }[];
 }
 
@@ -23,7 +24,7 @@ const shuffle = <T,>(array: T[]): T[] => {
   return array;
 }
 
-export const RelationConceptCard: React.FC<CardProps> = ({ pairs, addClass, ...props }) => {
+export const RelationConceptCard: React.FC<CardProps> = ({ pairs, title, addClass, ...props }) => {
   const { addSelectedPair, selectedPairs, correctPairs  } = useRelationConceptActivityContext();
 
   /**
@@ -72,7 +73,7 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, addClass, ...p
       <div className={`${css['grid-overlay']}`}>
         <FullScreenButton elementId='relation-concept' />
       </div>
-      <div className={`${css['grid-title']}`}><h3>RELACIÓN DE CONCEPTOS</h3></div>
+      <div className={`${css['grid-title']}`}><h3>{title}</h3></div>
       <div className={`${css['grid-container']} ${addClass ?? ''}`}>
         {shuffledPairs.map((pair) => (
           <button
