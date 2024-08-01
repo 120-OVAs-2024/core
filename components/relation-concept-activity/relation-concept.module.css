@@ -64,7 +64,7 @@
 
 .card.selected{
     background: var(--clr-accent-dark);
-    color: var(--clr-dark-mode);
+    color: #121212;
 }
 
 .card.correct {
@@ -83,8 +83,10 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: -10px;
+    right: -10px;
+    font-size: 18px;
+    z-index: 1;
 }
 
 .card.incorrect {
@@ -95,7 +97,7 @@
 .card.incorrect::after {
     content: '✖';
     color: white;
-    background-color: #c22e41;
+    background-color: #c12d41;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -103,6 +105,8 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: -10px;
+    right: -10px;
+    font-size: 18px;
+    z-index: 1;
 }
