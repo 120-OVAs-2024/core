@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import {  useId,  useState } from 'react';
 import { Row } from 'books-ui';
 import { Button, ModalFeedback } from '@shared/components';
 
@@ -33,7 +33,6 @@ export const RadioBag: React.FC<OptionProps> = ({ options, question, addClass, t
     const reactId = useId();
 
     const uid = reactId; // ID del componente
-    const correctCounter = correctCount > 11 ? 0 : correctCount;
 
     const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         addOptionElementsId(event.target.id);
@@ -59,8 +58,8 @@ export const RadioBag: React.FC<OptionProps> = ({ options, question, addClass, t
             <div className={`u-flow ${addClass ?? ''}`} {...props}>
                 <div className={`u-grid ${css['game-bag']}`} >
                     <div className={css['wrapper-images']}>
-                        <img src='assets/svgs/character.svg' alt="Personaje" className={css['character']} />
-                        <img src={BAGS[correctCounter].Bag} alt="bolso" className={css['bag']}/>
+                        <img src='assets/svgs/character.svg' alt="Personaje" className={css['character']}/>
+                        <img src={BAGS[correctCount].Bag} alt="bolso" className={css['bag']}/>
                     </div>
                     <div className={css['wrapper-container']}>
                         <div className={`${css['question']}`} role='heading' aria-level={2}><h2>{question}</h2></div>

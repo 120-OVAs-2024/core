@@ -10,7 +10,6 @@ interface Props {
 export const BagButton: React.FC<Props> = ({ type, children }) => {
   const { handleValidation, handleReset, button, validation, result } = useGameBagContext();
 
-  console.log('type', type, )
   return cloneElement(children, {
     ...children.props,
     disabled: type !== 'reset' ? button : validation ? result : true,
