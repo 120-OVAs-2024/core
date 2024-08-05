@@ -33,3 +33,4 @@ export * from './game-money';
 export * from './checkbox-activity';
 export * from './game-ballons';
 export * from './game-space';
+export * from './game-castle';
