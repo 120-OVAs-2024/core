@@ -115,6 +115,8 @@ export default function Level({
           )}
           {question?.answers.map((q, i) => (
             <button
+              aria-pressed={q === selectAnswers}
+              disabled={!!openModal}
               key={q + i}
               aria-label={q}
               className={`${css.fish} ${selectAnswers === q && css.selectAnswer}`}
@@ -126,6 +128,16 @@ export default function Level({
               onClick={() => addSelectAnswer(q)}>
               <img src={DATA_fishs[i].image} alt={q} />
               <p className={css.paragraph__fish}>{q}</p>
+              {!!openModal && q === selectAnswers && (
+                <img
+                  src={
+                    openModal === 'success'
+                      ? 'assets/images/ph--seal-check-duotone.svg'
+                      : 'assets/images/ic--round-cancel.svg'
+                  }
+                  className={css.feedback}
+                />
+              )}
             </button>
           ))}
         </div>
