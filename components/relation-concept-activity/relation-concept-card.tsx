@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import {FullScreenButton } from '@shared/components';
+import {FullScreenAlert, FullScreenButton } from '@shared/components';
 
 import { useRelationConceptActivityContext  } from './relation-concept-activity-context';
 
@@ -86,11 +86,11 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, title, addClas
   }
 
   return (
+    <>
+    <FullScreenAlert />
     <div className={`${css['grid-wrapper']} ${addClass ?? ''}`} id="relation-concept">
-      <div className={`${css['grid-overlay']}`}>
-        <FullScreenButton elementId='relation-concept' />
-      </div>
-      <div className={`${css['grid-title']}`}><h2 className='u-fs-400'>{title}</h2></div>
+        <FullScreenButton elementId='relation-concept' addClass={css['fullScreen__button']}/>
+      <div className={`${css['grid-title']}`}><h2>{title}</h2></div>
       <div className={`${css['grid-container']}`} data-id='card-container'>
         {shuffledPairs.map((pair) => (
           <button
@@ -100,10 +100,11 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, title, addClas
             className={`${getClassName(pair.id, pair.text)} ${css['grid-item']}`}
             data-id={getDataId(pair.id, pair.text)}
             {...props}>
-            <b>{pair.text}</b>
+            <span className='u-font-bold'>{pair.text}</span>
           </button>
         ))}
       </div>
     </div>
+    </>
   );
 };
