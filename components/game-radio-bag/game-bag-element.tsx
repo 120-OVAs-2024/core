@@ -28,22 +28,35 @@ interface OptionProps {
 }
 
 export const RadioBag: React.FC<OptionProps> = ({ options, question, addClass, title, alt, modal, correctCount, incrementCorrectCount, ...props }) => {
+    
     const { selectedId, addOptionElementsId, validation} = useGameBagContext();
     const [isOpen, setIsOpen] = useState<string | null>(null);
-    const reactId = useId();
+    const reactId = useId(); // Obtiene un ID único para el componente
 
     const uid = reactId; // ID del componente
 
+    /**
+     * Maneja el cambio de opción seleccionada.
+     * @param {React.ChangeEvent<HTMLInputElement>} event - Evento de cambio del input
+     */
     const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         addOptionElementsId(event.target.id);
     };
 
+    /**
+     * Maneja la validación de la opción seleccionada.
+     * Abre el modal correcto o incorrecto según el estado de la opción seleccionada.
+     */
     const handleValidation = () => {
         const selectedOption = options.find(option => option.id === selectedId);
         if(selectedOption?.state === 'success') incrementCorrectCount();
         setIsOpen(selectedOption?.state === 'success' ? MODALS.TRUE : MODALS.FALSE);
     };
 
+    /**
+     * Obtiene la clase CSS para un botón según su estado y si está seleccionado.
+     * @returns {string} La clase CSS correspondiente
+     */
     const getSelectedOptionClass = () => {
         if (!validation) return '';
         const selectedOption = options.find(option => option.id === selectedId);
