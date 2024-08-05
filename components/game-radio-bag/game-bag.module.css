@@ -2,6 +2,7 @@
     background-image: url('assets/svgs/background-game.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
     padding: 2rem;
     width: 100%;
 }
@@ -109,4 +110,14 @@
 input[type="radio"]:disabled{
     opacity: 0.8;
     cursor: not-allowed;
+}
+
+@media screen and (max-width: 690px) {
+    .wrapper-images{
+        min-height: auto;
+        order: 2;
+    }
+    .wrapper-container{
+        order: 1;
+    }
 }

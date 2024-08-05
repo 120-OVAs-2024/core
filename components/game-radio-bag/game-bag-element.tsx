@@ -28,7 +28,7 @@ interface OptionProps {
 }
 
 export const RadioBag: React.FC<OptionProps> = ({ options, question, addClass, title, alt, modal, correctCount, incrementCorrectCount, ...props }) => {
-    
+
     const { selectedId, addOptionElementsId, validation} = useGameBagContext();
     const [isOpen, setIsOpen] = useState<string | null>(null);
     const reactId = useId(); // Obtiene un ID único para el componente
@@ -68,7 +68,7 @@ export const RadioBag: React.FC<OptionProps> = ({ options, question, addClass, t
 
     return(
         <>
-            <div className={`u-flow ${addClass ?? ''}`} {...props}>
+            <div className={`u-flow ${addClass ?? ''}`} {...props} role='group'>
                 <div className={`u-grid ${css['game-bag']}`} >
                     <div className={css['wrapper-images']}>
                         <img src='assets/svgs/character.svg' alt="Personaje" className={css['character']}/>
@@ -108,11 +108,11 @@ export const RadioBag: React.FC<OptionProps> = ({ options, question, addClass, t
                     </BagButton>
                 </Row>
             </div>
-            <ModalFeedback type="success" isOpen={isOpen === MODALS.TRUE} onClose={closeModal} finalFocusRef="#main" audio={modal.audio_success}>
+            <ModalFeedback type="success" isOpen={isOpen === MODALS.TRUE} onClose={closeModal} finalFocusRef="#main" audio={modal.audio_success} aria-live="assertive">
                 <p>{modal.text_success}</p>
             </ModalFeedback>
 
-            <ModalFeedback type="wrong" isOpen={isOpen === MODALS.FALSE} onClose={closeModal} finalFocusRef=".js-modal-wrong" audio={modal.audio_wrong}>
+            <ModalFeedback type="wrong" isOpen={isOpen === MODALS.FALSE} onClose={closeModal} finalFocusRef=".js-modal-wrong" audio={modal.audio_wrong} aria-live="assertive">
                 <p>{modal.text_wrong}</p>
             </ModalFeedback>
         </>
