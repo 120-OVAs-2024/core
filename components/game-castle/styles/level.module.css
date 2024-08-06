@@ -81,15 +81,24 @@
   bottom: 0;
   left: 100%;
 }
-
-.paragraph__fish {
+.container_paragraph__fish {
   margin-top: 3px;
-  background-color: rgb(247, 240, 219);
+  clip-path: polygon(0% 0%, 89% 0%, 100% 19%, 100% 99%, 10% 99%, 0% 80%);
+  background-color: rgb(252, 252, 252);
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paragraph__fish {
+  color: #fff;
+  background: rgb(46, 54, 60);
+  background: linear-gradient(180deg, rgba(46, 54, 60, 1) 50%, rgba(24, 28, 31, 1) 50%);
+  clip-path: polygon(0% 0%, 89% 0%, 100% 19%, 100% 99%, 10% 99%, 0% 80%);
   text-align: center;
   padding: 3px 6px;
   font-weight: bold;
-  border-radius: 10px;
-  border: 2px solid #fda219;
+
   max-width: 100px;
 }
 

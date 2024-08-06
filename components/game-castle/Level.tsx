@@ -121,13 +121,15 @@ export default function Level({
               aria-label={q}
               className={`${css.fish} ${selectAnswers === q && css.selectAnswer}`}
               style={{
-                top: `${20 + Math.random() * 40}%`,
+                top: `${40 + Math.random() * 20}%`,
                 left: (PERCENT_SPACE_FISHS / question.answers.length) * (i + MARGIN_FISH) + '%',
                 animationDelay: Math.random() * 2 + 's'
               }}
               onClick={() => addSelectAnswer(q)}>
               <img src={DATA_fishs[i].image} alt={q} />
-              <p className={css.paragraph__fish}>{q}</p>
+              <div className={css.container_paragraph__fish}>
+                <p className={css.paragraph__fish}>{q}</p>
+              </div>
               {!!openModal && q === selectAnswers && (
                 <img
                   width="35px"
