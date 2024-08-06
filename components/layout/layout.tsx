@@ -1,4 +1,5 @@
 import { useCallback, useLayoutEffect, useState } from 'react';
+import { Interpreter, Portal } from 'books-ui';
 import { MotionConfig } from 'framer-motion';
 import { useHashLocation } from 'wouter/use-hash-location';
 
@@ -52,6 +53,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
   return (
     <MotionConfig reducedMotion={`${stopAnimations || reduceMotion ? 'always' : 'never'}`}>
       <Header />
+      <Portal id="js-interpreter">
+       <Interpreter/>
+      </Portal>     
       <main id="main" tabIndex={-1}>
         {children}
       </main>
