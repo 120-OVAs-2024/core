@@ -9,8 +9,8 @@ export interface Question {
 export interface Modal {
     audio_success?: string;
     audio_wrong?: string;
-    text_success: string; 
-    text_wrong: string;
+    text_success?: string; 
+    text_wrong?: string;
 }
 
 // Define la interfaz para el estado inicial de la actividad
