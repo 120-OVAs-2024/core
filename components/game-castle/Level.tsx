@@ -130,6 +130,7 @@ export default function Level({
               <p className={css.paragraph__fish}>{q}</p>
               {!!openModal && q === selectAnswers && (
                 <img
+                  width="35px"
                   src={
                     openModal === 'success'
                       ? 'assets/images/ph--seal-check-duotone.svg'
