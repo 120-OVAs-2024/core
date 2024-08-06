@@ -1,7 +1,7 @@
 
 export const UNIVERSE01 = [
     {
-      background: '/assets/svgs/universe01/fondo_1.svg',
+      background: 'assets/svgs/universe01/fondo_1.svg',
     },
     {
         planet: 'assets/svgs/universe01/planet-01.svg',
