@@ -9,6 +9,7 @@ export * from './video';
 export * from './loader';
 export * from './select-activity';
 export * from './button';
+export * from './button-download';
 export * from './panel';
 export * from './dnd-activity';
 export * from './modal';
