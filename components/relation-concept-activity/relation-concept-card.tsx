@@ -50,7 +50,11 @@ export const RelationConceptCard: React.FC<CardProps> = ({ pairs, title, addClas
    */
   const getDataId = (id: string, label: string) => {
     const selected = selectedPairs.find(pair => pair.id === id && pair.label === label);
+    const correct = correctPairs.find(pair => pair.id === id && !pair.isIncorrect);
+    const incorrect = correctPairs.find(pair => pair.id === id && pair.isIncorrect);
 
+    if (incorrect) return 'incorrect';
+    if (correct) return 'correct';
     if (selected) return 'selected';
   }
 
