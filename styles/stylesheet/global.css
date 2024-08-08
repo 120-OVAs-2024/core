@@ -218,6 +218,11 @@ ul[role='tablist'] {
   margin-block: min(1rem, 1vh);
 }
 
+.c-interpreter__container {
+  --interpreter-clr-list: #11203c;
+  --interpreter-btn-bg: #11203c;
+}
+
 .c-image__figcaption {
   font-style: italic;
 }
