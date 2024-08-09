@@ -3,37 +3,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url('../../../../public/assets/svgs/Ova_004_sld_05_fondo.svg'), 
+    background: url('assets/svgs/Ova_004_sld_05_fondo.svg'), 
                 linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
     padding: 20px;
     border-radius: 8px;
     width: 100%;
     max-width: 1280px;
     box-sizing: border-box;
+    position: relative;
+    gap: 1rem;
 }
 
-.grid-overlay {
-    display: flex;
-    width: 100%;
+.fullScreen__button {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .grid-title {
     text-align: center;
-    margin-bottom: 1rem;
     color: var(--clr-text-secondary);
     background-color: var(--clr-brand-light);
     padding: 5px 20px;
     border-radius: 50px;
-    width: 80%;
-    max-width: 400px;
     box-sizing: border-box;
+    position: relative;
+}
+
+.grid-title h2{
+    font-size: var(--fs-400);
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    grid-auto-rows: minmax(12rem, auto);
-    gap : 5px;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap : 1rem;
     width: 100%;
     box-sizing: border-box;
     justify-items: center;
@@ -60,6 +64,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-sizing: border-box;
+    min-height: 14rem;
 }
 
 .card.selected{
@@ -109,4 +114,16 @@
     right: -10px;
     font-size: 18px;
     z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+    .grid-wrapper{
+        overflow-y: auto;
+    }
+}
+
+@media screen and (max-width: 1000px) and (orientation: landscape) {
+    .grid-wrapper{
+        overflow-y: auto;
+    }
 }

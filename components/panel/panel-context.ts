@@ -1,9 +1,6 @@
 import { createContext } from 'books-ui';
 
-interface PanelContextType {
-  titles: string[];
-  addSectionTitle: (title: string) => void;
-}
+import type { PanelContextType } from './types/types';
 
 export const [PanelCoreProvider, usePanelCoreContext] = createContext<PanelContextType>({
   name: 'PanelCoreContext'

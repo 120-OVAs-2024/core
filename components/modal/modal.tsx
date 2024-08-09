@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
 import type { ModalProps } from 'books-ui';
 import { Modal as ModalUI } from 'books-ui';
 
 import { useOvaContext } from '@/context/ova-context';
+import type { VideoURLs } from '@/shared/hooks/useInterpreter';
+import { useInterpreter } from '@/shared/hooks/useInterpreter';
 
 import { Icon } from '../icon';
 
@@ -9,22 +12,43 @@ import { i18n } from './consts';
 
 import css from './modal.module.css';
 
-interface Props extends ModalProps {
+export interface ModalCoreProps extends ModalProps {
+  isOpen: boolean;
   addClass?: string;
-  children: JSX.Element;
+  interpreter?: VideoURLs;
 }
 
-export const Modal: React.FC<Props> = ({ addClass, children, onClose, ...props }) => {
+export const Modal: React.FC<ModalCoreProps> = ({ addClass, children, isOpen, onClose, interpreter, ...props }) => {
   const { lang } = useOvaContext();
+  const [updateVideoSources, restoreLastVideoSources] = useInterpreter();
+
+  /**
+   * Maneja el cierre del modal.
+   * Llama a la función de cierre si está definida y restaura las fuentes de video anteriores.
+   */
+  const handleCloseModal = () => {
+    if (onClose) onClose();
+    restoreLastVideoSources();
+  };
+
+  /**
+   * Efecto para actualizar las fuentes de video cuando el intérprete cambia o el modal se abre.
+   * Si el intérprete no está definido o el modal no está abierto, no hace nada.
+   * De lo contrario, actualiza las fuentes de video con los datos del intérprete.
+   */
+  useEffect(() => {
+    if (!interpreter || !isOpen) return;
+    updateVideoSources({ ...interpreter });
+  }, [interpreter, isOpen, updateVideoSources]);
 
   return (
-    <ModalUI {...props} onClose={onClose}>
+    <ModalUI {...props} isOpen={isOpen} onClose={handleCloseModal}>
       <ModalUI.Overlay addClass={css['modal-overlay']} />
       <ModalUI.Content addClass={`${css['modal']} u-p-3 ${addClass ?? ''}`}>
-        <button onClick={onClose} aria-label={i18n[lang].btnModal} className={`${css['modal-button']} u-pl-2`}>
+        <button onClick={handleCloseModal} aria-label={i18n[lang].btnModal} className={`${css['modal-button']} u-pl-2`}>
           <Icon name="close" />
         </button>
-        {children}
+        <>{children}</>
       </ModalUI.Content>
     </ModalUI>
   );

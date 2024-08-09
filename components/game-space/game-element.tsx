@@ -66,18 +66,6 @@ export const RadioSpace: React.FC<OptionProps> = ({ options, question, universeT
     };
 
     /**
-     * Maneja las teclas presionadas para cambiar la selección.
-     * @param {React.KeyboardEvent<HTMLInputElement>} event - El evento de teclado.
-     * @param {string} optionId - El ID de la opción.
-     */
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, optionId: string) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-            addOptionElementsId(optionId);
-        }
-    };
-
-    /**
      * Maneja la validación de la opción seleccionada.
      */
     const handleValidation = () => {
@@ -127,12 +115,11 @@ export const RadioSpace: React.FC<OptionProps> = ({ options, question, universeT
                             htmlFor={option.id}>
                             <input 
                                 type='radio' 
-                                name={`radio-group-${option.name}`}
+                                name={`radio-group-${uid}`}
                                 id={option.id} 
                                 checked={selectedId === option.id}
                                 disabled = {validation}
                                 onChange={handleOptionChange}
-                                onKeyDown={(event) => handleKeyDown(event, option.id)}
                                 aria-checked={selectedId === option.id}
                             />
                             <span dangerouslySetInnerHTML={{ __html: option.name}}/>

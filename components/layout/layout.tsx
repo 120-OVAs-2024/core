@@ -1,8 +1,10 @@
 import { useCallback, useLayoutEffect, useState } from 'react';
+import { Interpreter, Portal } from 'books-ui';
 import { MotionConfig } from 'framer-motion';
 import { useHashLocation } from 'wouter/use-hash-location';
 
 import { useOvaContext } from '@/context/ova-context';
+import { REMOVE_HTML_TAGS_REGEX } from '@/shared/consts/removeHtmlTagsRegex';
 import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
 import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
@@ -33,9 +35,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
     const currentPageTitle = titles[currentPage - 1];
 
     if (currentPageTitle) {
-      document.title = currentPageTitle;
+      document.title = currentPageTitle.replace(REMOVE_HTML_TAGS_REGEX, '');
     } else {
-      document.title = baseTitle;
+      document.title = baseTitle.replace(REMOVE_HTML_TAGS_REGEX, '');
     }
   }, [titles, currentPage, baseTitle]);
 
@@ -52,6 +54,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
   return (
     <MotionConfig reducedMotion={`${stopAnimations || reduceMotion ? 'always' : 'never'}`}>
       <Header />
+      <Portal id="js-interpreter">
+       <Interpreter/>
+      </Portal>     
       <main id="main" tabIndex={-1}>
         {children}
       </main>
