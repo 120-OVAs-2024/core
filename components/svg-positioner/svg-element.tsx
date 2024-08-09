@@ -1,5 +1,4 @@
-
-import React, { useState, useLayoutEffect, useContext } from 'react';
+import React, { useContext,useLayoutEffect, useState } from 'react';
 
 import { SvgPositionerContext } from './svg-positioner';
 
@@ -14,30 +13,33 @@ interface SvgPositionerContextType {
   dimensions: SvgDimensions;
 }
 
-interface Props {
+interface BaseProps {
   top: number;
   left: number;
   width: number;
   height: number;
   addClass?: string;
   type?: keyof JSX.IntrinsicElements;
-  children: React.ReactNode; // Changed to support a wider variety of children types
+  children: React.ReactNode;
 }
+
+type SvgProps = BaseProps & React.SVGProps<SVGElement>;
+type HtmlProps = BaseProps & React.HTMLProps<HTMLElement>;
+
+type Props = SvgProps | HtmlProps;
 
 export const SvgElement: React.FC<Props> = ({
   top,
   left,
   width,
   height,
-  addClass = '', // Providing a default value for addClass
-  type = 'div', // Providing a default value for type
+  addClass = '',
+  type = 'div',
   children,
   ...props
 }) => {
-  // Use the context to get SVG dimensions
   const { dimensions: svgDimensions } = useContext<SvgPositionerContextType>(SvgPositionerContext);
 
-  // Initialize local state for element dimensions
   const [dimensions, setDimensions] = useState({
     top: 0,
     left: 0,
@@ -45,7 +47,6 @@ export const SvgElement: React.FC<Props> = ({
     width: 0
   });
 
-  // Update dimensions when SVG dimensions or props change
   useLayoutEffect(() => {
     if (!svgDimensions.height && !svgDimensions.width) {
       return;
@@ -60,7 +61,6 @@ export const SvgElement: React.FC<Props> = ({
     setDimensions(nextDimensions);
   }, [svgDimensions, top, left, width, height]);
 
-  // Ensure required props are provided
   if (!top || !left || !width || !height) {
     return (
       <p>
@@ -88,22 +88,21 @@ export const SvgElement: React.FC<Props> = ({
     );
   }
 
-  // Define the type of HTML element to render
   const ElementType = type as keyof JSX.IntrinsicElements;
 
-  // Render the element with calculated dimensions and additional props
-  return (
-    <ElementType
-      className={`${css.element} ${addClass}`}
-      style={{
-        '--svg-element-x-position': `${dimensions.left}%`,
-        '--svg-element-y-position': `${dimensions.top}%`,
-        '--svg-element-width': `${dimensions.width}%`,
-        '--svg-element-height': `${dimensions.height}%`
-      } as React.CSSProperties}
-      {...props}
-    >
-      {children}
-    </ElementType>
-  );
+  const commonProps = {
+    className: `${css.element} ${addClass}`,
+    style: {
+      '--svg-element-x-position': `${dimensions.left}%`,
+      '--svg-element-y-position': `${dimensions.top}%`,
+      '--svg-element-width': `${dimensions.width}%`,
+      '--svg-element-height': `${dimensions.height}%`
+    } as React.CSSProperties
+  };
+
+  if (ElementType in React.createElement('svg').props) {
+    return React.createElement(ElementType, { ...commonProps, ...(props as SvgProps) }, children);
+  } else {
+    return React.createElement(ElementType, { ...commonProps, ...(props as HtmlProps) }, children);
+  }
 };
