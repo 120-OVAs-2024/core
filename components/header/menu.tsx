@@ -70,7 +70,7 @@ export const Menu = () => {
                       <span className="u-font-bold" aria-hidden="true">
                         {index + 1}.
                       </span>
-                      {title}
+                      <span dangerouslySetInnerHTML={{ __html: title }}></span>
                     </Link>
                   </li>
                 ))}

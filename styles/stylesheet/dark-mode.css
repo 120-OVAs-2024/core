@@ -38,3 +38,16 @@ html[data-dark-mode="true"] main::-webkit-scrollbar {
 html[data-dark-mode="true"] main::-webkit-scrollbar-thumb {
     border: 2px solid var(--clr-background);
 }
+
+html[data-dark-mode="true"] .c-interpreter__container {
+    --interpreter-clr-list: #1e3867;
+    --interpreter-btn-bg: #1e3867;
+}
+
+html[data-dark-mode="true"] .c-video {
+    box-shadow: none;
+}
+
+html[data-dark-mode="true"] .c-interpreter__list {
+    box-shadow: none;
+}
