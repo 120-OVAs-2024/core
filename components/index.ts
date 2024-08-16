@@ -36,3 +36,4 @@ export * from './game-ballons';
 export * from './game-space';
 export * from './game-castle';
 export * from './game-radio-bag';
+export * from './game-jumpSandwich';
