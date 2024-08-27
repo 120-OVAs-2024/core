@@ -14,6 +14,7 @@ import { Icon } from '../icon';
 import css from './cover-title.module.css';
 
 interface Props {
+  addClass?: string;
   title: string;
   url?: string;
   interpreter?: VideoURLs;
@@ -32,7 +33,7 @@ const i18n = {
   }
 };
 
-export const CoverTitle: React.FC<Props> = ({ title, url = 'assets/base/cover.webp', audio, interpreter }) => {
+export const CoverTitle: React.FC<Props> = ({ addClass, title, url = 'assets/base/cover.webp', audio, interpreter }) => {
   const [, setBackground] = useBackground();
   const [updateVideoSources] = useInterpreter();
   const { lang } = useOvaContext();
@@ -49,7 +50,7 @@ export const CoverTitle: React.FC<Props> = ({ title, url = 'assets/base/cover.we
   }, [interpreter, updateVideoSources]);
 
   return (
-    <motion.section className={css['cover-title']} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.section className={`${css['cover-title']} ${addClass ?? ""}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <div className={css['cover-title__audio']}>{audio ? <Audio a11y src={audio.a11y} /> : null}</div>
       <div className={`${css['cover-title__title']} u-px-9`}>
         {audio ? <Audio src={audio.title} type="button" addClass="u-mx-auto" /> : null}
