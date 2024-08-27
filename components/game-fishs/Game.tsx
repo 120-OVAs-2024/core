@@ -16,8 +16,10 @@ interface props_GameFish {
   title?: string;
   alt?: string;
   isSpace?: boolean;
+  addClassBtnFish?: string;
 }
 export function GameFish({
+  addClassBtnFish,
   questions,
   onResult,
   initData,
@@ -39,6 +41,7 @@ export function GameFish({
         {questions.map((quest, index) => (
           <Panel.Section key={index}>
             <Level
+              addClassBtnFish={addClassBtnFish}
               isSpace={isSpace}
               content={content}
               question={quest}

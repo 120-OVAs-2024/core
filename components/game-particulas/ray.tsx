@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+
 import css from "./ray.module.css"
 interface LightningPath {
     x: number;
