@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 
 import css from './styles/bottle.module.css';
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   letter: string;
   index: string;
   enable: boolean;
@@ -35,11 +35,12 @@ const Bottle: React.FC<Props> = ({ letter = 'A', index = 'hasdh767803h', enable 
 
   return (
     <button
-      {...props}
       className={css.container}
       style={{ animationDelay: `${Math.random() * 3}s` }}
-      aria-label={'letra  ' + letter}
-      disabled={!enable}>
+      aria-label={`letra ${letter}`}
+      disabled={!enable}
+      {...props}
+      >
       <div className={css.container__responsive}>
         <img src={!enable ? 'assets/images/Botella_sin_corcho.webp' : 'assets/images/Botella.webp'} alt="" />
         {!enable && (
