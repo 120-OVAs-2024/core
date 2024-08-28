@@ -1,6 +1,5 @@
 .panel {
-    place-content: normal;
-    grid-template-rows: auto 1fr;
+    display: block;
 }
 
 .panel__section {
@@ -9,7 +8,7 @@
 
 .progress {
     --wrapper-width: 140ch;
-    justify-self: center;
+    margin-inline: auto;
 }
 
 .progress__list {

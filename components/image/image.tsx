@@ -14,10 +14,10 @@ interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 export const Image: React.FC<Props> = ({ src, title = '', alt = '', size, hasHtml, noCaption, ...props }) => {
   const parsedAlt = hasHtml ? alt.replace(/<[^>]*>/g, '') : alt;
-  const Element = noCaption ? 'div' : 'figure'
+  const Element = noCaption ? 'div' : 'figure';
 
   return (
-    <Element>
+    <Element className="u-my-0.5">
       <ImageUI src={src} alt={`${title} ${parsedAlt}`} size={size} noCaption {...props} />
       {!noCaption ? (
         <figcaption className={css['image__figcaption']}>
