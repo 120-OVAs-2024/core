@@ -10,7 +10,7 @@ export const PhraseAndImageModal: React.FC<Props> = ({ children }) => {
   const { openModal } = usePhraseAndImageContext();
 
   return (
-    <Modal isOpen={openModal} onClose={() => openModal} finalFocusRef="AunNoSeSabe">
+    <Modal isOpen={openModal} onClose={() => openModal} finalFocusRef="card_0">
       {children}
     </Modal>
   );
