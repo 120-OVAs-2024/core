@@ -28,7 +28,7 @@ export const PanelSection: React.FC<Props> = ({ title, addClass, children, inter
   }, [interpreter, addNewVideoSource, uid]);
 
   return (
-    <PanelUI.Section ref={ref} id={uid} addClass={`${css['panel__section']} ${addClass ?? ''}`}>
+    <PanelUI.Section ref={ref} id={uid} addClass={`${css['panel__section']} u-px-0.5  ${addClass ?? ''}`}>
       {children}
     </PanelUI.Section>
   );
