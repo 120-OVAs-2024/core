@@ -1,30 +1,42 @@
-.game-bag{
-    background-image: url('assets/svgs/background-game.svg');
+.game-bag {
+    --bg-clr: #eef5e5;
+    --border-clr-brown: #9f6e4f;
+    --border-clr-purple: #7a4f83;
+    --border-radius: 100vw;
+    --border-size: .2rem;
+    --font-clr: #121212;
+
+    width: 100%;
+    background-image: url('assets/images/background__game__school.webp');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    padding: 2rem;
-    width: 100%;
+    padding: 1.5rem .8rem;
+    color: var(--font-clr);
 }
 
-.wrapper-images{
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+.wrapper-answers {
+    --grid-max: 30ch;
+}
+
+.wrapper-images {
+    display: grid;
+    align-items: center;
     width: 100%;
     height: 100%;
     min-height: 28rem;
 }
 
-.character{
-    width: 10rem;
+.character {
+    --image-size: 9rem;
+
+    max-width: var(--image-size);
+    height: auto;
+    transform: translateX(calc(var(--move-x, 0) + (var(--image-size) / 2)));
+    transition: transform 200ms ease-in-out;
 }
 
-.bag{
-    width: 6.2rem;
-}
-
-.wrapper-container{
+.wrapper-container {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -33,91 +45,85 @@
     justify-content: center;
 }
 
-.question{
-    background: #f5e3fb;
-    border-radius: 8px;
-    border: 4px solid #cd214f;
-    color: #121212;
-    padding: 1rem;
+.question {
+    background: var(--bg-clr);
+    border-radius: var(--border-radius);
+    border: var(--border-size) solid var(--border-clr-brown);
+    color: inherit;
+    padding: 1.2rem .5rem;
+    text-align: center;
 }
 
-.option{
+.radio {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    background: #52bfff;
-    border-radius: 8px;
-    padding: 1rem;
-    border: 4px solid var(--clr-background);
-    position: relative;
-    color: #121212;
+    color: inherit;
     font-weight: bold;
+    z-index: 2;
 }
 
-.option.selected {
-    background-color: #d2e7fd; 
+.radio__label {
+    width: 100%;
+    background-color: var(--bg, var(--bg-clr));
+    border-radius: var(--border-radius);
+    padding: 1rem .5rem;
+    text-align: center;
+    border: var(--border-size) solid var(--border, var(--border-clr-purple));
 }
 
-.option.correct {
-    background: #a5cb66;
-    position: relative;
+.radio__input:checked~.radio__label {
+    --bg: #d6e7c0;
 }
 
-.option.correct::after {
+.radio[data-state="success"] .radio__label {
+    --bg: #a5cb66;
+    --border: #ffffff;
+}
+
+.radio[data-state="wrong"] .radio__label {
+    --bg: #e96b67;
+    --border: #ffffff;
+}
+
+.radio[data-state]::after {
+    --size: 1.875rem;
+
+    position: absolute;
+    bottom: calc(100% - (var(--size) / 2));
+    left: calc(100% - (var(--size) / 2));
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-icon);
+    border-radius: 100%;
+    color: #ffffff;
+    font-size: var(--fs-300);
+    isolation: isolate;
+    z-index: 1;
+}
+
+.radio[data-state="success"]::after {
     content: '✔';
-    color: white;
-    background-color: #85a321;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 18px;
-    z-index: 1;
+    --bg-icon: #85a321;
 }
 
-.option.incorrect {
-    background: #e96b67;
-    position: relative;
-}
-
-.option.incorrect::after {
+.radio[data-state="wrong"]::after {
     content: '✖';
-    color: white;
-    background-color: #c12d41;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    --bg-icon: #c12d41;
+}
+
+.fullscreen__button {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 18px;
-    z-index: 1;
-}
-
-.option input[type='radio'] {
-    margin-right: 10px;
-}
-
-input[type="radio"]:disabled{
-    opacity: 0.8;
-    cursor: not-allowed;
+    z-index: 3;
 }
 
 @media screen and (max-width: 690px) {
-    .wrapper-images{
+    .wrapper-images {
         min-height: auto;
-        order: 2;
-    }
-    .wrapper-container{
-        order: 1;
     }
 }
+
