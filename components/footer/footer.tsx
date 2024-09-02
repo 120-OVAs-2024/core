@@ -1,7 +1,9 @@
+import { useMemo } from 'react';
 import { Pagination, useMedia } from 'books-ui';
 import { Link, useLocation } from 'wouter';
 
 import { useOvaContext } from '@/context/ova-context';
+import { REMOVE_HTML_TAGS_REGEX } from '@/shared/consts/removeHtmlTagsRegex';
 import { focusMainElement } from '@/shared/utils/focusMain';
 
 import { Icon } from '../icon';
@@ -25,6 +27,9 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
     navigate(`/page-${value}`);
   };
 
+  // Limpia el titulo de cualquier etiqueta HTML que tenga.
+  const parsedTitles = useMemo(() => titles.map((title) => title.replace(REMOVE_HTML_TAGS_REGEX, '')) ,[titles])
+
   return (
     <footer className={css['footer']}>
       <Pagination
@@ -33,7 +38,7 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
         addClass="js-pagination-element"
         defaultPage={currentPage}
         onChange={handleNavigation}
-        renderItem={(item) => <PaginationItem item={item} lang={lang} titles={titles} />}
+        renderItem={(item) => <PaginationItem item={item} lang={lang} titles={parsedTitles} />}
       />
     </footer>
   );

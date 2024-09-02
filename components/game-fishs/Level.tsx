@@ -26,6 +26,7 @@ interface propsLevel {
   audio_success?: string;
   audio_wrong?: string;
   isSpace?: boolean;
+  addClassBtnFish?: string;
 }
 
 const DEFAULT_QUESTON: question_game = {
@@ -48,7 +49,8 @@ export default function Level({
   audio_success,
   audio_wrong,
   content,
-  isSpace = true
+  isSpace = true,
+  addClassBtnFish
 }: propsLevel) {
   const cancelAnimation = useReduceMotion();
   const { stopAnimations } = useA11yAttribute();
@@ -153,7 +155,7 @@ export default function Level({
             <button
               key={q + i}
               aria-label={q}
-              className={`${css.fish} ${selectAnswers.includes(q) && css.selectAnswer}`}
+              className={`${css.fish} ${selectAnswers.includes(q) && css.selectAnswer} ${addClassBtnFish}`}
               style={{
                 top: `${35 + Math.random() * 40}%`,
                 left: (PERCENT_SPACE_FISHS / answers.length) * (i + MARGIN_FISH) + '%',

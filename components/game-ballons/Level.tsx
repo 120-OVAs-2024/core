@@ -161,7 +161,7 @@ export default function Level({ baseWords, index, onResult, title, alt, content 
               disabled={!ALREADY_FILL || openModal !== null}
               onClick={checkAnswer}
             />
-            <Button label="Reintentar" disabled={openModal !== 'wrong'} onClick={reset} />
+            <Button label="Reintentar" addClass="js-button-reset" disabled={openModal !== 'wrong'} onClick={reset} />
             {openModal === 'success' && index && (
               <Panel.Button section={index}>
                 <Button label="Continuar" />

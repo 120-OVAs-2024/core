@@ -1,25 +1,22 @@
-import { useRef, useEffect, useReducer } from "react"
-import type { InitialState, Option } from './types/types'
-import { States } from './types/types';
-import { motion } from "framer-motion"
-import css from "./game-particulas.module.css"
-import { Particule } from "./particule";
-import { RadioButton } from './radio-button';
-import { RadioActivityProvider } from './radio-activity-context';
-import { Ray } from "./ray";
+import { useEffect, useReducer, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { FullScreenButton } from '@shared/components';
 
+import type { InitialState, Option } from './types/types';
+import { States } from './types/types';
+import { Particule } from './particule';
+import { RadioActivityProvider } from './radio-activity-context';
+import { RadioButton } from './radio-button';
+import { Ray } from './ray';
 
-
-
-
+import css from './game-particulas.module.css';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
-  onResult?: ({ result, options }: { result: boolean; options: Option[], }) => void;
+  onResult?: ({ result, options }: { result: boolean; options: Option[] }) => void;
   minSelected?: number;
-  question: string,
-  id: string
+  question: string;
+  id: string;
 }
 const INITIAL_STATE = Object.freeze({
   validation: false,
@@ -28,14 +25,18 @@ const INITIAL_STATE = Object.freeze({
   options: []
 });
 
-
 type SubComponents = {
   Particule: typeof Particule;
   Button: typeof RadioButton;
 };
 
-
-export const GameParticulas: React.FC<Props> & SubComponents = ({ children, onResult, minSelected = 1, question, id }) => {
+export const GameParticulas: React.FC<Props> & SubComponents = ({
+  children,
+  onResult,
+  minSelected = 1,
+  question,
+  id
+}) => {
   const [activity, updateActivity] = useReducer(
     (prev: InitialState, next: Partial<InitialState>) => ({ ...prev, ...next }),
     INITIAL_STATE
@@ -63,7 +64,6 @@ export const GameParticulas: React.FC<Props> & SubComponents = ({ children, onRe
     if (onResult) {
       onResult({ result, options: activity.options });
     }
-
 
     updateActivity({ result: result });
   };
@@ -98,27 +98,24 @@ export const GameParticulas: React.FC<Props> & SubComponents = ({ children, onRe
         <Ray />
         <motion.div
           initial={{
-            transform: "translateY(-200px)"
+            opacity: '0.8'
           }}
           animate={{
-            transform: "translateY(0px)"
+            opacity: '1'
           }}
           transition={{
-            // repeat: 1,
-            repeatType: "mirror",
-            duration: 1,
-
+            duration: 0.12,
+            ease: 'easeInOut'
           }}
           className={css.containerQuestion}
-          data-state={activity.validation ? activity.result : null}
-        > <p>{question}</p> </motion.div>
-
+          data-state={activity.validation ? activity.result : null}>
+          <p>{question}</p>
+        </motion.div>
         {children}
-
-      </div >
+      </div>
     </RadioActivityProvider>
-
-  )
+  );
 };
-GameParticulas.Button = RadioButton
-GameParticulas.Particule = Particule
+
+GameParticulas.Button = RadioButton;
+GameParticulas.Particule = Particule;

@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url('../../../../public/assets/svgs/Ova_004_sld_05_fondo.svg'), 
+    background: url('assets/svgs/Ova_004_sld_05_fondo.svg'), 
                 linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
     padding: 20px;
     border-radius: 8px;
@@ -11,6 +11,7 @@
     max-width: 1280px;
     box-sizing: border-box;
     position: relative;
+    gap: 1rem;
 }
 
 .fullScreen__button {
@@ -35,8 +36,8 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap : 5px;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap : 1rem;
     width: 100%;
     box-sizing: border-box;
     justify-items: center;

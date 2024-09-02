@@ -1,3 +1,4 @@
 export const EVENTS = Object.freeze({
-  OVATITLEUPDATE: 'OvaTitleUpdate'
+  OVATITLEUPDATE: 'OvaTitleUpdate',
+  CHANGEINTERPRETEVIDEOSOURCES: 'changeInterpreteVideoSources'
 });

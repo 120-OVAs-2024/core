@@ -34,34 +34,23 @@ const INITIAL_STATE: InitialState = {
     /**
      * Añade un par seleccionado al estado de la actividad.
      * Si se seleccionan dos elementos, se verifica si forman un par correcto o incorrecto.
-     * @param pair - El par seleccionado que contiene id, texto y tipo (word o definition).
+     * @param pair - El par seleccionado que contiene id, label y pair.
      */
-    const addSelectedPair = (pair: { id: string; text: string; type: 'word' | 'definition' }) => {
+    const addSelectedPair = (pair: { id: string; label: string; pair: number }) => {
         const newSelectedPairs = [...activity.selectedPairs, pair];
         updateActivity({ selectedPairs: newSelectedPairs });
 
-        if (newSelectedPairs.length === 2) {
-          const [first, second] = newSelectedPairs;
+      if (newSelectedPairs.length === 2) {
+        const [first, second] = newSelectedPairs;
 
-          const correctPair = pairs.find(p => 
-            (p.id === first.id && p.word === first.text && p.definition === second.text) ||
-            (p.id === second.id && p.word === second.text && p.definition === first.text)
-          );
-
-          if (correctPair) {
-            updateActivity({ correctPairs: [...activity.correctPairs, { id: first.id, word: correctPair.word, definition: correctPair.definition }] });
-            updateActivity({selectedPairs: []}); // Reiniciamos los pares seleccionados
-          }else{
-            updateActivity({
-              correctPairs: [
-                  ...activity.correctPairs,
-                  { id: `${first.id}-${second.id}-word`, word: first.text, definition: "", isIncorrect: true },
-                  { id: `${first.id}-${second.id}-definition`, word: "", definition: second.text, isIncorrect: true }
-              ]
-            });
-            updateActivity({selectedPairs: []}); // Reiniciamos los pares seleccionados
-          }
+        if (first.pair === second.pair) {
+            updateActivity({ correctPairs: [...activity.correctPairs, ...newSelectedPairs] });
+        }else{
+            updateActivity({ correctPairs: [...activity.correctPairs, { ...first, isIncorrect: true }, { ...second, isIncorrect: true }] });
         }
+
+        updateActivity({ selectedPairs: [] }); // Reiniciamos los pares seleccionados
+      }
     };
 
     /**
@@ -69,23 +58,16 @@ const INITIAL_STATE: InitialState = {
      * Verifica si todos los pares seleccionados son correctos y llama a la función onResult si se proporciona.
      */
     const handleValidation = () => {
-        updateActivity({ validation: true, button: true });
-    
-        const paired = activity.correctPairs.reduce((acc, current) => {
-          const correctPair = pairs.find(pair => pair.id === current.id);
-          if (correctPair) {
-            acc.push(correctPair);
-          }
-          return acc;
-        }, [] as Option[]);
-    
-        const result = paired.length === pairs.length;
-    
-        if (onResult) {
-          onResult({ result, options: paired });
-        }
-    
-        updateActivity({ result });
+      updateActivity({ validation: true, button: true });
+
+      const correctPairsCount = activity.correctPairs.filter(pair => !pair.isIncorrect).length / 2; // Cada par correcto añade dos elementos a correctPairs
+      const result = correctPairsCount === pairs.length / 2;
+
+      if (onResult) {
+          onResult({ result, options: activity.correctPairs });
+      }
+
+      updateActivity({ result });
     };
 
     /**

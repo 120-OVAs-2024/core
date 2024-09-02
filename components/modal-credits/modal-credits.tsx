@@ -1,15 +1,15 @@
-import type { ModalProps } from 'books-ui';
 import { Audio } from 'books-ui';
 
 import { useOvaContext } from '@/context/ova-context';
 
+import type { ModalCoreProps } from '../modal/modal';
 import { Modal } from '../modal/modal';
 
 import { i18n } from './consts';
 
 import css from './modal-credits.module.css';
 
-interface Props extends ModalProps {
+interface Props extends ModalCoreProps {
   addClass?: string;
   school: string;
   course?: string;

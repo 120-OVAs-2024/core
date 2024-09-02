@@ -2,19 +2,16 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-import { spaceProp } from './types/types';
-
 import css from './styles/bottle.module.css';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const defaultResult = (_: spaceProp): void => {};
-export default function Bottle({
-  letter = 'A',
-  index = 'hasdh767803h',
-  enable = true,
-  onResult = defaultResult,
-  ...props
-}) {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  letter: string;
+  index: string;
+  enable: boolean;
+  onResult?: ({ index, letter }: { index: string; letter: string }) => void;
+}
+
+const Bottle: React.FC<Props> = ({ letter = 'A', index = 'hasdh767803h', enable = true, onResult, ...props }) => {
   const refBubble1 = useRef<HTMLImageElement>(null);
   const refBubble2 = useRef<HTMLImageElement>(null);
   const refBubble3 = useRef<HTMLImageElement>(null);
@@ -31,17 +28,19 @@ export default function Bottle({
         opacity: 0,
         rotate: 450,
         duration: 1.5,
-        onComplete: () => onResult({ index, letter })
+        onComplete: () => onResult?.({ index, letter })
       });
     }
   }, [enable]);
+
   return (
     <button
-      {...props}
       className={css.container}
       style={{ animationDelay: `${Math.random() * 3}s` }}
-      aria-label={'letra  ' + letter}
-      disabled={!enable}>
+      aria-label={`letra ${letter}`}
+      disabled={!enable}
+      {...props}
+      >
       <div className={css.container__responsive}>
         <img src={!enable ? 'assets/images/Botella_sin_corcho.webp' : 'assets/images/Botella.webp'} alt="" />
         {!enable && (
@@ -70,10 +69,12 @@ export default function Bottle({
             />
           </>
         )}
-        <p className={css.letter} style={{ opacity: !enable ? 0.3 : 1 }}>
+        <span className={css.letter} style={{ opacity: !enable ? 0.3 : 1 }}>
           {letter}
-        </p>
+        </span>
       </div>
     </button>
   );
-}
+};
+
+export default Bottle;
