@@ -80,7 +80,7 @@ main {
   list-style-image: url('data:image/svg+xml,<%3Fxml version="1.0" encoding="utf-8"%3F><svg viewBox="0 0 18.48 16.9" style="enable-background:new 0 0 18.48 16.9;" xmlns="http://www.w3.org/2000/svg"><style> .st0 { fill: %23025C88; }</style><polygon class="st0" points="12.17,8.45 11.91,8.04 0.96,15.13 0.96,1.77 11.91,8.85 12.17,8.45 11.91,8.04 12.17,8.45 12.43,8.04 0,0 0,16.9 13.05,8.45 12.43,8.04 12.17,8.45 " /><polygon class="st0" points="17.6,8.45 17.33,8.04 6.4,15.13 6.4,1.77 17.33,8.85 17.6,8.45 17.33,8.04 17.6,8.45 17.86,8.04 5.43,0 5.43,16.9 18.48,8.45 17.86,8.04 17.6,8.45 " /></svg>');
 }
 
-.u-list-shape li::marker {
+.u-list-shape > li::marker {
   /* Tamaño del icono */
   font-size: 2.4rem;
   line-height: 0.1em;
@@ -91,20 +91,20 @@ main {
   counter-set: listcounter;
 }
 
-:is(.u-list-shape__number li, .u-list-shape__letter li, .u-list-triangle__number li, .u-list-triangle__letter li) {
+:is(.u-list-shape__number > li, .u-list-shape__letter > li, .u-list-triangle__number > li, .u-list-triangle__letter > li) {
   position: relative;
   counter-increment: listcounter;
 }
 
-:is(.u-list-shape__number li, .u-list-triangle__number li)::before {
+:is(.u-list-shape__number > li, .u-list-triangle__number > li)::before {
   content: counter(listcounter) '.';
 }
 
-:is(.u-list-shape__letter li, .u-list-triangle__letter li)::before {
+:is(.u-list-shape__letter > li, .u-list-triangle__letter > li)::before {
   content: counter(listcounter, lower-alpha) '.';
 }
 
-:is(.u-list-shape__number li, .u-list-shape__letter li, .u-list-triangle__letter li, .u-list-triangle__number li)::before {
+:is(.u-list-shape__number > li, .u-list-shape__letter > li, .u-list-triangle__letter > li, .u-list-triangle__number > li)::before {
   --size-shape: 2rem;
 
   position: absolute;
@@ -122,7 +122,7 @@ main {
   background-image: url('data:image/svg+xml,<%3Fxml version="1.0" encoding="utf-8"%3F><svg viewBox="0 0 32.38 26.51" xmlns="http://www.w3.org/2000/svg"><style> .st1 { fill: %23035170; }</style><path class="st1" d="M7.43,0.13C3.09-0.66-0.24,2.28,0.01,6.69l0.63,11.15c0.31,5.51,5,9.35,10.46,8.57l18.39-2.63c1.64-0.23,2.93-1.77,2.88-3.42l-0.18-6.41c-0.15-5.19-4.67-10.2-10.11-11.18L7.43,0.13L7.43,0.13z" /></svg>');
 }
 
-:is(.u-list-triangle__letter li, .u-list-triangle__number li)::before {
+:is(.u-list-triangle__letter > li, .u-list-triangle__number > li)::before {
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Generator: Adobe Illustrator 25.0.1  SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg version='1.1' id='Capa_2' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 154.4 200' style='enable-background:new 0 0 154.4 200%3B' xml:space='preserve'%3E%3Cstyle type='text/css'%3E.st0%7Bfill:none%3Bstroke:%23025C87%3Bstroke-width:3.189%3Bstroke-linecap:round%3Bstroke-miterlimit:10%3B%7D.st1%7Bfill:%23025C87%3B%7D%3C/style%3E%3Cg%3E%3Cpath class='st0' d='M45.1 1.9l99.1 85.7c5.6 4.9 8.6 11.9 8.1 19.3c-0.5 7.4-4.3 14-10.5 18.1L32 198.1'/%3E%3Cpath class='st1' d='M12.8 18.6L2.1 177.3c-0.9 14 14.6 23 26.2 15.2l109.8-73c9.3-6.2 10.2-19.5 1.7-26.9L40.8 7C30.2-2.1 13.8 4.7 12.8 18.6z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
