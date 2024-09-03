@@ -12,20 +12,30 @@ import css from './modal-bibliography.module.css';
 
 interface Props extends ModalCoreProps {
   addClass?: string;
+  label?: string;
   audio?: string;
+  content?: JSX.Element | JSX.Element[];
 }
 
 type SubComponents = {
   Link: typeof ModalBibliographyLink;
 };
 
-const ModalBibliography: React.FC<Props> & SubComponents = ({ addClass, children, audio, ...props }) => {
+const ModalBibliography: React.FC<Props> & SubComponents = ({
+  addClass,
+  label,
+  children,
+  audio,
+  content,
+  ...props
+}) => {
   const { lang } = useOvaContext();
 
   return (
     <Modal {...props} addClass={`${css['modal']} u-py-4 ${addClass ?? ''}`}>
       <div className="u-flow">
-        <h2 className="u-text-center">{i18n[lang].title}</h2>
+        <h2 className="u-text-center">{label || i18n[lang].title}</h2>
+        {content}
         <ul className="u-list-shape u-flow">{children}</ul>
         {audio ? <Audio src={audio} /> : null}
       </div>

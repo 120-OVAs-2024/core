@@ -34,7 +34,6 @@ export function GameFish({
     <Panel>
       <div id="fullscreen__section">
         <FullScreenAlert />
-
         <Panel.Section>
           <Level intro question={initData} title={title} alt={alt} />
         </Panel.Section>
