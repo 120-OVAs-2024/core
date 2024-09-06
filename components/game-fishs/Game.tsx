@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 import { Panel } from '@/shared/components';
-import { FullScreenAlert } from '@/shared/components';
 
 import { question_game } from './types/types';
 import Level from './Level';
@@ -33,7 +32,6 @@ export function GameFish({
   return (
     <Panel>
       <div id="fullscreen__section">
-        <FullScreenAlert />
         <Panel.Section>
           <Level intro question={initData} title={title} alt={alt} />
         </Panel.Section>
