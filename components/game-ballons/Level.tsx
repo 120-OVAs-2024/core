@@ -28,7 +28,6 @@ function initialState(word: string[]): letterProp[] {
       index: crypto.randomUUID(),
       enable: true
     }))
-    .sort(() => Math.random() - 0.5);
 }
 
 export default function Level({ baseWords, index, onResult, title, alt, content }: propsLevel) {
