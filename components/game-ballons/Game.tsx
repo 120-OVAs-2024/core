@@ -26,7 +26,7 @@ export function GameBallons({ onResult, pharases, title, alt, audio_success, aud
               baseWords={word}
               index={index + 1 === pharases.length ? undefined : index + 1}
               onResult={(res: boolean) => {
-                onResult && onResult(res, index);
+                onResult?.(res, index);
               }}
               title={title}
               alt={alt}

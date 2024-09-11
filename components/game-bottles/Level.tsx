@@ -88,10 +88,8 @@ export default function Level({
       .map((obj) => obj?.letter || '')
       .join('')
       .toLowerCase();
-    console.log("🚀 ~ checkAnswer ~ sentenceByUser:", sentenceByUser)
 
     const isCorrect = baseWords.word.toLowerCase() === sentenceByUser;
-    console.log("🚀 ~ checkAnswer ~ isCorrect:", isCorrect)
     setOpenModal(isCorrect ? 'success' : 'wrong');
 
     if (onResult) {
