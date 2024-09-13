@@ -1,0 +1,144 @@
+.lego__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('assets/svgs/background.svg'),
+      linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+    padding: 3rem 9rem;
+    background-size: cover;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/*****  question  *****/
+
+.lego__question{
+    background-color: #f8f7db;
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    border: 2px solid #c73238;
+    color: #121212;
+    box-sizing: border-box;
+}
+
+.lego__question.incorrect{
+    background-color: #f8aaaa;
+    border: 2px solid whitesmoke;
+}
+
+.lego__question.correct{
+    background-color: #a9ca49;
+    border: 2px solid whitesmoke;
+}
+
+/*****  options  *****/
+
+.lego__options{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
+    width: 100%;
+    gap: 1rem;
+    margin-top: 1rem;
+    box-sizing: border-box;
+}
+
+.option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    min-height: 15rem;
+    padding: 1rem;
+    height: 100%;
+    position: relative;
+    font-weight: bold;
+    color: var(--clr-background);
+
+    background-image: url('assets/svgs/lego.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.circle {
+    background-color: transparent;
+    color: var(--clr-background);
+    border-radius: 50%;
+    border: 2px solid var(--clr-background);
+    padding: 0rem 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.option label {
+    display: flex;
+    align-items: flex-start;
+}
+
+.option.correct {
+    background-image: url('assets/svgs/lego-correct.svg');
+}
+
+.option.correct::after {
+    content: '✔';
+    color: white;
+    background-color: #899e2e;
+    border: 2px solid var(--clr-background);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -3px;
+    right: -10px;
+}
+
+.option.incorrect {
+    background-image: url('assets/svgs/lego-wrong.svg');
+}
+
+.option.incorrect::after {
+    content: '✖';
+    color: white;
+    background-color: var(--clr-activity-wrong);
+    border: 2px solid var(--clr-background);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -3px;
+    right: -10px;
+}
+
+/* Responsivo para pantallas más pequeñas */
+@media (max-width: 1024px) {
+    .lego__container {
+        padding: 2rem 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .lego__container {
+        padding: 1.5rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .lego__container {
+        padding: 1rem;
+    }
+}
