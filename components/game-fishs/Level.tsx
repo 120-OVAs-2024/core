@@ -84,8 +84,8 @@ export default function Level({
 
     if (onResult) {
       onResult(isCorrect);
-      return;
     }
+    
     setOpenModal(isCorrect ? 'success' : 'wrong');
   };
 
