@@ -5,9 +5,10 @@
     justify-content: center;
     background: url('assets/svgs/background.svg'),
       linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
-    padding: 3rem 6rem;
+    padding: 3rem 6ch;
     background-size: cover;
     width: 100%;
+    min-height: 27.5rem;
     box-sizing: border-box;
 }
 
