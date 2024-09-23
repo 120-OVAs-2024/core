@@ -38,3 +38,4 @@ export * from './game-castle';
 export * from './game-radio-bag';
 export * from './game-jumpSandwich';
 export * from './game-phraseAndImage';
+export * from './game-lego';

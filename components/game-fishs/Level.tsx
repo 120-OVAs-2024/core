@@ -12,11 +12,11 @@ import css from './styles/level.module.css';
 
 const MARGIN_FISH = 0.7;
 const PERCENT_SPACE_FISHS = 80;
-interface propsLevel {
+export interface propsLevel {
   question?: question_game;
   index?: number;
   intro?: boolean;
-  onResult?(result: boolean): void;
+  onResult?(result: boolean, questionNumber: number): void;
   content?: ReactNode;
   title?: string;
   alt?: string;
@@ -24,6 +24,8 @@ interface propsLevel {
   audio_wrong?: string;
   isSpace?: boolean;
   addClassBtnFish?: string;
+  disableFeedbackImage?: boolean;
+  questionsCount?: number;
 }
 
 const DEFAULT_QUESTON: question_game = {
@@ -55,7 +57,9 @@ export default function Level({
   audio_wrong,
   content,
   isSpace = true,
-  addClassBtnFish
+  addClassBtnFish,
+  disableFeedbackImage,
+  questionsCount
 }: propsLevel) {
   const [selectAnswers, setSelectAnswers] = useState<string[]>([]);
   const [openModal, setOpenModal] = useState<'success' | 'wrong' | null>(null);
@@ -81,22 +85,33 @@ export default function Level({
 
   const checkAnswers = () => {
     const isCorrect = spaceBlank.every((space, index) => space.content === selectAnswers[index]);
-
-    if (onResult) {
-      onResult(isCorrect);
-      return;
+    if (onResult && questionsCount) {
+      const questionNumber = index ?? questionsCount;
+      onResult(isCorrect, questionNumber);
     }
+
     setOpenModal(isCorrect ? 'success' : 'wrong');
   };
 
   return (
     <>
-      {question.audio_description && openModal === null && <Audio src={question.audio_description} a11y />}
-      {question.audio_content && openModal === null && <Audio src={question.audio_content} />}
+      {question.audio_description &&
+        (disableFeedbackImage ? (
+          <Audio src={question.audio_description} a11y />
+        ) : (
+          !openModal && <Audio src={question.audio_description} />
+        ))}
+      {question.audio_content &&
+        (disableFeedbackImage ? (
+          <Audio src={question.audio_content} />
+        ) : (
+          !openModal && <Audio src={question.audio_content} />
+        ))}
+
       <Row alignItems="center" justifyContent="center">
         <Col xs="11" mm="10" lg="9" hd="8" addClass="u-mb-2 u-flow">
-          {audio_success && openModal === 'success' && <Audio src={audio_success} />}
-          {audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
+          {!disableFeedbackImage && audio_success && openModal === 'success' && <Audio src={audio_success} />}
+          {!disableFeedbackImage && audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
           {content}
           <FullScreenAlert />
         </Col>
@@ -135,11 +150,13 @@ export default function Level({
                   fish={DATA_fishs[index].image}
                   margin={(PERCENT_SPACE_FISHS / answers.length) * (index + MARGIN_FISH) + '%'}
                   onClick={addSelectAnswer}
+                  isCorrect={openModal === 'success'}
                   addClass={addClassBtnFish}
+                  isDisabled={!!openModal}
                 />
               ))}
 
-              {openModal === 'wrong' && (
+              {!disableFeedbackImage && openModal === 'wrong' && (
                 <img
                   src="assets/images/Ova_002_sld_15_Haz_fallado.webp"
                   className={css.modal_depth}
@@ -147,7 +164,7 @@ export default function Level({
                 />
               )}
 
-              {openModal === 'success' && (
+              {!disableFeedbackImage && openModal === 'success' && (
                 <img
                   src="assets/images/Ova_002_sld_15_Felicidades.webp"
                   className={css.modal_depth}
