@@ -20,18 +20,19 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 500px;
+    max-width: 100%;
     margin: 0 auto;
     gap: 1rem;
 }
 
-
 .radio__option {
-    background-color: white;
+    --radio-option-bg: white;
+
+    background-color: var(--radio-option-bg);
     color: black;
     font-weight: 600;
-    width: 220px;
-    height: 70px;
+    width: 13.75rem;
+    height: 6.875rem;
     border-radius: 12px;
     display: grid;
     place-content: center;
@@ -39,6 +40,21 @@
     border: 2px solid black;
     position: relative;
     cursor: pointer;
+    padding: 0.5rem;
+}
+
+.radio__option.checked {
+    --radio-option-bg: var(--clr-brand-light);
+}
+
+.radio__option[data-state="correct"] {
+    --radio-option-bg: var(--clr-activity-success);
+    font-weight: bold;
+}
+
+.radio__option[data-state="incorrect"] {
+    --radio-option-bg: var(--clr-activity-wrong);
+    font-weight: bold;
 }
 
 .img__basket {
@@ -53,20 +69,6 @@
     100% {
         transform: translateY(-70px);
     }
-}
-
-.radio__option:focus-within {
-    background-color: rgb(228, 164, 164);
-}
-
-.radio__option[data-state="correct"] {
-    background-color: var(--clr-activity-success);
-    font-weight: bold;
-}
-
-.radio__option[data-state="incorrect"] {
-    background-color: var(--clr-activity-wrong);
-    font-weight: bold;
 }
 
 .radio__option[data-state="incorrect"]::before {
@@ -108,6 +110,11 @@
     pointer-events: none;
 }
 
+.radio__option:focus-within {
+    outline: 2px solid var(--clr-brand);
+    border: none;
+}
+
 .radio__question {
     background-color: black;
     color: white;
@@ -118,6 +125,15 @@
 .input {
     position: absolute;
     left: -9999px;
+}
+
+.game-radio-basket-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    max-width: 50%;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 /* medias queries */
