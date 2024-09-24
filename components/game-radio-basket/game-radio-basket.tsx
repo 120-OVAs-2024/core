@@ -16,9 +16,11 @@ interface Props {
   children: React.ReactNode;
   onResult: (state: string | null) => void;
   data: Data[];
+  isBallon?: boolean;
+  addClass?: string;
 }
 
-export const GameRadioBasket: React.FC<Props> = ({ data, onResult, children }) => {
+export const GameRadioBasket: React.FC<Props> = ({ data, onResult, isBallon = true, children, addClass }) => {
   const [state, setState] = useState<string | null>('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [disabledInput, setDisabledInput] = useState<boolean>(false);
@@ -97,15 +99,21 @@ export const GameRadioBasket: React.FC<Props> = ({ data, onResult, children }) =
               onChange={onChange}
               option={element.option}
               disabled={disabledInput}
+              isChecked={selectedId === element.id}
+              addClass={addClass}
             />
           ))}
+        </div>
+        <div className={`u-mt-3 ${css['game-radio-basket-buttons']}`}>
           <Button disabled={disabledButton.check} label="Comprobar" onClick={validation} />
           <Button type="reset" disabled={disabledButton.reset} label="Reiniciar" onClick={handleReset} />
         </div>
 
-        <div className={css.img__basket}>
-          <img src="assets/images/ova_33_sld_12_ball.webp" alt="Balon de basket" />
-        </div>
+        {isBallon && (
+          <div className={css.img__basket}>
+            <img src="assets/images/ova_33_sld_12_ball.webp" alt="Balon de basket" />
+          </div>
+        )}
       </div>
       <div className={css.radio__question}>{children}</div>
       <p className="u-my-3 u-font-italic">
