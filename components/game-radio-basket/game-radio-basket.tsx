@@ -17,9 +17,10 @@ interface Props {
   onResult: (state: string | null) => void;
   data: Data[];
   isBallon?: boolean;
+  addClass?: string;
 }
 
-export const GameRadioBasket: React.FC<Props> = ({ data, onResult, isBallon = true, children }) => {
+export const GameRadioBasket: React.FC<Props> = ({ data, onResult, isBallon = true, children, addClass }) => {
   const [state, setState] = useState<string | null>('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [disabledInput, setDisabledInput] = useState<boolean>(false);
@@ -99,6 +100,7 @@ export const GameRadioBasket: React.FC<Props> = ({ data, onResult, isBallon = tr
               option={element.option}
               disabled={disabledInput}
               isChecked={selectedId === element.id}
+              addClass={addClass}
             />
           ))}
         </div>

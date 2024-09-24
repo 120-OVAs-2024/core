@@ -7,12 +7,23 @@ interface Props {
   option: string;
   disabled: boolean;
   isChecked: boolean;
+  addClass?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const RadioInput: React.FC<Props> = ({ name, id, value, onChange, isChecked, option, disabled, ...props }) => {
+export const RadioInput: React.FC<Props> = ({
+  name,
+  id,
+  value,
+  onChange,
+  isChecked,
+  option,
+  disabled,
+  addClass,
+  ...props
+}) => {
   return (
-    <label className={`${css.radio__option} ${isChecked ? `${css.checked}` : ''} `} htmlFor={id}>
+    <label className={`${css.radio__option} ${addClass} ${isChecked ? `${css.checked}` : ''} `} htmlFor={id}>
       <input
         disabled={disabled}
         data-state=""
