@@ -29,6 +29,11 @@
     text-align: start;
     height: auto;
     align-items: center;
+    color: inherit;
+}
+
+.select :global(.c-select-button:disabled) :global(.c-select-button__text) {
+    color: inherit;
 }
 
 .select :global(.c-select-button__text) {
