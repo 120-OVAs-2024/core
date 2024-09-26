@@ -49,7 +49,7 @@ export const SelectElement: React.FC<Props> = ({ id, addClass, options, placehol
   }, [selectedOptions, currentSelectedOption]);
 
   useEffect(() => {
-    if (!currentSelectedOption.key || !validation) return;
+    if (!currentSelectedOption.key && !validation) return;
   
     // Busca la opción correspondiente en las respuestas
     const matchingOption = answers.find(({ option }) => option.includes(currentSelectedOption.key as string));

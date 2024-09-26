@@ -8,7 +8,7 @@ import { SelectElement } from './select-group-element';
 
 const INITIAL_STATE: InitialState = Object.freeze({
   validation: false,
-  button: false,
+  button: true,
   result: false,
   options: [],
   answers: []
@@ -138,8 +138,13 @@ const SelectsGroup: React.FC<Props> & SubComponents = ({ children, correctAnswer
    * Reinicia la actividad a su estado inicial.
    */
   const handleReset = () => {
-    updateActivity(INITIAL_STATE);
+    const resetState = createInitialState();
+    updateActivity(resetState);
   };
+
+  const selectedOptions = useMemo(() => {
+    return activity.options.flat().filter(Boolean) as string[];
+  }, [activity.options]);
 
   /**
    * Usado para observar los cambios en la propiedad options del estado Activity.
@@ -147,16 +152,12 @@ const SelectsGroup: React.FC<Props> & SubComponents = ({ children, correctAnswer
    * entonces active el botón que inicia la comprobación.
    */
   useEffect(() => {
-    if (!activity.options.length) return;
+    if (!selectedOptions.length) return;
 
-    if (selectElementsId.current.length === activity.options.length && !activity.validation) {
+    if (selectElementsId.current.length === selectedOptions.length && !activity.validation) {
       updateActivity({ button: false });
     }
-  }, [activity.options, activity.validation, selectElementsId]);
-
-  const selectedOptions = useMemo(() => {
-    return [...activity.options].flat().filter((answer) => !!answer) as string[];
-  }, [activity.options]);
+  }, [selectedOptions, activity.validation, selectElementsId]);
 
   return (
     <SelectGroupActivityProvider
