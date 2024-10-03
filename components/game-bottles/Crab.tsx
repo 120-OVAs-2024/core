@@ -6,6 +6,7 @@ import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
 import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
 
 import css from './styles/crab.module.css';
+
 export default function Crab() {
   const tl = useMemo(() => gsap.timeline(), []);
   const cancelAnimation = useReduceMotion();
@@ -14,11 +15,13 @@ export default function Crab() {
   const refContainer = useRef<HTMLDivElement>(null);
   const refPatDer = useRef<HTMLImageElement>(null);
   const refPatIzq = useRef<HTMLImageElement>(null);
+
   useGSAP(() => {
     tl.to(refPatIzq.current, { rotate: 30, duration: 0.5, repeat: -1, yoyo: true }, 0);
     tl.to(refPatDer.current, { rotate: -15, duration: 0.5, repeat: -1, yoyo: true }, 0);
     tl.to(refContainer.current, { x: 300, duration: 8, repeat: -1, yoyo: true, ease: 'power1.inOut' }, 0);
   }, []);
+  
   useEffect(() => {
     tl.restart();
     if (cancelAnimation || stopAnimations) {

@@ -14,28 +14,23 @@ div.radio {
 }
 
 .containerPlaneAndOption {
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     display: grid;
-
-
-
+    row-gap: .4rem;
+    grid-template-rows: 7.5rem auto;
 }
 
 .containerPlaneAndOption .option {
     width: auto;
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: .5rem 1rem;
     min-width: 300px;
-    border: 2px solid #E76732;
+    border: 3px solid #E76732;
     min-height: 50px;
-    border-radius: 10px;
+    border-radius: 1rem;
     height: auto;
-    min-height: 100px;
-    background-color: var(--ui-color-gray-600);
-    color: white;
+    background-color: #f7f7da;
+    color: inherit;
     display: flex;
+    font-weight: bold;
     justify-content: start;
     align-items: center;
 }
@@ -45,8 +40,11 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
 }
 
 .plane {
-    width: 80px;
-    height: 80px;
+    --size-particule: 60px;
+    --size-sub-particule: 55px;
+
+    width: var(--size-particule);
+    height: var(--size-particule);
     transform-style: preserve-3d;
 }
 
@@ -58,8 +56,8 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
 }
 
 .plane.main .circle {
-    width: 80px;
-    height: 80px;
+    width: var(--size-particule);
+    height: var(--size-particule);
     position: absolute;
     transform-style: preserve-3d;
     border-radius: 100%;
@@ -86,11 +84,11 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
 }
 
 .plane.main .circle::before {
-    transform: translateZ(-90px);
+    transform: translateZ(calc(-1 * var(--size-sub-particule)));
 }
 
 .plane.main .circle::after {
-    transform: translateZ(90px);
+    transform: translateZ(var(--size-sub-particule));
 }
 
 .plane.main .circle:nth-child(1) {
@@ -133,20 +131,12 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
     }
 }
 
-.radio>div {
-    border: 2px solid white;
-}
-
-.radio>div:focus-within {
-    outline: max(2px, .08em) solid white;
-}
-
 .radio[data-state="right"] {
-    --input-radio-bg: green;
+    --input-radio-bg: var(--clr-activity-success);
 }
 
 .radio[data-state="wrong"] {
-    --input-radio-bg: red;
+    --input-radio-bg: var(--clr-activity-wrong);
 }
 
 .radio :global(.c-input-radio__icon) svg {

@@ -15,9 +15,10 @@ interface Props extends ModalCoreProps {
   course?: string;
   teachers: string[];
   audio?: string;
+  lang?: 'es'
 }
 
-export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, audio, course, ...props }) => {
+export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, audio, course, lang: langProp, ...props }) => {
   const { lang } = useOvaContext();
 
   return (
@@ -33,7 +34,7 @@ export const ModalCredits: React.FC<Props> = ({ addClass, school, teachers, audi
         ))}
         <p>2024</p>
         <p>UNAD</p>
-        <p className="u-font-bold u-font-italic">“{i18n[lang].license}”</p>
+        <p className="u-font-bold u-font-italic">“{i18n[langProp || lang].license}”</p>
         {audio ? <Audio src={audio} /> : null}
       </div>
     </Modal>

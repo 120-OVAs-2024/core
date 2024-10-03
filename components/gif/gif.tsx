@@ -53,7 +53,7 @@ export const Gif: React.FC<Props> = ({
 
   return (
     <Element
-      className={`${css.gif} ${addClass ?? ''}`}
+      className={`${css.gif} u-my-0.5 ${addClass ?? ''}`}
       {...(size && {
         style: { '--gif-max-width': size } as React.CSSProperties
       })}>

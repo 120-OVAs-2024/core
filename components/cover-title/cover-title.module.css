@@ -1,4 +1,6 @@
 .cover-title {
+    --title-size: 60ch;
+
     display: grid;
     height: 100%;
     grid-template-columns: auto;
@@ -12,7 +14,7 @@
 
 .cover-title__title {
     align-self: start;
-    max-width: 60ch;
+    max-width: var(--title-size);
     display: grid;
     place-content: center;
     gap: 1em;
@@ -60,7 +62,7 @@
     }
 
     .cover-title__title {
-        max-width: 80ch;
+        --title-size: 80ch;
         display: grid;
         place-items: center;
     }
