@@ -6,7 +6,7 @@ import { Button, FullScreenAlert, Icon } from '@/shared/components';
 import { CorrectIcon, WrongIcon } from './icons_/icons';
 import { letterProp, spaceProp, TypeWord } from './types/types';
 import Ballon from './Ballon';
-import { Parallax } from './parallax';
+import { Parallax } from './Parallax';
 
 import css from './styles/level.module.css';
 
@@ -22,12 +22,11 @@ interface propsLevel {
 }
 
 function initialState(word: string[]): letterProp[] {
-  return word
-    .map((letter: string) => ({
-      letter,
-      index: crypto.randomUUID(),
-      enable: true
-    }))
+  return word.map((letter: string) => ({
+    letter,
+    index: crypto.randomUUID(),
+    enable: true
+  }));
 }
 
 export default function Level({ baseWords, index, onResult, title, alt, content }: propsLevel) {

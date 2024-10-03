@@ -1,6 +1,5 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 
 import ballons from './data/ballons';
 import { BallonProps } from './types/types';
@@ -17,7 +16,7 @@ const Ballon: React.FC<BallonProps> = ({
 }) => {
   const refWord = useRef<HTMLImageElement>(null);
 
-  useGSAP(() => {
+  useEffect(() => {
     if (!refWord.current) return;
 
     const animationProps = enable

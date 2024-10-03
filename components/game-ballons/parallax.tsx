@@ -1,6 +1,5 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 
 import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
 import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
@@ -26,7 +25,7 @@ export const Parallax: React.FC<Props> = ({ children }) => {
   const refClouds = useRef<HTMLImageElement>(null);
   const refClouds2 = useRef<HTMLImageElement>(null);
 
-  useGSAP(() => {
+  useEffect(() => {
     const animated1 = gsap.fromTo(
       refClouds.current,
       { left: '100%' },
