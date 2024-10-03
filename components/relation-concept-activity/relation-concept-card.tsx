@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-import {FullScreenButton } from '@shared/components';
+import {FullScreenAlert, FullScreenButton } from '@shared/components';
 
 import { useRelationConceptActivityContext  } from './relation-concept-activity-context';
 
@@ -7,84 +6,78 @@ import css from './relation-concept.module.css';
 
 interface CardProps {
   addClass?: string;
-  pairs: { id: string; word: string; definition: string }[];
+  title: string;
+  pairs: { id: string; label: string; pair: number }[];
 }
 
-/**
- * Función para mezclar un array usando el algoritmo de Fisher-Yates.
- * @param array - Array a mezclar.
- * @returns Array mezclado.
- */
-const shuffle = <T,>(array: T[]): T[] => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
 
-export const RelationConceptCard: React.FC<CardProps> = ({ pairs, addClass, ...props }) => {
+export const RelationConceptCard: React.FC<CardProps> = ({ pairs, title, addClass, ...props }) => {
   const { addSelectedPair, selectedPairs, correctPairs  } = useRelationConceptActivityContext();
-
-  /**
-   * Mezcla los pares de palabras y definiciones y los combina en un solo array.
-   * Utiliza useMemo para memorizar el resultado y evitar cálculos innecesarios en renderizados subsecuentes.
-   */
-  const shuffledPairs = useMemo(() => {
-    const combinedPairs = pairs.flatMap(pair => [
-      { id: pair.id, text: pair.word, type: 'word' as const },
-      { id: pair.id, text: pair.definition, type: 'definition' as const }
-    ]);
-    return shuffle(combinedPairs);
-  }, [pairs]);
 
   /**
    * Maneja el evento de clic en una tarjeta.
    * @param id - ID de la tarjeta.
-   * @param text - Texto de la tarjeta.
-   * @param type - Tipo de la tarjeta ('word' o 'definition').
+   * @param label - Texto de la tarjeta.
+   * @param pair - Número de par de la tarjeta.
    */
-  const handleClick = (id: string, text: string, type: 'word' | 'definition') => {
-    addSelectedPair({ id, text, type });
+  const handleClick = (id: string, label: string, pair: number) => {
+    addSelectedPair({ id, label, pair });
   };
 
   /**
    * Obtiene el nombre de la clase CSS para una tarjeta específica basado en su estado.
    * @param id - ID de la tarjeta.
-   * @param text - Texto de la tarjeta.
+   * @param label - Texto de la tarjeta.
    * @returns Nombre de la clase CSS.
    */
-  const getClassName = (id: string, text: string) => {
-    const selected = selectedPairs.find(pair => pair.id === id && pair.text === text);
-    
+  const getClassName = (id: string, label: string) => {
+    const selected = selectedPairs.find(pair => pair.id === id && pair.label === label);
     const correct = correctPairs.find(pair => pair.id === id && !pair.isIncorrect);
-    const incorrect = correctPairs.find(pair => pair.id.includes(id) && pair.isIncorrect && (pair.word === text || pair.definition === text));
-
-    if (correct) return `${css.card} ${css.correct}`;
-    if (incorrect) return `${css.card} ${css.incorrect}`;
+    const incorrect = correctPairs.find(pair => pair.id === id && pair.isIncorrect);
+    
     if (selected) return `${css.card} ${css.selected}`;
+    if (incorrect) return `${css.card} ${css.incorrect}`;
+    if (correct) return `${css.card} ${css.correct}`;
     
     return `${css.card}`;
   };
 
+  /**
+   * Obtiene el valor del atributo data-id para una tarjeta específica basado en su estado.
+   * @param id - ID de la tarjeta.
+   * @param label - Texto de la tarjeta.
+   * @returns Valor del atributo data-id.
+   */
+  const getDataId = (id: string, label: string) => {
+    const selected = selectedPairs.find(pair => pair.id === id && pair.label === label);
+    const correct = correctPairs.find(pair => pair.id === id && !pair.isIncorrect);
+    const incorrect = correctPairs.find(pair => pair.id === id && pair.isIncorrect);
+
+    if (incorrect) return 'incorrect';
+    if (correct) return 'correct';
+    if (selected) return 'selected';
+  }
+
   return (
-    <div className={`${css['grid-wrapper']}`} id="relation-concept">
-      <div className={`${css['grid-overlay']}`}>
-        <FullScreenButton elementId='relation-concept' />
-      </div>
-      <div className={`${css['grid-title']}`}><h3>RELACIÓN DE CONCEPTOS</h3></div>
-      <div className={`${css['grid-container']} ${addClass ?? ''}`}>
-        {shuffledPairs.map((pair) => (
+    <>
+    <FullScreenAlert />
+    <div className={`${css['grid-wrapper']} ${addClass ?? ''}`} id="relation-concept">
+        <FullScreenButton elementId='relation-concept' addClass={css['fullScreen__button']}/>
+      <div className={`${css['grid-title']}`}><h2>{title}</h2></div>
+      <div className={`${css['grid-container']}`} data-id='card-container'>
+        {pairs.map((pair) => (
           <button
-            key={pair.id + pair.text}
-            id = {pair.id + pair.text}
-            onClick={() => handleClick(pair.id, pair.text, pair.type)}
-            className={`${getClassName(pair.id, pair.text)} ${css['grid-item']}`}
+            key={pair.id}
+            id = {pair.id}
+            onClick={() => handleClick(pair.id, pair.label, pair.pair)}
+            className={`${getClassName(pair.id, pair.label)} ${css['grid-item']}`}
+            data-id={getDataId(pair.id, pair.label)}
             {...props}>
-            <b>{pair.text}</b>
+            <span className='u-font-bold'>{pair.label}</span>
           </button>
         ))}
       </div>
     </div>
+    </>
   );
 };

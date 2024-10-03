@@ -1,0 +1,162 @@
+.radios__container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.radio__options {
+    background: url(assets/images/ova_33_sld_12_game-fund.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    place-content: center;
+    padding: 4rem;
+    position: relative;
+}
+
+.radio__options_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.radio__option {
+    --radio-option-bg: white;
+
+    background-color: var(--radio-option-bg);
+    color: black;
+    font-weight: 600;
+    width: 13.75rem;
+    height: 6.875rem;
+    border-radius: 12px;
+    display: grid;
+    place-content: center;
+    margin: 0.5rem;
+    border: 2px solid black;
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.radio__option.checked {
+    --radio-option-bg: var(--clr-brand-light);
+}
+
+.radio__option[data-state="correct"] {
+    --radio-option-bg: var(--clr-activity-success);
+    font-weight: bold;
+}
+
+.radio__option[data-state="incorrect"] {
+    --radio-option-bg: var(--clr-activity-wrong);
+    font-weight: bold;
+}
+
+.img__basket {
+    margin-left: -1.8rem;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-70px);
+    }
+}
+
+.radio__option[data-state="incorrect"]::before {
+    content: "✖";
+    position: absolute;
+    top: 0.1rem;
+    right: 0.5rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    background-color: rgb(233, 93, 93);
+    color: white;
+    font-weight: 800;
+}
+
+.radio__option[data-state="correct"]::before {
+    content: "✔";
+    position: absolute;
+    top: 0.1rem;
+    right: 0.5rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    background-color: rgb(38, 160, 64);
+    color: white;
+    font-weight: 800;
+}
+
+.radio__option input[type="radio"]:disabled+.label {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.radio__option input[type="radio"]:disabled+.label+input {
+    pointer-events: none;
+}
+
+.radio__option:focus-within {
+    outline: 2px solid var(--clr-brand);
+    border: none;
+}
+
+.radio__question {
+    background-color: black;
+    color: white;
+    padding: 0.4rem;
+}
+
+/* radio */
+.input {
+    position: absolute;
+    left: -9999px;
+}
+
+.game-radio-basket-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    max-width: 50%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+/* medias queries */
+
+@media screen and (min-width:1024px) {
+    .img__basket {
+        position: absolute;
+        right: 100px;
+        bottom: 70px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .radio__options_container {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html:not([data-stop-animations="true"]) {
+        .img__basket {
+            animation: bounce 0.6s ease-in-out infinite alternate;
+        }
+    }
+
+}

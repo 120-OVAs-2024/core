@@ -37,7 +37,8 @@ html[data-dark-mode="true"] .containerQuestion {
     color: white;
     font-weight: 800;
     text-align: center;
-    padding: 1rem
+    padding: 1rem;
+    position: relative;
 }
 
 .containerQuestion[data-state="true"] {

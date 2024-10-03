@@ -1,37 +1,30 @@
 import { Panel } from '@/shared/components';
-import { FullScreenAlert } from '@/shared/components';
 
-import { question_game } from './types/types';
+import type { question_game } from './types/types';
+import type { propsLevel } from './Level';
 import Level from './Level';
 
-interface props_GameFish {
+interface props_GameFish extends propsLevel {
   questions: question_game[];
-  onResult?(result: boolean): void;
   initData: question_game;
-  audio_success?: string;
-  audio_wrong?: string;
-  title?: string;
-  alt?: string;
+  addClassBtnFish?: string;
 }
-export function GameFish({ questions, onResult, initData, title, alt, audio_success, audio_wrong }: props_GameFish) {
+
+export function GameFish({ addClassBtnFish, questions, initData, ...props }: props_GameFish) {
   return (
     <Panel>
       <div id="fullscreen__section">
-        <FullScreenAlert />
-
         <Panel.Section>
-          <Level intro question={initData} title={title} alt={alt} />
+          <Level intro question={initData}  {...props} />
         </Panel.Section>
         {questions.map((quest, index) => (
           <Panel.Section key={index}>
             <Level
+              addClassBtnFish={addClassBtnFish}
               question={quest}
               index={index + 1 === questions.length ? undefined : index + 1}
-              onResult={onResult}
-              title={title}
-              alt={alt}
-              audio_success={audio_success}
-              audio_wrong={audio_wrong}
+              {...props}
+              questionsCount={questions.length}
             />
           </Panel.Section>
         ))}

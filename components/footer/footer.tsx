@@ -1,7 +1,9 @@
+import { useMemo } from 'react';
 import { Pagination, useMedia } from 'books-ui';
 import { Link, useLocation } from 'wouter';
 
 import { useOvaContext } from '@/context/ova-context';
+import { REMOVE_HTML_TAGS_REGEX } from '@/shared/consts/removeHtmlTagsRegex';
 import { focusMainElement } from '@/shared/utils/focusMain';
 
 import { Icon } from '../icon';
@@ -13,7 +15,7 @@ import css from './footer.module.css';
 
 export const Footer: React.FC<Props> = ({ currentPage }) => {
   const [, navigate] = useLocation();
-  const { routes, lang } = useOvaContext();
+  const { routes, lang, titles } = useOvaContext();
 
   // Calcula el número de elementos límite para la paginación
   const boundaryCount = useMedia<number>(['(min-width: 1536px)'], [Math.floor(routes.length / QUARTER)], 1);
@@ -25,6 +27,9 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
     navigate(`/page-${value}`);
   };
 
+  // Limpia el titulo de cualquier etiqueta HTML que tenga.
+  const parsedTitles = useMemo(() => titles.map((title) => title.replace(REMOVE_HTML_TAGS_REGEX, '')) ,[titles])
+
   return (
     <footer className={css['footer']}>
       <Pagination
@@ -33,13 +38,13 @@ export const Footer: React.FC<Props> = ({ currentPage }) => {
         addClass="js-pagination-element"
         defaultPage={currentPage}
         onChange={handleNavigation}
-        renderItem={(item) => <PaginationItem item={item} lang={lang} />}
+        renderItem={(item) => <PaginationItem item={item} lang={lang} titles={parsedTitles} />}
       />
     </footer>
   );
 };
 
-const PaginationItem: React.FC<PaginationItemProps> = ({ item, lang }) => {
+const PaginationItem: React.FC<PaginationItemProps> = ({ item, lang, titles }) => {
   const { onClick, type, page, disabled } = item;
 
   /**
@@ -57,8 +62,9 @@ const PaginationItem: React.FC<PaginationItemProps> = ({ item, lang }) => {
       to={`/page-${page}`}
       className={css['footer__nav-link']}
       onClick={focusMainElement}
+      aria-label={`${i18n[lang].page} ${page}, ${titles[page! - 1]}`}
       aria-current={item['aria-current']}>
-      <span className="u-sr-only">Slide</span> {page}
+      {page}
     </Link>
   ) : type === PAGINATION_ITEM_TYPE.NEXT || type === PAGINATION_ITEM_TYPE.PREVIOUS ? (
     <button
@@ -66,6 +72,7 @@ const PaginationItem: React.FC<PaginationItemProps> = ({ item, lang }) => {
       onClick={handleClick}
       data-type={type}
       data-page={page}
+      aria-label={type === PAGINATION_ITEM_TYPE.NEXT ? i18n[lang].nextA11y : i18n[lang].previousA11y}
       disabled={disabled}>
       <Icon addClass={css['footer__nav-button-icon']} name={ICON_TYPE[type as PaginationItemType]} />
       <span>{type === PAGINATION_ITEM_TYPE.NEXT ? i18n[lang].next : i18n[lang].previous}</span>

@@ -9,6 +9,7 @@ export interface Props {
 export interface PaginationItemProps {
   item: PaginationItemTypeUI;
   lang: Language;
+  titles: string[];
 }
 
 export type PaginationItemType = 'page' | 'next' | 'previous';

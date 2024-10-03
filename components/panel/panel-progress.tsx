@@ -1,10 +1,12 @@
-import { forwardRef, useMemo, useRef } from 'react';
+import { forwardRef, useEffect, useMemo, useRef } from 'react';
 import { usePanelContext as usePanel } from 'books-ui';
 
 import { useOvaContext } from '@/context/ova-context';
+import { useInterpreter } from '@/shared/hooks/useInterpreter';
 import { eventUpdateTitle } from '@/shared/utils/eventUpdateTitle';
 
 import { usePaginationRange } from './hooks/usePaginationRange';
+import type { InterpreterSource } from './types/types';
 import { i18n } from './consts';
 import { usePanelCoreContext } from './panel-context';
 
@@ -19,11 +21,11 @@ const KEYCODE = Object.freeze({
   RIGHT: 39
 });
 
-
 export const PanelProgress = () => {
   const { lang } = useOvaContext();
-  const { titles } = usePanelCoreContext();
+  const { titles, interpreter } = usePanelCoreContext();
   const { validation, handleToggle, sectionsId, isOpen } = usePanel();
+  const [updateVideoSources] = useInterpreter();
 
   const LAST_SECTION_INDEX = sectionsId.length - 1;
   const FIRST_SECTION_INDEX = 0;
@@ -87,6 +89,7 @@ export const PanelProgress = () => {
       }
     }
   };
+
   /**
    * Maneja el evento onClick para mostrar la sección correspondiente.
    *
@@ -95,18 +98,48 @@ export const PanelProgress = () => {
   const handleClick = (section: string) => {
     // Manejar el cambio de sección
     handleToggle(section);
+    handleInterpreterSectionChange(section);
+    handleSectionTitleChange(section);
+  };
 
-    if (titles.length <= 0) return;
+  /**
+   * Maneja la actualización de los videos del intérprete según la sección seleccionada.
+   *
+   * @param section - La sección seleccionada.
+   */
+  const handleInterpreterSectionChange = (sectionId: string) => {
+    if (interpreter.length === 0) return;
 
-    // Encontrar el índice de la sección actual en el array sectionsId
-    const currentIndex = sectionsId.findIndex((uid) => uid === section);
+    // Encontrar las fuentes de video del intérprete correspondientes a la sección actual
+    const currentInterpreterVideoSources = interpreter.find(({ uid }) => uid === sectionId) as InterpreterSource;
 
-    if (currentIndex !== -1) {
-      // Obtener el título correspondiente a la sección actual
-      const currentTitle = titles[currentIndex];
-      if (currentTitle) eventUpdateTitle(currentTitle);
+    if (currentInterpreterVideoSources) {
+      const { a11yURL, contentURL } = currentInterpreterVideoSources;
+      updateVideoSources({ mode: 'fixed', a11yURL, contentURL });
     }
   };
+
+  /**
+   * Maneja la actualización del título según la sección seleccionada.
+   *
+   * @param section - La sección seleccionada.
+   */
+  const handleSectionTitleChange = (sectionId: string) => {
+    if (titles.length === 0) return;
+
+    // Encontrar el índice de la sección actual en el array sectionsId
+    const currentSectionIndex = sectionsId.findIndex((uid) => uid === sectionId);
+
+    if (currentSectionIndex !== -1) {
+      // Obtener el título correspondiente a la sección actual
+      const currentSectionTitle = titles[currentSectionIndex];
+      if (currentSectionTitle) eventUpdateTitle(currentSectionTitle);
+    }
+  };
+
+  useEffect(() => {
+    handleInterpreterSectionChange(isOpen!);
+  }, [interpreter]);
 
   return (
     <div className={`${css['progress']} u-wrapper u-mt-5`}>

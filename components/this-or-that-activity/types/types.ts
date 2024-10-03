@@ -25,7 +25,7 @@ export interface ThisOrThatActivityContextType {
     selectedId: string | null;
     setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
     options: Option[];
-  }
+}
   
 // Enumeración para los estados posibles
 export enum States {

@@ -77,25 +77,30 @@ export const ThisOrThatElement: React.FC<Props> = ({selects, question, addClass,
 
   return (
     <div className={`${css['container-element']} ${addClass ?  addClass : ''}`}>
-      <div className={`${css['question']} ${getClassQuestion()}`}><p className='u-font-bold u-text-center'>{question}</p></div>
-      <div className={css['container-options']}>
-        {selects.map(select => (
-          <button
-            key={select.id}
-            id={select.id}
-            name={radioName}
-            className={`${css['radio-element']} ${getClassName(select.id)}`}
-            onClick={() => handleClick(select.id, select.state)}
-            disabled={validation}
-            aria-pressed={ariaPressed[select.id] ? 'true' : 'false'}
-            {...props}
-            >
-              <div className={css['circle']}>{select.id}</div>
-              <span className="u-font-bold">{select.text}</span>
-          </button>
-        ))}
+      <div data-id='card' role="group" aria-labelledby="question" className={css['card-element']}>
+        <div className={`${css['question']} ${getClassQuestion()}`} data-id='question'>
+          <p className='u-font-bold u-text-center'>{question}</p>
+        </div>
+        <div className={css['container-options']} data-id='options' role="radiogroup" aria-labelledby="question">
+          {selects.map(select => (
+            <button
+              key={select.id}
+              id={select.id}
+              name={radioName}
+              className={`${css['radio-element']} ${getClassName(select.id)}`}
+              onClick={() => handleClick(select.id, select.state)}
+              disabled={validation}
+              role='radio'
+              aria-checked={ariaPressed[select.id] ? 'true' : 'false'}
+              aria-pressed={ariaPressed[select.id] ? 'true' : 'false'}
+              {...props}
+              >
+                <div className={css['circle']}>{select.id}</div>
+                <span className="u-font-bold">{select.text}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );   
-
 }

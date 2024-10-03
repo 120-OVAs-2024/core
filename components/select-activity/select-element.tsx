@@ -17,12 +17,21 @@ type OptionType = {
 interface Props extends SelectPropsUI {
   id?: string;
   addClass?: string;
-  correctAnswer: string;
+  correctAnswer: string | string[];
   options: OptionType[];
+  name: string;
   placeholder?: string;
 }
 
-export const SelectElement: React.FC<Props> = ({ id, correctAnswer, addClass, options, placeholder = "", ...props }) => {
+export const SelectElement: React.FC<Props> = ({
+  id,
+  correctAnswer,
+  addClass,
+  options,
+  placeholder = '',
+  name,
+  ...props
+}) => {
   const reactId = useId();
   const uid = id || reactId;
 
@@ -37,9 +46,13 @@ export const SelectElement: React.FC<Props> = ({ id, correctAnswer, addClass, op
    * @param selectedOption - Opción seleccionada
    */
   const handleSelectionChange = (selectedOption: Key) => {
-    const selectionState = selectedOption === correctAnswer ? States.SUCCESS : States.WRONG;
+    // Asegurar que `correctAnswer` siempre sea un array
+    const correctAnswers = Array.isArray(correctAnswer) ? correctAnswer : [correctAnswer];
+
+    const selectionState = correctAnswers.includes(selectedOption as string) ? States.SUCCESS : States.WRONG;
+
     addSelectedValues({ id: uid, answer: selectedOption as string, state: selectionState });
-    setCurrentSelectedOption({ key: selectedOption, state: selectionState});
+    setCurrentSelectedOption({ key: selectedOption, state: selectionState });
   };
 
   /**
@@ -70,10 +83,11 @@ export const SelectElement: React.FC<Props> = ({ id, correctAnswer, addClass, op
       isDisabled={validation}
       onSelectionChange={handleSelectionChange}
       placeholder={placeholder}
+      name={name}
       {...props}>
       {options.map(({ id, option }) => (
         <Item key={id}>
-          <span dangerouslySetInnerHTML={{ __html: option }}></span>
+          <span id={name} dangerouslySetInnerHTML={{ __html: option }}></span>
         </Item>
       ))}
     </Select>
