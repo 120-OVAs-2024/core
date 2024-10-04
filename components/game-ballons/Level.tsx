@@ -6,7 +6,7 @@ import { Button, FullScreenAlert, Icon } from '@/shared/components';
 import { CorrectIcon, WrongIcon } from './icons_/icons';
 import { letterProp, spaceProp, TypeWord } from './types/types';
 import Ballon from './Ballon';
-import { Parallax } from './Parallax';
+import { Parallax } from './parallax';
 
 import css from './styles/level.module.css';
 
