@@ -22,12 +22,11 @@ interface propsLevel {
 }
 
 function initialState(word: string[]): letterProp[] {
-  return word
-    .map((letter: string) => ({
-      letter,
-      index: crypto.randomUUID(),
-      enable: true
-    }))
+  return word.map((letter: string) => ({
+    letter,
+    index: crypto.randomUUID(),
+    enable: true
+  }));
 }
 
 export default function Level({ baseWords, index, onResult, title, alt, content }: propsLevel) {
