@@ -537,7 +537,7 @@ div.tour__element :global(.tour-description) {
     width: fit-content;
     padding: 0.3em 1.5em;
     margin-inline: auto;
-    color: var(--clr-text-secondary);
+    color: #121212;
     font-size: var(--fs-300);
     border: 1px solid transparent;
     background-color: var(--clr-accent-dark);

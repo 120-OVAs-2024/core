@@ -36,21 +36,23 @@
 .progress__button {
     --outline-color: var(--clr-accent-dark);
 
-    padding-inline: 0;
     font-style: italic;
     text-transform: capitalize;
-    border-radius: 0.5rem;
-    background-color: transparent;
+    border-radius: .4rem;
     border: 1px solid transparent;
     cursor: pointer;
-    appearance: none;
-    transition: opacity 120ms ease;
+    background-color: var(--clr-accent);
+    transition: opacity, transform 120ms ease-in-out;
 }
 
 html[data-dark-mode="true"] .progress__button {
-    color: var(--clr-text-main);
+    color: #121212;
 }
 
+
+.progress__button:is(:hover, :focus-visible) {
+    transform: scale(0.96);
+}
 .progress__button:disabled {
     opacity: 0;
 }
@@ -102,8 +104,8 @@ html[data-dark-mode="true"] .progress__button {
 }
 
 .progress__item-button:focus-visible {
-    --outline-color: var(--clr-accent-dark);
-    --button-clr: var(--clr-accent-dark);
+    --outline-color: var(--clr-brand);
+    --button-clr: var(--clr-brand);
 
     transform: scale(1.5);
     transition: transform 150ms ease;
