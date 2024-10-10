@@ -11,6 +11,10 @@
     margin-inline: auto;
 }
 
+.progress p[aria-hidden="true"] {
+    font-size: var(--fs-300);
+}
+
 .progress__list {
     --gap-list: 1.3rem;
 
