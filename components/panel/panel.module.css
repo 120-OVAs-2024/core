@@ -1,9 +1,13 @@
 .panel {
-    display: block;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    place-content: initial;
 }
 
 .panel__section {
     opacity: 0;
+    height: 100%;
 }
 
 .progress {
