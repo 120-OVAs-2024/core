@@ -21,6 +21,7 @@ export interface TypeWord {
   word: string[];
   content?: string;
   a11y?: string;
+  sentence?: string;
 }
 
 export interface BallonProps extends React.ButtonHTMLAttributes<ButtonHTMLAttributes> {
