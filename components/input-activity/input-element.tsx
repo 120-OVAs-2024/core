@@ -2,6 +2,8 @@ import { useEffect, useId, useState } from 'react';
 
 import { useInputActivityContext } from './input-activity-context';
 
+import css from './input-activity.module.css';
+
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
@@ -17,6 +19,7 @@ export const InputElement: React.FC<Props> = ({ id, correctAnswers, name, addCla
     const uid = id || reactId;
 
     const [userAnswer, setUserAnswer] = useState<string>('');
+    const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
     // Registrar el uid en el contexto al montar el componente
     useEffect(() => {
@@ -29,6 +32,7 @@ export const InputElement: React.FC<Props> = ({ id, correctAnswers, name, addCla
         const inputValue = e.target.value;
 
         setUserAnswer(inputValue);
+        
 
         // Registrar la respuesta en el contexto sin validar aún
         addInputValues({
@@ -43,10 +47,21 @@ export const InputElement: React.FC<Props> = ({ id, correctAnswers, name, addCla
     useEffect(() => {
         if (!validation) {
             setUserAnswer(''); // Limpia el input cuando se hace reset
+            setIsCorrect(null); // Limpia el estado de la respuesta
+        }else{
+            const correct = correctAnswers.some((answer) => answer.trim() === userAnswer.trim());
+            setIsCorrect(correct);
         }
     }, [validation]);
 
+    const inputClass = isCorrect === null 
+    ? '' 
+    : isCorrect 
+    ? css.correct 
+    : css.incorrect;
+
     return (
+        <div className={css.input}>
         <input 
             id={uid}
             type="text"
@@ -55,6 +70,7 @@ export const InputElement: React.FC<Props> = ({ id, correctAnswers, name, addCla
             onChange={handleInputChange}
             className={`${addClass}`}
             disabled={validation}
-        />
+        /><span className={inputClass}></span> 
+        </div>
     );
 };
