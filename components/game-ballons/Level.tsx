@@ -79,7 +79,8 @@ export default function Level({ baseWords, index, onResult, title, alt, content 
       .join(' ')
       .toLowerCase();
 
-    const isCorrect = baseWords.word.join(' ').toLowerCase() === sentenceByUser;
+    const sentence = baseWords?.sentence || baseWords.word.join(' ')
+    const isCorrect = sentence.toLowerCase() === sentenceByUser;
     setOpenModal(isCorrect ? 'success' : 'wrong');
 
     if (onResult) {
