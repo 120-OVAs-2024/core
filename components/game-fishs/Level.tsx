@@ -95,27 +95,28 @@ export default function Level({
 
   return (
     <>
-      {question.audio_description &&
-        (disableFeedbackImage ? (
-          <Audio src={question.audio_description} a11y />
-        ) : (
-          !openModal && <Audio src={question.audio_description} />
-        ))}
-      {question.audio_content &&
-        (disableFeedbackImage ? (
-          <Audio src={question.audio_content} />
-        ) : (
-          !openModal && <Audio src={question.audio_content} />
-        ))}
-
       <Row alignItems="center" justifyContent="center">
         <Col xs="11" mm="10" lg="9" hd="8" addClass="u-mb-2 u-flow">
+          {question.audio_description &&
+            (disableFeedbackImage ? (
+              <Audio src={question.audio_description} a11y />
+            ) : (
+              !openModal && <Audio src={question.audio_description} a11y />
+            ))}
+          {question.audio_content &&
+            (disableFeedbackImage ? (
+              <Audio src={question.audio_content} />
+            ) : (
+              !openModal && <Audio src={question.audio_content} />
+            ))}
+
           {!disableFeedbackImage && audio_success && openModal === 'success' && <Audio src={audio_success} />}
           {!disableFeedbackImage && audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
+
           {content}
           <FullScreenAlert />
         </Col>
-        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-flow">
+        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-flow u-mb-4">
           <Parallax>
             <>
               <div className={css.container__question}>
