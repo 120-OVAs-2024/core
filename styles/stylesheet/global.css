@@ -149,6 +149,11 @@ main {
   z-index: 2;
 }
 
+html[data-dark-mode="true"] .u-validation-success::after,
+html[data-dark-mode="true"] .u-validation-wrong::after {
+  background-color: var(--clr-dark-mode-light);
+}
+
 .u-validation-success::after {
   content: '✔';
   color: var(--clr-activity-success);
