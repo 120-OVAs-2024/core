@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { ModalProps } from 'books-ui';
 import { Modal as ModalUI } from 'books-ui';
 
@@ -21,13 +21,14 @@ export interface ModalCoreProps extends ModalProps {
 export const Modal: React.FC<ModalCoreProps> = ({ addClass, children, isOpen, onClose, interpreter, ...props }) => {
   const { lang } = useOvaContext();
   const [updateVideoSources, restoreLastVideoSources] = useInterpreter();
+  const flagOpenModal = useRef(false);
 
   /**
    * Maneja el cierre del modal.
    * Llama a la función de cierre si está definida y restaura las fuentes de video anteriores.
    */
   const handleCloseModal = () => {
-    if (onClose) onClose();
+    onClose?.();
     restoreLastVideoSources();
   };
 
@@ -37,8 +38,15 @@ export const Modal: React.FC<ModalCoreProps> = ({ addClass, children, isOpen, on
    * De lo contrario, actualiza las fuentes de video con los datos del intérprete.
    */
   useEffect(() => {
-    if (!interpreter || !isOpen) return;
-    updateVideoSources({ ...interpreter });
+    if (interpreter && isOpen && !flagOpenModal.current) {
+      flagOpenModal.current = true;
+      updateVideoSources({ ...interpreter });
+    }
+
+    // Cuando `isOpen` vuelve a false, reinicia el flag
+    if (!isOpen && flagOpenModal.current) {
+      flagOpenModal.current = false;
+    }
   }, [interpreter, isOpen, updateVideoSources]);
 
   return (

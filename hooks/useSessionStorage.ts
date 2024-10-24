@@ -1,12 +1,21 @@
 import { useState } from 'react';
 
-export const useSessionStorage = <T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] => {
+type SessionStorage<T> = [T, (value: T | ((val: T) => T)) => void, () => T];
+
+export const useSessionStorage = <T>(key: string, initialValue: T): SessionStorage<T> => {
   /**
    * Estado que va a almacenar nuestro valor.
    * Pasamos la función para el estado inicial a useState,
    * para que esta solo se ejecute una vez.
    */
-  const [storedValue, setStoredValue] = useState<T>(() => {
+  const [storedValue, setStoredValue] = useState<T>(() => getCurrentValueFromSessionStorage());
+
+  /**
+   * Función para obtener el valor actual de sessionStorage.
+   * Si la API no está disponible (SSR), o si hay errores,
+   * devuelve el valor inicial.
+   */
+  function getCurrentValueFromSessionStorage(): T {
     /**
      * Dado que la API del SessionStorage no está disponible
      * en server-side rendering, comprobamos su existencia.
@@ -26,7 +35,7 @@ export const useSessionStorage = <T>(key: string, initialValue: T): [T, (value: 
       console.warn(`Error in useSessionStorage: ${error}`);
       return initialValue;
     }
-  });
+  }
 
   /**
    * Función utilizada para actualizar el valor del SessionStorage.
@@ -51,5 +60,5 @@ export const useSessionStorage = <T>(key: string, initialValue: T): [T, (value: 
     }
   };
 
-  return [storedValue, setValue];
+  return [storedValue, setValue, getCurrentValueFromSessionStorage];
 };

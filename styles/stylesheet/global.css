@@ -1,7 +1,8 @@
 :root {
-  --z-index-menu: 20;
-  --z-index-modal: 30;
-  --z-index-interpreter: 40;
+  --z-index-header: 5;
+  --z-index-menu: 10;
+  --z-index-modal: 20;
+  --z-index-interpreter: 50;
 }
 
 body.debug * {
@@ -148,6 +149,11 @@ main {
   z-index: 2;
 }
 
+html[data-dark-mode="true"] .u-validation-success::after,
+html[data-dark-mode="true"] .u-validation-wrong::after {
+  background-color: var(--clr-dark-mode-light);
+}
+
 .u-validation-success::after {
   content: '✔';
   color: var(--clr-activity-success);
@@ -221,6 +227,7 @@ ul[role='tablist'] {
 .c-interpreter__container {
   --interpreter-clr-list: #11203c;
   --interpreter-btn-bg: #11203c;
+  z-index: var(--z-index-interpreter);
 }
 
 .c-image__figcaption {

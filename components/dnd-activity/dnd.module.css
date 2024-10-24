@@ -32,6 +32,11 @@
     transition: background-color 120ms ease;
 }
 
+html[data-dark-mode="true"] .drag {
+    --drag-bg-clr: var(--clr-brand-light);
+    box-shadow: none;
+}
+
 .drag[data-validation] {
     cursor: not-allowed;
 }
@@ -50,6 +55,10 @@
     box-shadow: 2px 2px 3px 0px #60606057;
     font-style: normal;
     z-index: 2;
+}
+
+html[data-dark-mode="true"] .drag[data-validation]::after {
+  background-color: var(--clr-dark-mode-light);
 }
 
 .drag[data-validation="true"] {
@@ -89,4 +98,10 @@ div.drop {
 
 .drop--over {
     --drag-bg-clr: var(--clr-accent-dark);
+}
+
+html[data-dark-mode="true"] div.drop {
+    --drag-bg-clr: var(--clr-brand-light);
+    background-color: var(--clr-dark-mode-light);
+    box-shadow: none;
 }

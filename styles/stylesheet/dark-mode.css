@@ -1,6 +1,7 @@
 html[data-dark-mode="true"]:root {
     --clr-elements-dark-mode: #f7f7f7;
     --clr-dark-mode: #121212;
+    --clr-dark-mode-light: #1f1f1f;
 
 
     --clr-brand: #002e46;
