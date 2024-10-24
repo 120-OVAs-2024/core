@@ -10,7 +10,7 @@
     place-content: center;
     align-items: center;
     column-gap: 1em;
-    z-index: var(--z-index-menu);
+    z-index: var(--z-index-header);
     background-image: url(assets/base/banner-header.webp), radial-gradient(circle at 33%, hsl(0deg 0% 100% / 16%) 13%, var(--clr-brand) 48%);
     background-color: var(--clr-brand);
     color: var(--clr-text-header);
@@ -544,6 +544,7 @@ div.tour__element :global(.tour-description) {
     border-bottom-left-radius: var(--radius);
     border-bottom-right-radius: var(--radius);
     transform: translateX(-50%);
+    z-index: var(--z-index-interpreter);
 }
 
 .skip-link:not(:focus):not(:active) {
