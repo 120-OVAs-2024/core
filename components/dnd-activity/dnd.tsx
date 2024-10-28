@@ -25,7 +25,8 @@ const DndActivity: React.FC<Props> & SubComponents = ({
   children,
   minCorrectDrags,
   announcements = defaultAnnouncements,
-  onResult
+  onResult,
+  ...props
 }) => {
   const { lang } = useOvaContext();
   const [activity, updatedActivity] = useReducer(
@@ -131,7 +132,8 @@ const DndActivity: React.FC<Props> & SubComponents = ({
         validate={activity.validation}
         onValidate={handleNewDrag}
         announcements={announcements}
-        screenReaderInstructions={i18n[lang].screenReaderInstruction}>
+        screenReaderInstructions={i18n[lang].screenReaderInstruction}
+        {...props}>
         <div className={css['wrapper']}>{styleChildren(children)}</div>
       </DragAndDrop>
     </DndActivityProvider>
