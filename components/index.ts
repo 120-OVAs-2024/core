@@ -39,5 +39,6 @@ export * from './game-radio-bag';
 export * from './game-jumpSandwich';
 export * from './game-phraseAndImage';
 export * from './game-lego';
-export * from './select-group-activity'
+export * from './select-group-activity';
 export * from './input-activity';
+export * from './race-card';
