@@ -101,12 +101,16 @@ export const RaceCard: React.FC<PropsSvg> = ({ question, selected, isEnd = false
       (element as HTMLInputElement).disabled = true;
     });
 
-    // Update activity state
-    setActivity({
-      validation: true,
-      button: false,
-      showFeedback: true
-    });
+    if (selected === 'success') {
+      setActivity((prev) => ({ ...prev, button: true, validation: true, showFeedback: true }));
+    } else {
+      setActivity({
+        validation: true,
+        button: false,
+        showFeedback: true
+      });
+    }
+
     speed();
     resetSelected();
   };
