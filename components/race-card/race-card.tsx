@@ -5945,20 +5945,13 @@ export const RaceCard: React.FC<PropsSvg> = ({ question, selected, isEnd = false
             {state.pointplayer2}
           </text>
         </g>
-        <g id="Cuadro_de_preguntas">
-          <g>
-            <path
-              className="st56"
-              d="M618.9,127.3H159.1c-11.8,0-21.4-9.6-21.4-21.4V42c0-11.8,9.6-21.4,21.4-21.4h459.7 c11.8,0,21.4,9.6,21.4,21.4v63.9C640.3,117.7,630.7,127.3,618.9,127.3z"
-            />
-          </g>
-        </g>
+
         {/* Question */}
 
-        <foreignObject x="180" y="45" width="400" height="210">
+        <foreignObject x="150" y="10" width="500" height="200">
           {' '}
-          <div ref={refQuestion} className="u-flow u-text-center">
-            <p style={{ color: 'black', fontWeight: 'bolder', fontSize: '1rem' }}>{question}</p>{' '}
+          <div ref={refQuestion} className={`u-flow u-text-center ${css['box-questions']} `}>
+            <p style={{ color: 'black', fontWeight: 'bolder' }}>{question}</p>{' '}
           </div>{' '}
         </foreignObject>
         {/* Button check */}
