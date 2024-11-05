@@ -6,6 +6,7 @@ import { FullScreenAlert, FullScreenButton } from '@/shared/components';
 
 import { InputRadio } from './input-radio';
 import { RaceCard } from './race-card';
+import { CartColors } from './types';
 
 import css from './svg-card.module.css';
 
@@ -17,9 +18,19 @@ interface PropsSvgPag12TWO {
   alt?: string;
   isEnd?: boolean;
   id: string;
+  colorsCarts: CartColors;
 }
 
-export const RaceCardRender: React.FC<PropsSvgPag12TWO> = ({ options, question, id, title, alt, modal, ...props }) => {
+export const RaceCardRender: React.FC<PropsSvgPag12TWO> = ({
+  options,
+  question,
+  id,
+  title,
+  alt,
+  modal,
+  colorsCarts,
+  ...props
+}) => {
   const newChoices = useMemo(() => {
     if (!options) return [];
 
@@ -70,6 +81,7 @@ export const RaceCardRender: React.FC<PropsSvgPag12TWO> = ({ options, question, 
 
         <Col xs="11" mm="11" md="9" lg="10" hd="6" addClass={css.content__game}>
           <RaceCard
+            colorsCartInitial={colorsCarts}
             isEnd={false}
             question={question}
             selected={selected}
