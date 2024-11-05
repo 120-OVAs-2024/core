@@ -1,13 +1,25 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Panel as PanelUI } from 'books-ui';
+
+import { ColorCart1 } from './types';
 
 import css from './svg-card.module.css';
 
 interface Props {
   messageInitial: ReactNode;
+  initialColors?: ColorCart1;
 }
 
-export const RaceCardInitial: React.FC<Props> = ({ messageInitial }) => {
+export const RaceCardInitial: React.FC<Props> = ({
+  messageInitial,
+  initialColors = {
+    color1: '#560b04',
+    color2: '#f99200',
+    color3: '#9d0a21',
+    color4: '#731314'
+  }
+}) => {
+  const [colorsCart] = useState<ColorCart1>(initialColors);
   return (
     <div>
       <svg
@@ -18,9 +30,7 @@ export const RaceCardInitial: React.FC<Props> = ({ messageInitial }) => {
         viewBox="0 0 777.6 500"
         xmlSpace="preserve">
         <style>
-          {
-            '#svg-sld14-initial .st1{fill:#cceaf8}.st2{fill:#b8e6f6}.st4{fill:#876132}.st5{fill:#76ac2b}.st6{fill:#6d961f}.st7{fill:#72c628}.st9{fill:#d6d5cd}.st10{fill:#e42d2c}.st11{fill:#fdfdfd}.st13{fill:#696969}.st15{fill:#5b9b3d}.st16{fill:#418338}.st17{fill:#4a5147}.st18{opacity:.3;enable-background:new}.st18,.st19{fill:#1d1d1b}.st20{fill:#fff}.st21{fill:#231f20}.st22{fill:#191717}.st23{fill:#9d0b20}.st24{fill:#fab83a}.st25,.st26{opacity:.31;fill:#fff;enable-background:new}.st26{opacity:.29;fill:#1d1d1b}.st27{fill:#252024}.st28{fill:#3e393d}.st29{fill:#6c6d69}.st30{fill:#731314}.st31{fill:#560a05}.st32{fill:#8c2725}.st33{fill:#f89300}.st34{fill:#ea7b49}.st35{fill:none;stroke:#646363;stroke-width:1.9779;stroke-linecap:round;stroke-miterlimit:10}.st36{fill:#a9a8ad}.st37{fill:#f8cd75}.st38{fill:#231f20;stroke:#a9a8ad;stroke-width:1.1228;stroke-miterlimit:10}.st39{fill:#ddd}.st44{fill:#403250}.st47{fill:#adb6de}.st49{fill:#fcc13a}.st50{fill:#585858}.st51{fill:none;stroke:#1d1d1b;stroke-width:2.0523}.st51,.st54,.st55,.st57{stroke-miterlimit:10}.st54{fill:none;stroke:#646363;stroke-width:1.3515;stroke-linecap:round}.st55,.st57{fill:#231f20;stroke:#a9a8ad;stroke-width:.7673}.st57{fill:#fffbda;stroke:#55539f;stroke-width:5.6801}.st58{fill:none;stroke:#1d1d1b;stroke-width:1.4849}.st58,.st61,.st62{stroke-miterlimit:10}.st61{fill:none;stroke:#646363;stroke-width:1.1183;stroke-linecap:round}.st62{fill:#231f20;stroke:#a9a8ad;stroke-width:.6348}'
-          }
+          {`#svg-sld14-initial .st1{fill:#cceaf8}.st2{fill:#b8e6f6}.st4{fill:#876132}.st5{fill:#76ac2b}.st6{fill:#6d961f}.st7{fill:#72c628}.st9{fill:#d6d5cd}.st10{fill:#e42d2c}.st11{fill:#fdfdfd}.st13{fill:#696969}.st15{fill:#5b9b3d}.st16{fill:#418338}.st17{fill:#4a5147}.st18{opacity:.3;enable-background:new}.st18,.st19{fill:#1d1d1b}.st20{fill:#fff}.st21{fill:#231f20}.st22{fill:#191717}.st23{fill:${colorsCart?.color3}}.st24{fill:#fab83a}.st25,.st26{opacity:.31;fill:#fff;enable-background:new}.st26{opacity:.29;fill:#1d1d1b}.st27{fill:#252024}.st28{fill:#3e393d}.st29{fill:#6c6d69}.st30{fill:${colorsCart?.color4}}.st31{fill:${colorsCart?.color1}}.st32{fill:#8c2725}.st33{fill:${colorsCart?.color2}}.st34{fill:white}.st35{fill:none;stroke:#646363;stroke-width:1.9779;stroke-linecap:round;stroke-miterlimit:10}.st36{fill:#a9a8ad}.st37{fill:#f8cd75}.st38{fill:#231f20;stroke:#a9a8ad;stroke-width:1.1228;stroke-miterlimit:10}.st39{fill:#ddd}.st44{fill:#403250}.st47{fill:#adb6de}.st49{fill:#fcc13a}.st50{fill:#585858}.st51{fill:none;stroke:#1d1d1b;stroke-width:2.0523}.st51,.st54,.st55,.st57{stroke-miterlimit:10}.st54{fill:none;stroke:#646363;stroke-width:1.3515;stroke-linecap:round}.st55,.st57{fill:#231f20;stroke:#a9a8ad;stroke-width:.7673}.st57{fill:#fffbda;stroke:#55539f;stroke-width:5.6801}.st58{fill:none;stroke:#1d1d1b;stroke-width:1.4849}.st58,.st61,.st62{stroke-miterlimit:10}.st61{fill:none;stroke:#646363;stroke-width:1.1183;stroke-linecap:round}.st62{fill:#231f20;stroke:#a9a8ad;stroke-width:.6348}`}
         </style>
         <g id="Cielo">
           <linearGradient
