@@ -1,5 +1,4 @@
 import { useEffect, useReducer, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { FullScreenButton } from '@shared/components';
 
 import type { InitialState, Option } from './types/types';
@@ -94,23 +93,13 @@ export const GameParticulas: React.FC<Props> & SubComponents = ({
         validation: activity.validation
       }}>
       <div id={id} className={css.actParticulas}>
-        <FullScreenButton elementId={id}></FullScreenButton>
+        <FullScreenButton elementId={id}/>
         <Ray />
-        <motion.div
-          initial={{
-            opacity: '0.8'
-          }}
-          animate={{
-            opacity: '1'
-          }}
-          transition={{
-            duration: 0.12,
-            ease: 'easeInOut'
-          }}
+        <div
           className={css.containerQuestion}
           data-state={activity.validation ? activity.result : null}>
           <p>{question}</p>
-        </motion.div>
+        </div>
         {children}
       </div>
     </RadioActivityProvider>
