@@ -12,6 +12,7 @@ import { MenuOptions } from './types/types';
 import { i18n, i18nTour, MODAL, SPANISH_LANGUAGE } from './consts';
 import { useHeaderContext } from './header-context';
 import { MenuButton } from './menu-button';
+import { MenuLink } from './menu-link';
 import { MenuList } from './menu-list';
 
 import css from './header.module.css';
@@ -66,12 +67,7 @@ export const Menu = () => {
               <MenuList>
                 {titles.map((title, index) => (
                   <li key={index}>
-                    <Link to={routes[index]} className={css['menu-list__button']}>
-                      <span className="u-font-bold" aria-hidden="true">
-                        {index + 1}.
-                      </span>
-                      <span dangerouslySetInnerHTML={{ __html: title }}></span>
-                    </Link>
+                    <MenuLink href={routes[index]} title={title} itemNumber={index + 1} />
                   </li>
                 ))}
               </MenuList>
