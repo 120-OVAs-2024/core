@@ -386,6 +386,11 @@ html[data-dark-mode="true"] .menu-list::-webkit-scrollbar-thumb {
     grid-template-columns: auto 1fr;
 }
 
+.menu-list__button--active {
+    background-color: var(--clr-brand);
+    color: #fff;
+}
+
 :is(.menu-list__button, .accordion__button) svg {
     height: 2.8ex;
     fill: currentColor;

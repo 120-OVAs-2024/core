@@ -42,6 +42,8 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
 .plane {
     --size-particule: 60px;
     --size-sub-particule: 55px;
+    --rotate-deg-x: 63.435deg;
+    --rotate-duration: 20s;
 
     width: var(--size-particule);
     height: var(--size-particule);
@@ -51,8 +53,8 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
 .plane.main {
     margin: auto;
     transform: rotateX(60deg) rotateZ(-30deg);
-    -webkit-animation: rotate 20s infinite linear;
-    animation: rotate 20s infinite linear;
+    animation: rotate var(--rotate-duration) infinite linear;
+    will-change: transform;
 }
 
 .plane.main .circle {
@@ -62,13 +64,12 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
     transform-style: preserve-3d;
     border-radius: 100%;
     box-sizing: border-box;
-    box-shadow: 0 0 60px var(--backgroundParticule), inset 0 0 60px var(--backgroundParticule)
+    box-shadow: 0 0 60px var(--backgroundParticule), inset 0 0 60px var(--backgroundParticule);
 }
 
 .plane.main .circle::before,
 .plane.main .circle::after {
     content: "";
-    display: block;
     position: absolute;
     top: 0;
     left: 0;
@@ -79,7 +80,6 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
     height: 10px;
     border-radius: 100%;
     background: var(--backgroundParticule);
-    box-sizing: border-box;
     box-shadow: 0 0 60px 2px var(--backgroundParticule);
 }
 
@@ -92,40 +92,29 @@ html[data-dark-mode="true"] .containerPlaneAndOption .option {
 }
 
 .plane.main .circle:nth-child(1) {
-    transform: rotateZ(72deg) rotateX(63.435deg);
+    transform: rotateZ(72deg) rotateX(var(--rotate-deg-x));
 }
 
 .plane.main .circle:nth-child(2) {
-    transform: rotateZ(144deg) rotateX(63.435deg);
+    transform: rotateZ(144deg) rotateX(var(--rotate-deg-x));
 }
 
 .plane.main .circle:nth-child(3) {
-    transform: rotateZ(216deg) rotateX(63.435deg);
+    transform: rotateZ(216deg) rotateX(var(--rotate-deg-x));
 }
 
 .plane.main .circle:nth-child(4) {
-    transform: rotateZ(288deg) rotateX(63.435deg);
+    transform: rotateZ(288deg) rotateX(var(--rotate-deg-x));
 }
 
 .plane.main .circle:nth-child(5) {
-    transform: rotateZ(360deg) rotateX(63.435deg);
-}
-
-@-webkit-keyframes rotate {
-    0% {
-        transform: rotateX(0) rotateY(0) rotateZ(0);
-    }
-
-    100% {
-        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-    }
+    transform: rotateZ(360deg) rotateX(var(--rotate-deg-x));
 }
 
 @keyframes rotate {
     0% {
         transform: rotateX(0) rotateY(0) rotateZ(0);
     }
-
     100% {
         transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
     }
