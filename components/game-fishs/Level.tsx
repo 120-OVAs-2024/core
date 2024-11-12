@@ -96,7 +96,7 @@ export default function Level({
   return (
     <>
       <Row alignItems="center" justifyContent="center">
-        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-mb-2 u-flow">
+        <Col xs="11" mm="10" md="9" lg="8" hd="7" addClass="u-mb-2 u-flow">
           {question.audio_description &&
             (disableFeedbackImage ? (
               <Audio src={question.audio_description} a11y />

@@ -39,15 +39,16 @@ export default function Level({ question, index, intro, onResult, title, alt, co
 
   return (
     <>
-      {question?.audio_description && <Audio src={question.audio_description} a11y />}
-
       <Row id={uid} alignItems="center" justifyContent="center">
-        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-mb-2 u-flow">
+        <Col xs="11" mm="10" md="9" lg="8" hd="7" addClass="u-mb-2 u-flow">
+          {question?.audio_description && <Audio src={question.audio_description} a11y />}
+
           {question?.audio_content && <Audio src={question.audio_content} />}
+
           {content}
           <FullScreenAlert />
         </Col>
-        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-flow">
+        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-flow u-mb-4">
           <Parallax id={uid}>
             <>
               <div

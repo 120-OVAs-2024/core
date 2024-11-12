@@ -108,17 +108,18 @@ export default function Level({
 
   return (
     <>
-      {baseWords?.a11y && <Audio a11y src={baseWords.a11y} />}
-      {baseWords?.content && <Audio src={baseWords.content} addClass="u-mb-2" />}
-
       <Row alignItems="center" justifyContent="center">
-        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-mb-2 u-flow">
+        <Col xs="11" mm="10" md="9" lg="8" hd="7" addClass="u-mb-2 u-flow">
+          {baseWords?.a11y && <Audio a11y src={baseWords.a11y} />}
+          {baseWords?.content && <Audio src={baseWords.content} />}
+
           {audio_success && openModal === 'success' && <Audio src={audio_success} />}
           {audio_wrong && openModal === 'wrong' && <Audio src={audio_wrong} />}
+
           {content}
           <FullScreenAlert />
         </Col>
-        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-flow">
+        <Col xs="11" mm="10" lg="9" hd="8" addClass="u-flow u-mb-4">
           <Parallax>
             <>
               {/* Bottellas */}
