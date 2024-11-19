@@ -72,13 +72,13 @@
   border: 2px solid #121212;
 }
 
-.card-selected,
-.card-selected .circle {
+button[role="radio"].card-selected,
+button[role="radio"].card-selected, button[role="radio"].circle {
   background: var(--clr-accent-dark);
   color: #121212;
 }
 
-.card-wrong {
+button[role="radio"].card-wrong {
   background-color: #d62e41;
 }
 
@@ -97,7 +97,7 @@
   right: 5px;
 }
 
-.card-success {
+button[role="radio"].card-success {
   background-color: #398431;
 }
 
