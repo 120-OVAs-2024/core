@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useA11yAttribute } from '@/shared/hooks/useA11yAttribute';
 import { useReduceMotion } from '@/shared/hooks/useReduceMotion';
+
+import { poster } from './poster';
 
 import css from './gif.module.css';
 
@@ -25,10 +27,11 @@ export const Gif: React.FC<Props> = ({
   hasHtml,
   ...props
 }) => {
+  const [error, setError] = useState<boolean>(false);
+  const ref = useRef<HTMLVideoElement>(null);
+
   const { stopAnimations } = useA11yAttribute();
   const reduceMotion = useReduceMotion();
-
-  const ref = useRef<HTMLVideoElement>(null);
 
   const Element = noCaption ? 'div' : 'figure';
   const parsedAlt = hasHtml ? alt.replace(/<[^>]*>/g, '') : alt;
@@ -51,13 +54,24 @@ export const Gif: React.FC<Props> = ({
     };
   }, [stopAnimations, reduceMotion]);
 
+  const handleError = (): void => setError(true);
+
   return (
     <Element
       className={`${css.gif} u-my-0.5 ${addClass ?? ''}`}
       {...(size && {
         style: { '--gif-max-width': size } as React.CSSProperties
       })}>
-      <video ref={ref} autoPlay loop muted playsInline aria-label={`${title} ${parsedAlt}`} {...props}>
+      <video
+        ref={ref}
+        autoPlay
+        onError={handleError}
+        loop
+        muted
+        playsInline
+        aria-label={`${title} ${parsedAlt}`}
+        {...(error && { poster })}
+        {...props}>
         <source src={src} type="video/webm" />
       </video>
 

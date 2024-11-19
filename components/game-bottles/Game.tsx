@@ -20,7 +20,7 @@ export function GameBottle({ onResult, words, title, alt, audio_success, audio_w
     <Panel>
       <div id="fullscreen__section">
         {words.map((word, index) => (
-          <Panel.Section key={index}>
+          <Panel.Section interpreter={{ ...word?.interpreter }} key={index}>
             <Level
               content={content}
               baseWords={word}

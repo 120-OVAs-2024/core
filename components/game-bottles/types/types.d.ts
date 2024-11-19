@@ -1,3 +1,5 @@
+import type { VideoURLs } from "@/shared/hooks/useInterpreter";
+
 export interface partBlank {
   type: 'space';
   content: string;
@@ -19,4 +21,5 @@ export interface TypeWord {
   word: string;
   content?: string;
   a11y?: string;
+  interpreter?: VideoURLs
 }
