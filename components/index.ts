@@ -43,3 +43,4 @@ export * from './select-group-activity';
 export * from './input-activity';
 export * from './race-card';
 export * from './img-container';
+export * from './memory-card';
