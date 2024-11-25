@@ -1,28 +1,24 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@shared/components';
 
-import { ImgContainer } from '../img-container';
+import { useOvaContext } from '@/context/ova-context';
 
 import { Card } from './card';
+import { i18n } from './const';
 import { CardType } from './types';
 
 import css from './memory-card.module.css';
 
 interface Props {
-  background: string;
+  addClass?: string;
   memoryImages: CardType[];
   onResult: (result: boolean) => boolean;
-  labelCheck?: string;
-  labelReset?: string;
+  children?: React.ReactNode | React.ReactNode[];
 }
 
-export const MemoryCardActivity: React.FC<Props> = ({
-  background,
-  memoryImages,
-  onResult,
-  labelCheck = 'Comprobar',
-  labelReset = 'Reiniciar'
-}) => {
+export const MemoryCardActivity: React.FC<Props> = ({ addClass, memoryImages, onResult, children }) => {
+  const { lang } = useOvaContext();
+
   const [cards, setCards] = useState<CardType[]>(memoryImages);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
@@ -92,21 +88,17 @@ export const MemoryCardActivity: React.FC<Props> = ({
 
   return (
     <>
-      <ImgContainer
-        addClass={`${css['image-container-game']} u-flow`}
-        background={background}
-        backgroundSize="70px"
-        padding="40px">
-        <div className={css.container}>
-          {cards.map((card, index) => (
-            <Card card={card} key={index} handleCardClick={() => handleCardClick(index)} />
-          ))}
-        </div>
-      </ImgContainer>
+      <div className={`${css.container} u-grid u-p-2 ${addClass ?? ''}`}>
+        {cards.map((card, index) => (
+          <Card card={card} key={index} handleCardClick={() => handleCardClick(index)} />
+        ))}
+      </div>
 
-      <div className={`u-mt-5 ${css.buttons}`}>
-        <Button style={{ width: '130px' }} disabled={buttonsDisabled} onClick={checkGameStatus} label={labelCheck} />
-        <Button disabled={isReset} onClick={restartGame} label={labelReset} />
+      {children}
+
+      <div className={`u-my-3 ${css.buttons}`}>
+        <Button disabled={buttonsDisabled} onClick={checkGameStatus} label={i18n[lang].check} />
+        <Button disabled={isReset} onClick={restartGame} label={i18n[lang].tryAgain} />
       </div>
     </>
   );

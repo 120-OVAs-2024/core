@@ -20,7 +20,11 @@ export const Image: React.FC<Props> = ({ src, title = '', alt = '', size, hasHtm
     <Element className="u-my-0.5">
       <ImageUI src={src} alt={`${title} ${parsedAlt}`} size={size} noCaption {...props} />
       {!noCaption ? (
-        <figcaption className={css['image__figcaption']}>
+        <figcaption
+          className={css['image__figcaption']}
+          {...(size && {
+            style: { '--image-max-width': size } as React.CSSProperties
+          })}>
           <p className="u-font-bold">{title}</p>&nbsp;
           <p dangerouslySetInnerHTML={{ __html: alt }}></p>
         </figcaption>
