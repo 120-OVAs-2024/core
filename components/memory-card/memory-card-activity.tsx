@@ -12,10 +12,18 @@ interface Props {
   background: string;
   memoryImages: CardType[];
   onResult: (result: boolean) => boolean;
+  labelCheck?: string;
+  labelReset?: string;
 }
 
-export const MemoryCardActivity: React.FC<Props> = ({ background, memoryImages, onResult }) => {
-  const [cards, setCards] = useState<CardType[]>(memoryImages.sort(() => Math.random() - 0.5));
+export const MemoryCardActivity: React.FC<Props> = ({
+  background,
+  memoryImages,
+  onResult,
+  labelCheck = 'Comprobar',
+  labelReset = 'Reiniciar'
+}) => {
+  const [cards, setCards] = useState<CardType[]>(memoryImages);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [isReset, setIsReset] = useState(true);
@@ -77,7 +85,7 @@ export const MemoryCardActivity: React.FC<Props> = ({ background, memoryImages, 
       flipped: false,
       matched: false
     }));
-    setCards(resetCards.sort(() => Math.random() - 0.5));
+    setCards(resetCards.sort());
     setButtonsDisabled(true);
     setIsReset(true);
   };
@@ -97,8 +105,8 @@ export const MemoryCardActivity: React.FC<Props> = ({ background, memoryImages, 
       </ImgContainer>
 
       <div className={`u-mt-5 ${css.buttons}`}>
-        <Button disabled={buttonsDisabled} onClick={checkGameStatus} label="Check" />
-        <Button disabled={isReset} onClick={restartGame} label="Try Again" />
+        <Button style={{ width: '130px' }} disabled={buttonsDisabled} onClick={checkGameStatus} label={labelCheck} />
+        <Button disabled={isReset} onClick={restartGame} label={labelReset} />
       </div>
     </>
   );
