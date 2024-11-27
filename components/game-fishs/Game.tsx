@@ -10,12 +10,12 @@ interface props_GameFish extends propsLevel {
   addClassBtnFish?: string;
 }
 
-export function GameFish({ addClassBtnFish, questions, initData, ...props }: props_GameFish) {
+export function GameFish({ addClassBtnFish, questions, initData, children, ...props }: props_GameFish) {
   return (
     <Panel>
       <div id="fullscreen__section">
         <Panel.Section>
-          <Level intro question={initData}  {...props} />
+          <Level intro question={initData} {...props} />
         </Panel.Section>
         {questions.map((quest, index) => (
           <Panel.Section key={index}>
@@ -28,6 +28,7 @@ export function GameFish({ addClassBtnFish, questions, initData, ...props }: pro
             />
           </Panel.Section>
         ))}
+        {children}
       </div>
     </Panel>
   );
