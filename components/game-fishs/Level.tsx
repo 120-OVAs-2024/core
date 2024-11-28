@@ -9,7 +9,6 @@ import { Fish } from './fish';
 import { Parallax } from './parallax';
 
 import css from './styles/level.module.css';
-import { reactClickToComponent } from 'vite-plugin-react-click-to-component';
 
 const MARGIN_FISH = 0.7;
 const PERCENT_SPACE_FISHS = 80;

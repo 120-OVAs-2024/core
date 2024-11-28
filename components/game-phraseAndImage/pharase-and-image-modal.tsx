@@ -7,10 +7,12 @@ interface Props {
 }
 
 export const PhraseAndImageModal: React.FC<Props> = ({ children }) => {
-  const { openModal } = usePhraseAndImageContext();
-
+  const { openModal, updateActivity } = usePhraseAndImageContext();
+  const handleCloseModal = () => {
+    updateActivity({ openModal: false });
+  };
   return (
-    <Modal isOpen={openModal} onClose={() => openModal} finalFocusRef="card_0">
+    <Modal isOpen={openModal} onClose={handleCloseModal} finalFocusRef="card_0">
       {children}
     </Modal>
   );
