@@ -103,6 +103,7 @@ const PhraseAndImage: React.FC<Props> & SubComponents = ({
         handleReset: handleResetActivity,
         handleSelectImage,
         handleOpenModal,
+        updateActivity,
         openModal: activity.openModal,
         button: activity.button,
         result: activity.result,

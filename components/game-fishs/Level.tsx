@@ -26,6 +26,7 @@ export interface propsLevel {
   addClassBtnFish?: string;
   disableFeedbackImage?: boolean;
   questionsCount?: number;
+  children?: ReactNode;
 }
 
 const DEFAULT_QUESTON: question_game = {
