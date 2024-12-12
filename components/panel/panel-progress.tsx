@@ -160,11 +160,11 @@ export const PanelProgress = () => {
         aria-orientation="horizontal">
         <li role="presentation">
           <button
-            onClick={() => handleClick(sectionsId[BUTTON_TYPE.next])}
+            onClick={() => handleClick(sectionsId[BUTTON_TYPE.previous])}
             className={css['progress__button']}
-            aria-label={i18n[lang].ariaNext}
-            disabled={true && currentSection >= (LAST_SECTION_INDEX || 0)}>
-            {i18n[lang].next}
+            aria-label={i18n[lang].ariaPrev}
+            disabled={true && currentSection <= FIRST_SECTION_INDEX}>
+            {i18n[lang].previous}
           </button>
         </li>
         {sections.map((uid) => (
@@ -180,11 +180,11 @@ export const PanelProgress = () => {
         ))}
         <li role="presentation">
           <button
-            onClick={() => handleClick(sectionsId[BUTTON_TYPE.previous])}
+            onClick={() => handleClick(sectionsId[BUTTON_TYPE.next])}
             className={css['progress__button']}
-            aria-label={i18n[lang].ariaPrev}
-            disabled={true && currentSection <= FIRST_SECTION_INDEX}>
-            {i18n[lang].previous}
+            aria-label={i18n[lang].ariaNext}
+            disabled={true && currentSection >= (LAST_SECTION_INDEX || 0)}>
+            {i18n[lang].next}
           </button>
         </li>
       </ul>
