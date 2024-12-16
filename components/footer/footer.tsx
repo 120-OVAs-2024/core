@@ -64,7 +64,7 @@ const PaginationItem: React.FC<PaginationItemProps> = ({ item, lang, titles }) =
       onClick={focusMainElement}
       aria-label={`${i18n[lang].page} ${page}, ${titles[page! - 1]}`}
       aria-current={item['aria-current']}>
-      {page}
+      <span>{page}</span>
     </Link>
   ) : type === PAGINATION_ITEM_TYPE.NEXT || type === PAGINATION_ITEM_TYPE.PREVIOUS ? (
     <button

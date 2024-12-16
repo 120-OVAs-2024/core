@@ -563,6 +563,11 @@ div.tour__element :global(.tour-description) {
     white-space: nowrap;
 }
 
+html[data-dark-mode="true"] .skip-link {
+    color: var(--clr-text-footer);
+}
+
+
 @media screen and (forced-colors: active) {
     .skip-link {
         color: LinkText;

@@ -75,6 +75,10 @@ html[data-dark-mode="true"] :is(.footer__nav-link, .footer__nav-ellipsis) {
     transition: border-image-source 120ms ease;
 }
 
+.footer__nav-link[aria-current="page"] span {
+    background-color: var(--clr-accent-dark);
+}
+
 html[data-dark-mode="true"] .footer__nav-link:hover,
 html[data-dark-mode="true"] .footer__nav-link[aria-current="page"] {
     color: var(--clr-text-footer);
