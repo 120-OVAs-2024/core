@@ -230,6 +230,10 @@ ul[role='tablist'] {
   z-index: var(--z-index-interpreter);
 }
 
+.c-interpreter__container .c-video__controls label {
+  color: #ffffff;
+}
+
 .c-image__figcaption {
   font-style: italic;
 }

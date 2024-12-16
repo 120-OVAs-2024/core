@@ -104,7 +104,7 @@ export const A11yOverlay: React.FC<Props> = ({ isOpen, onClose }) => {
             animate="visible"
             exit="exit">
             <div className={css['modal__header']}>
-              <h2 id={`a11y-overlay-${uid}`} className="u-sr-only">
+              <h2 id={`a11y-overlay-${uid}`} className={`u-sr-only ${css['sr-only-title']}`}>
                 {i18n[lang].titleA11y}
               </h2>
               <h2 aria-labelledby={`a11y-overlay-${uid}`} aria-hidden="true" className={css['modal__title']}>

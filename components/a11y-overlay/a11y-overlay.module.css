@@ -15,7 +15,9 @@
     width: min(100%, 32.5rem);
     height: 100vh;
     background: linear-gradient(to right, rgb(0, 107, 230), rgb(2, 96, 221), rgb(5, 85, 212), rgb(7, 73, 203), rgb(9, 62, 194));
+    background-color: var(--brand-dark);
     isolation: isolate;
+    color: var(--color);
     z-index: var(--z-index-menu);
 }
 
@@ -64,6 +66,10 @@ html[data-dark-mode="true"] .modal {
 
 html[data-dark-mode="true"] .modal__title kbd {
     color: var(--color);
+}
+
+.sr-only-title {
+    color: inherit;
 }
 
 .modal__button {
