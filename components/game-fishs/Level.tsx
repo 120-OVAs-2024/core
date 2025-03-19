@@ -2,6 +2,7 @@ import { ReactNode, useMemo, useState } from 'react';
 import { Audio, Col, Panel, Row } from 'books-ui';
 
 import { Button, FullScreenAlert } from '@/shared/components';
+import { useInterpreter } from '@/shared/hooks/useInterpreter';
 
 import { DATA_fishs } from './data/data';
 import { question_game } from './types/types';
@@ -12,6 +13,7 @@ import css from './styles/level.module.css';
 
 const MARGIN_FISH = 0.7;
 const PERCENT_SPACE_FISHS = 80;
+
 export interface propsLevel {
   question?: question_game;
   index?: number;
@@ -65,6 +67,8 @@ export default function Level({
   const [selectAnswers, setSelectAnswers] = useState<string[]>([]);
   const [openModal, setOpenModal] = useState<'success' | 'wrong' | null>(null);
 
+  const [updatedVideoSources, restoreLastSources] = useInterpreter();
+
   const spaceBlank = useMemo(() => {
     return question.paragraphParts.filter((part) => part.type === 'space');
   }, [question.paragraphParts]);
@@ -91,6 +95,17 @@ export default function Level({
       onResult(isCorrect, questionNumber);
     }
 
+    if (!disableFeedbackImage) {
+      updatedVideoSources(
+        isCorrect
+          ? {
+              contentURL: `${question.interpreter_success?.contentURL}`
+            }
+          : {
+              contentURL: `${question.interpreter_wrong?.contentURL}`
+            }
+      );
+    }
     setOpenModal(isCorrect ? 'success' : 'wrong');
   };
 
@@ -194,6 +209,7 @@ export default function Level({
               onClick={() => {
                 setSelectAnswers([]);
                 setOpenModal(null);
+                restoreLastSources();
               }}
             />
             {openModal === 'success' && index && (
