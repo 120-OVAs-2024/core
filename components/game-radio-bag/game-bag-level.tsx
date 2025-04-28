@@ -61,15 +61,16 @@ const GameBagLevel: FC<Props> = ({ children, options, ...props }) => {
    * Maneja la validación de la actividad.
    */
   const handleValidation = () => {
-    updateActivity({ validation: true, button: true });
-
     const selectedOption = activity.options.find((opt) => opt.id === activity.selectedId);
+    
     if (selectedOption) {
       const isSuccess = selectedOption.state === 'success';
       updateActivity({ result: isSuccess });
     } else {
       updateActivity({ result: false });
     }
+
+    updateActivity({ validation: true, button: true });
   };
 
   /**

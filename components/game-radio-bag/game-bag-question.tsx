@@ -96,10 +96,8 @@ export const GameBagQuestion: React.FC<GameBagQuestionProps> = ({
       <div ref={wrapperRef} id={uid} role="group" className={`u-flow ${addClass ?? ''}`} {...props}>
         <FullScreenButton elementId={uid} addClass={css['fullscreen__button']} />
         <div className={css['game-bag']}>
-          <div className={`u-grid ${css['wrapper-answers']}`}>
-            {options.map((option) => (
-              <Radio key={`${option.id}-${uid}`} uid={uid} option={option} onChange={handleOptionChange} />
-            ))}
+          <div className={`${css['question']}`} role="heading" aria-level={2}>
+            <h2>{question}</h2>
           </div>
 
           <div className={css['wrapper-images']}>
@@ -110,9 +108,11 @@ export const GameBagQuestion: React.FC<GameBagQuestionProps> = ({
               className={css['character']}
             />
           </div>
-
-          <div className={`${css['question']}`} role="heading" aria-level={2}>
-            <h2>{question}</h2>
+          
+          <div className={`u-grid ${css['wrapper-answers']}`}>
+            {options.map((option) => (
+              <Radio key={`${option.id}-${uid}`} uid={uid} option={option} onChange={handleOptionChange} />
+            ))}
           </div>
         </div>
         <p className="u-text-center u-font-italic">
