@@ -1,8 +1,14 @@
+interface video_interpreter {
+  contentURL: string;
+}
+
 export interface question_game {
   paragraphParts: Array<partBlank | partText>;
   mockAnswers: string[];
   audio_description?: string;
   audio_content?: string;
+  interpreter_success?: video_interpreter;
+  interpreter_wrong?: video_interpreter;
 }
 
 export interface partText {
@@ -15,3 +21,4 @@ export interface partBlank {
   content: string;
   index: number;
 }
+

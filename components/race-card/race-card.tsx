@@ -21,7 +21,7 @@ interface PropsSvg {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   resetSelected: () => void;
   modalFinal: modalType;
-  colorsCartInitial: CartColors;
+  colorsCartInitial?: CartColors;
 }
 
 interface ActivityOptions {

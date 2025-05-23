@@ -7,18 +7,44 @@ import Level from './Level';
 interface props_GameFish extends propsLevel {
   questions: question_game[];
   initData: question_game;
+  isInitData?: boolean;
   addClassBtnFish?: string;
+  video_interpreter?: video_interpreter;
 }
 
-export function GameFish({ addClassBtnFish, questions, initData, children, ...props }: props_GameFish) {
+interface video_interpreter {
+  a11yURL: string;
+  contentURL: string;
+}
+
+export function GameFish({
+  addClassBtnFish,
+  questions,
+  initData,
+  isInitData = true,
+  children,
+  video_interpreter,
+  ...props
+}: props_GameFish) {
   return (
     <Panel>
       <div id="fullscreen__section">
-        <Panel.Section>
-          <Level intro question={initData} {...props} />
-        </Panel.Section>
+        {isInitData && initData && (
+          <Panel.Section
+            interpreter={{
+              a11yURL: `${video_interpreter?.a11yURL}_1.mp4`,
+              contentURL: `${video_interpreter?.contentURL}_1.mp4`
+            }}>
+            <Level intro question={initData} {...props} />
+          </Panel.Section>
+        )}
         {questions.map((quest, index) => (
-          <Panel.Section key={index}>
+          <Panel.Section
+            key={index}
+            interpreter={{
+              a11yURL: `${video_interpreter?.a11yURL}_${index + (isInitData ? 2 : 1)}.mp4`,
+              contentURL: `${video_interpreter?.contentURL}_${index + (isInitData ? 2 : 1)}.mp4 `
+            }}>
             <Level
               addClassBtnFish={addClassBtnFish}
               question={quest}

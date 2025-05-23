@@ -1,70 +1,74 @@
-interface Score{
-    score: number;
+interface Score {
+  score: number;
 }
 
 // Representa un modal con mensajes de audio y texto para estados de éxito y error.
 export interface Modal {
-    audio_success?: string;
-    audio_wrong?: string;
-    text_success: string; 
-    text_wrong: string;
+  audio_success?: string;
+  audio_wrong?: string;
+  text_success: string;
+  text_wrong: string;
+  contentURLCorrect?: string;
+  contentURLIncorrect?: string;
 }
 
 // Tipo para una pregunta
 export interface Question extends Score {
-    text: string;
-    correct: boolean;
-    audioSrc?: string;
+  text: string;
+  correct: boolean;
+  audioSrc?: string;
+  a11yURL?: string;
+  contentURL?: string;
 }
 
 // Tipo para el estado inicial
 export interface InitialState extends Score {
-    validation: boolean;
-    button: boolean;
-    result: boolean;
-    currentQuestionIndex: number;
-    showResult: boolean;
-    selectedAnswer: boolean | null;
+  validation: boolean;
+  button: boolean;
+  result: boolean;
+  currentQuestionIndex: number;
+  showResult: boolean;
+  selectedAnswer: boolean | null;
 }
 
 // Clase para el estado inicial
 export class InitialStateClass implements InitialState {
-    validation: boolean;
-    button: boolean;
-    result: boolean;
-    currentQuestionIndex: number;
-    showResult: boolean;
-    selectedAnswer: boolean | null;
-    score: number;
+  validation: boolean;
+  button: boolean;
+  result: boolean;
+  currentQuestionIndex: number;
+  showResult: boolean;
+  selectedAnswer: boolean | null;
+  score: number;
 
-    constructor (def?: Partial<InitialState>) {
-        this.validation = def?.validation || false;
-        this.button = def?.button || true;
-        this.result = def?.result || false;
-        this.currentQuestionIndex = def?.currentQuestionIndex || 0;
-        this.showResult = def?.showResult || false;
-        this.selectedAnswer = def?.selectedAnswer || null;
-        this.score = def?.score || 0;
-    }
+  constructor(def?: Partial<InitialState>) {
+    this.validation = def?.validation || false;
+    this.button = def?.button || true;
+    this.result = def?.result || false;
+    this.currentQuestionIndex = def?.currentQuestionIndex || 0;
+    this.showResult = def?.showResult || false;
+    this.selectedAnswer = def?.selectedAnswer || null;
+    this.score = def?.score || 0;
+  }
 }
 
 // Tipo para el contexto de la actividad TrueFalseActivity
-export interface TrueFalseActivityContextType extends Score{
-    currentQuestionIndex: number;
-    showResult: boolean;
-    validation: boolean;
-    button: boolean;
-    result: boolean;
-    selectedAnswer: boolean | null;
-    handleValidation: (answer: boolean | null) => void;
-    handleAnswerSelect: (answer: boolean) => void;
-    handleNextQuestion: () => void;
-    handlePreviousQuestion: () => void;
-    handleReset: () => void;
+export interface TrueFalseActivityContextType extends Score {
+  currentQuestionIndex: number;
+  showResult: boolean;
+  validation: boolean;
+  button: boolean;
+  result: boolean;
+  selectedAnswer: boolean | null;
+  handleValidation: (answer: boolean | null) => void;
+  handleAnswerSelect: (answer: boolean) => void;
+  handleNextQuestion: () => void;
+  handlePreviousQuestion: () => void;
+  handleReset: () => void;
 }
 
 // Enumeración para los estados posibles
 export enum States {
-    SUCCESS = "success",
-    WRONG = "wrong",
+  SUCCESS = 'success',
+  WRONG = 'wrong'
 }

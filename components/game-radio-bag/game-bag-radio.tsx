@@ -14,7 +14,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 const animationVariants = {
   expand: {
     scale: [0, 1],
-    y: [240, 0],
+    y: [-240, 0],
     transition: {
       duration: 1,
       ease: 'backInOut',
@@ -23,7 +23,7 @@ const animationVariants = {
   },
   collapse: {
     scale: [1, 0],
-    y: [0, 240],
+    y: [0, -240],
     transition: {
       duration: 1,
       ease: 'backInOut',

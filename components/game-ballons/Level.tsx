@@ -1,11 +1,13 @@
 import { ReactNode, useState } from 'react';
 import { Audio, Col, Panel, Row } from 'books-ui';
 
+import { useOvaContext } from '@/context/ova-context';
 import { Button, FullScreenAlert, Icon } from '@/shared/components';
 
 import { CorrectIcon, WrongIcon } from './icons_/icons';
 import { letterProp, spaceProp, TypeWord } from './types/types';
 import Ballon from './Ballon';
+import { i18n } from './const';
 import { Parallax } from './parallax';
 
 import css from './styles/level.module.css';
@@ -30,6 +32,7 @@ function initialState(word: string[]): letterProp[] {
 }
 
 export default function Level({ baseWords, index, onResult, title, alt, content }: propsLevel) {
+  const { lang } = useOvaContext();
   const [openModal, setOpenModal] = useState<'success' | 'wrong' | null>(null);
   const [selectIndex, setSelectIndex] = useState<number>(0);
 
@@ -155,15 +158,15 @@ export default function Level({ baseWords, index, onResult, title, alt, content 
 
           <div className={css.container_controls}>
             <Button
-              label="Comprobar"
+              label={i18n[lang].checkButton}
               id="button-comprobar"
               disabled={!ALREADY_FILL || openModal !== null}
               onClick={checkAnswer}
             />
-            <Button label="Reintentar" addClass="js-button-reset" disabled={openModal !== 'wrong'} onClick={reset} />
+            <Button label={i18n[lang].tryOnButton} addClass="js-button-reset" disabled={openModal !== 'wrong'} onClick={reset} />
             {openModal === 'success' && index && (
               <Panel.Button section={index}>
-                <Button label="Continuar" />
+                <Button label={i18n[lang].continueButton}/>
               </Panel.Button>
             )}
           </div>

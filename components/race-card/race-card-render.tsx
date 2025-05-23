@@ -18,7 +18,7 @@ interface PropsSvgPag12TWO {
   alt?: string;
   isEnd?: boolean;
   id: string;
-  colorsCarts: CartColors;
+  colorsCarts?: CartColors;
 }
 
 export const RaceCardRender: React.FC<PropsSvgPag12TWO> = ({
