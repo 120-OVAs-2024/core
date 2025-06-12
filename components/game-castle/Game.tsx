@@ -1,6 +1,7 @@
 import { Audio } from 'books-ui';
 
 import { Panel } from '@/shared/components';
+import { VideoURLs } from '@/shared/hooks/useInterpreter';
 
 import { question_game } from './types/types';
 import Level from './Level';
@@ -15,18 +16,19 @@ interface props_GameCastle {
     description?: string;
     content?: string;
   };
+  interpreter: VideoURLs;
 }
 
-export function GameCastle({ questions, onResult, title, alt, content, audio }: props_GameCastle) {
+export function GameCastle({ questions, onResult, interpreter, title, alt, content, audio }: props_GameCastle) {
   return (
     <Panel>
-      <Panel.Section>
+      <Panel.Section interpreter={{ ...interpreter }}>
         {audio?.description ? <Audio a11y src={audio.description} /> : null}
         {audio?.content ? <Audio src={audio.content} /> : null}
         <Level intro title={title} alt={alt} />
       </Panel.Section>
       {questions.map((quest, index) => (
-        <Panel.Section key={index}>
+        <Panel.Section key={index} interpreter={quest.interpreter}>
           <Level
             content={content}
             question={quest}
