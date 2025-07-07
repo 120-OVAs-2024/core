@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url('assets/svgs/Ova_012_sld_16.svg'),,
+  background: url('assets/svgs/Ova_012_sld_16.svg'),
     linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
   padding: 6rem 4rem;
   border-radius: 8px;
