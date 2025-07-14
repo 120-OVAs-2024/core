@@ -12,13 +12,8 @@ export interface Modal {
   audio_wrong?: string;
   text_success?: string;
   text_wrong?: string;
-  interpreter_success?: video_interpreter;
-  interpreter_wrong?: video_interpreter;
-}
-
-interface video_interpreter {
-  a11yURL: string;
-  contentURL: string;
+  interpreter_success?: string;
+  interpreter_wrong?: string;
 }
 
 export interface InitialState {

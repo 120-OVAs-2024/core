@@ -136,7 +136,7 @@ export const RadioLego: FC<OptionProps> = ({ options, question, addClass, title,
         onClose={closeModal}
         finalFocusRef="#main"
         audio={modal.audio_success}
-        interpreter={modal.interpreter_success}>
+        interpreter={{  contentURL: `${modal.interpreter_success}` }}>
         <p>{modal.text_success}</p>
       </ModalFeedback>
 
@@ -146,7 +146,7 @@ export const RadioLego: FC<OptionProps> = ({ options, question, addClass, title,
         onClose={closeModal}
         finalFocusRef=".js-modal-wrong"
         audio={modal.audio_wrong}
-        interpreter={modal.interpreter_wrong}>
+        interpreter={{  contentURL: `${modal.interpreter_wrong}` }}>
         <p>{modal.text_wrong}</p>
       </ModalFeedback>
     </>
