@@ -1,0 +1,61 @@
+.sortable-item {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid var(--clr-brand); /* azul */
+  border-radius: 8px;
+  font-style: italic;
+  min-height: 5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sortable-item span {
+  flex-grow: 1;
+  padding: 0.4rem;
+}
+
+.sortable-item:active {
+  cursor: grabbing;
+}
+
+.no-grab {
+  cursor: default !important;
+}
+
+.sortable-item:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.sortable-item__arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: var(--clr-brand);
+  color: white;
+  padding: 0.2rem;
+  user-select: none;
+}
+
+/* ✅ Cuando es correcto */
+.sortable-item--success {
+  border-color: var(--clr-activity-success);      /* borde verde */
+
+}
+
+.sortable-item--success .sortable-item__arrows{
+    background-color: var(--clr-activity-success);
+}
+
+/* ✅ Cuando es incorrecto */
+.sortable-item--error {
+  border-color: var(--clr-activity-wrong);      /* borde rojo */
+}
+
+.sortable-item--error .sortable-item__arrows{
+    background-color: var(--clr-activity-wrong);
+}
