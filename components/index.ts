@@ -44,3 +44,4 @@ export * from './input-activity';
 export * from './race-card';
 export * from './img-container';
 export * from './memory-card';
+export * from './order-actitvity'
