@@ -1,4 +1,5 @@
-import { Children, FC, useEffect, useReducer, useState } from 'react';
+import { Children, FC, useReducer, useState } from 'react';
+import { DragAndDropProps } from 'books-ui';
 import {
   closestCenter,
   DndContext,
@@ -17,7 +18,10 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
+import { useOvaContext } from '@/context/ova-context';
+
 import { InitialState } from './types/types';
+import { defaultAnnouncements, i18n } from './const';
 import { OrderButton } from './order-buttons';
 import { OrderActivityProvider, useOrderActivityContext } from './order-context';
 
@@ -29,10 +33,9 @@ const INITIAL_STATE: InitialState = {
   result: false
 };
 
-interface Props {
+interface Props extends DragAndDropProps {
   itemsIniciales: { id: string; order: number; text: string }[];
   onResult?: ({ result }: { result: boolean }) => void;
-  children: React.ReactNode;
 }
 
 type SubComponents = {
@@ -40,7 +43,13 @@ type SubComponents = {
 };
 
 // Contenedor principal
-const OrderActivity: FC<Props> & SubComponents = ({ itemsIniciales, children, onResult }: Props) => {
+const OrderActivity: FC<Props> & SubComponents = ({
+  itemsIniciales,
+  children,
+  announcements = defaultAnnouncements,
+  onResult
+}: Props) => {
+  const { lang } = useOvaContext();
   const [activity, updatedActivity] = useReducer(
     (prev: InitialState, next: Partial<InitialState>) => ({ ...prev, ...next }),
     INITIAL_STATE
@@ -62,14 +71,18 @@ const OrderActivity: FC<Props> & SubComponents = ({ itemsIniciales, children, on
         const newIndex = prev.findIndex((i) => i.id === over.id);
         return arrayMove(prev, oldIndex, newIndex);
       });
-      updatedActivity({ button: true });
+      updatedActivity({ button: false });
     }
   };
 
   const SortableRow = ({ id, text }: { id: string; text: string }) => {
     const { result, validation } = useOrderActivityContext();
 
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+      id,
+      data: { label: text }
+    });
+
     const style: React.CSSProperties = {
       transform: CSS.Transform.toString(transform),
       transition,
@@ -89,7 +102,9 @@ const OrderActivity: FC<Props> & SubComponents = ({ itemsIniciales, children, on
         {...attributes}
         {...(!validation ? listeners : {})}
         className={`${css['sortable-item']} ${extraClass} ${validation ? css['no-grab'] : ''}`}>
-        <span>{text}</span>
+        <span>
+          <i>{text}</i>
+        </span>
         <div className={css['sortable-item__arrows']}>
           <p>▲</p>
           <p>▼</p>
@@ -113,16 +128,19 @@ const OrderActivity: FC<Props> & SubComponents = ({ itemsIniciales, children, on
     updatedActivity(INITIAL_STATE);
   };
 
-  useEffect(() => {
-    if (!activity.validation && activity.button) {
-      updatedActivity({ button: false });
-    }
-  }, [activity.validation, activity.button]);
-
   return (
     <OrderActivityProvider value={{ handleValidation, handleReset, ...activity }}>
       <div style={{ marginTop: '1rem' }}>
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+          accessibility={{
+            announcements: announcements,
+            screenReaderInstructions: {
+              draggable: i18n[lang].screenReaderInstruction
+            }
+          }}>
           <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {items.map((item) => (

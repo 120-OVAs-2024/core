@@ -12,10 +12,10 @@ export interface OrderActivityContextType extends InitialState {
 }
 
 // Tipos de elementos DnD (opcional según tu implementación)
-export type OrderDndTypes = 'draggable' | 'droppable' | 'general-draggable';
+export type OrderTypes = 'draggable' | 'droppable' | 'general-draggable';
 
 // Clases dinámicas aplicadas según el estado del drag & drop
-export interface OrderDndClasses {
+export interface OrderClasses {
   style: string;
   dragging?: string;
   over?: string;
