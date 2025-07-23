@@ -22,6 +22,7 @@ export interface TypeWord {
   content?: string;
   a11y?: string;
   sentence?: string;
+  interpreter?: { a11yURL: string; contentURL: string };
 }
 
 export interface BallonProps extends React.ButtonHTMLAttributes<ButtonHTMLAttributes> {
