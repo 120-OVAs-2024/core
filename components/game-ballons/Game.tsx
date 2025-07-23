@@ -20,7 +20,9 @@ export function GameBallons({ onResult, pharases, title, alt, audio_success, aud
     <Panel>
       <div id="fullscreen__section">
         {pharases.map((word, index) => (
-          <Panel.Section key={index}>
+          <Panel.Section
+            key={index}
+            interpreter={{ contentURL: word.interpreter?.contentURL, a11yURL: word.interpreter?.contentURL }}>
             <Level
               content={content}
               baseWords={word}
