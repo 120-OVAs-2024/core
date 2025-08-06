@@ -12,6 +12,8 @@ export interface Modal {
   audio_wrong?: string;
   text_success?: string;
   text_wrong?: string;
+  interpreter_success?: string;
+  interpreter_wrong?: string;
 }
 
 export interface InitialState {

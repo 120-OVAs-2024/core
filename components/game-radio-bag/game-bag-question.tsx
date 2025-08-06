@@ -135,7 +135,8 @@ export const GameBagQuestion: React.FC<GameBagQuestionProps> = ({
         onClose={closeModal}
         finalFocusRef="#main"
         audio={modal?.audio_success}
-        aria-live="assertive">
+        aria-live="assertive"
+        interpreter={{ contentURL: modal?.interpreter_success }}>
         <p>{modal?.text_success}</p>
       </ModalFeedback>
 
@@ -145,7 +146,8 @@ export const GameBagQuestion: React.FC<GameBagQuestionProps> = ({
         onClose={closeModal}
         finalFocusRef=".js-modal-wrong"
         audio={modal?.audio_wrong}
-        aria-live="assertive">
+        aria-live="assertive"
+        interpreter={{ contentURL: modal?.interpreter_wrong }}>
         <p>{modal?.text_wrong}</p>
       </ModalFeedback>
     </>
