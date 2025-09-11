@@ -155,9 +155,9 @@ input[type="radio"]:disabled + span{
 .image_depth {
     position: absolute;
     bottom: 0px;
-    transform: scale(1.04);
+    width: 100%;
+    transform: scale(1);
     z-index: 0;
-    right: 21px;
 }
 
 .planet, .meteor {
