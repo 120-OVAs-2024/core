@@ -1,41 +1,48 @@
 export type RadioStates = 'wrong' | 'success';
 
 export type Option = {
-    id: string;
-    name: string;
-    state: RadioStates;
-    formula?: string;
+  id: string;
+  name: string;
+  state: RadioStates;
+  formula?: string;
 };
 
 // Representa un modal con mensajes de audio y texto para estados de éxito y error.
 export interface Modal {
-    audio_success?: string;
-    audio_wrong?: string;
-    text_success?: string; 
-    text_wrong?: string;
+  audio_success?: string;
+  audio_wrong?: string;
+  text_success?: string;
+  text_wrong?: string;
+  interpreter_success?: video_interpreter;
+  interpreter_wrong?: video_interpreter;
 }
 
 export interface InitialState {
-    validation: boolean;
-    button: boolean;
-    result: boolean;
-    options: Option[];
-    selectedId: string | null;
+  validation: boolean;
+  button: boolean;
+  result: boolean;
+  options: Option[];
+  selectedId: string | null;
+}
+
+interface video_interpreter {
+  a11yURL?: string;
+  contentURL?: string;
 }
 
 export interface GameSpaceContextType {
-    addOptionValues: (option: Option) => void;
-    handleValidation: () => void;
-    handleReset: () => void;
-    validation: boolean;
-    button: boolean;
-    result: boolean;
-    selectedId: string | null;
-    addOptionElementsId: (id: string | null) => void;
+  addOptionValues: (option: Option) => void;
+  handleValidation: () => void;
+  handleReset: () => void;
+  validation: boolean;
+  button: boolean;
+  result: boolean;
+  selectedId: string | null;
+  addOptionElementsId: (id: string | null) => void;
 }
 
 // Enumeración para los estados posibles
 export enum States {
-    SUCCESS = 'success',
-    WRONG = 'wrong'
+  SUCCESS = 'success',
+  WRONG = 'wrong'
 }
